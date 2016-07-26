@@ -1,0 +1,63 @@
+<template name="LinkUpload">
+	<h2>Links</h2>
+    <div class="links-container">
+        
+    </div>
+
+    <div id="uploadResult" {{this.atts}}>
+    <p>
+        {{> linkInfo links=linksToUpload}}
+    </p>
+    </div>
+    <button class="btn more">Add Links</button>
+</template>
+
+
+<template name="linkInfo">
+
+  {{#each this.links}}
+
+     <div class="panel widget panel-default">
+        <div class="panel-heading">
+            <a href="#" class="pull-right ">
+              <em class="fa fa-times link-delete" data-type="delete" data-index="{{this.index}}"></em>
+           </a>
+        </div>
+
+        <div class="row">
+         <fieldset class="form-group col-lg-4">
+            <label for="link-name">Title</label>
+            <input class="link-input form-control" data-type="name" data-index="{{this.index}}" type="text" placeholder="Autism Resource" value="{{this.name}}"/>
+          </fieldset>
+           <fieldset class="form-group col-lg-8">
+            <label for="link-name">Link</label>
+            <input class="link-input form-control col-sm-5"  data-type="filepath" data-index="{{this.index}}" type="text" placeholder="http://AutismResource.com" value="{{this.filepath}}">
+          </fieldset>
+        </div>
+        <div class="row">
+          <fieldset class="form-group col-lg-12">
+            <label for="link-name">Description</label>
+            <textarea class="link-input form-control"  data-type="description" data-index="{{this.index}}" type="text" placeholder="A great resource for inclusion" value="{{this.description}}" rows="3"></textarea>
+          </fieldset>
+        </div>
+    </div>
+  {{/each}}
+       
+</template>
+
+<template name="linkShow">
+    
+            {{#each this}}
+                <div class="row">
+                 <!-- START panel-->
+                         <div class="col-md-4">
+                            <a target="_system" href="{{makeLink filepath}}">{{nameOrLink name}}</a>
+                          </div>
+                          <div class="col-md-6">
+                            {{description}}
+                         </div>
+                </div>
+            {{/each}}myfile
+             <!-- END panel-->
+</template>
+

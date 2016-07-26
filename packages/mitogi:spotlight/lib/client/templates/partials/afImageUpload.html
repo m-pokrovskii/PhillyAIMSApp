@@ -1,0 +1,4 @@
+<template name="afImageUpload">	
+	{{> upload_photo type="photo" resourceID=resourceID fileTypes='image/*' callback=callback multiple="false" callbacks=myCallbacks}}
+  <input type="hidden" value="{{uploadFile}}" {{this.atts}}>
+</template>

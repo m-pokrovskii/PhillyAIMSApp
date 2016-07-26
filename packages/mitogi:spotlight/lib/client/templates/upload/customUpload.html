@@ -1,0 +1,86 @@
+<template name="customUpload">
+    <form id="fileupload" method="POST" enctype="multipart/form-data">
+    <div class="row">
+      <div class="upload-container">
+        <div class="col-lg-3 col-sm-3 ">
+           <!-- START widget-->
+           <div id="uploadPicture" class="btn-file btn-primary  panel widget bg-primary">
+            
+              <div class="row row-table">
+                 <div class="col-xs-4 text-center pv-lg">
+                    <i class="fa-cloud-upload fa fa-3x"></i>
+                 </div>
+                 <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">Upload</div>
+                    <div class="text-uppercase">From Files</div>
+                 </div>
+              </div>
+              <input type="file"
+                                        class="jqUploadclass"
+                                        multiple="{{ multiple }}"
+                                        data-form-data='{{ submitData }}'
+                                        accept="{{ fileTypes }}">
+           </div>
+        </div>
+        {{ submitData }}
+        <div class="col-lg-3 col-sm-3">
+           <!-- START widget-->
+           <div class="cameraPicture panel btn-purple widget bg-purple">
+              <div class="row row-table">
+                 <div class="col-xs-4 text-center pv-lg">
+                    <i class="fa-camera fa fa-3x"></i>
+                 </div>
+                 <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">Capture</div>
+                    <div class="text-uppercase">From Camera</div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        
+        <div class="col-lg-3 col-sm-3">
+           <!-- START widget-->
+           <div id="cameraPicture" class="panel btn widget btn-success bg-green">
+              <div class="row row-table">
+                 <div class="col-xs-4 text-center pv-lg">
+                    <i class="fa-link fa fa-3x"></i>
+                 </div>
+                 <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">Paste URL</div>
+                    <div class="text-uppercase">From Internet</div>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8 {{ class 'progressOuter'}}">
+          <div class="{{ class 'progressInner' }}">
+              <div class="{{ class 'progressBar' }}"
+                   role="progressbar"
+                   aria-valuemin="0"
+                   aria-valuemax="100" style="{{ progress }}">
+                  &nbsp;
+              </div>
+              <div class="progress-label">
+                  {{{ infoLabel }}}
+              </div>
+          </div>
+      </div>
+    </div>
+      {{> buttons type=type state=buttonState uploadContext=uploadContext autoStart=autostart}}
+  
+        
+            <!-- The fileinput-button span is used to style the file input field as button -->      
+        {{#if showQueue }}
+            <div class="panel panel-default" style="margin-top: 1px; background: #efefef">
+                <div class="panel-body">
+                    {{#each queueItems }}
+                        {{> queueItem type=../type uploadContext=uploadContext item=this }}
+                    {{/each}}
+                </div>
+            </div>
+        {{/if}}
+    </form>
+</template>

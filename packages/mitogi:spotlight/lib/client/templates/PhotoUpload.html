@@ -1,0 +1,41 @@
+<template name="PhotoUpload">
+    {{> uploader fileTypes='image/*,video/*' callbacks=myCallbacks multiple=true}}
+    
+	<div id="uploadResult" {{this.atts}}>
+	    <p>
+	        {{> photoInfo 
+            files=photosToUpload edit=editMode
+             }}
+	    </p>
+	</div>
+</template>
+
+
+
+
+<template name="photoInfo">
+    <div class="row">
+        <div id="spotlight-gallery">
+            {{#each this.files}}
+                <div class="col-xs-3">
+                 <!-- START panel-->
+                         <div class="panel panel-default bounceIn" id="panel-{{index}}">
+                            <div class="panel-heading">{{name}}
+                               {{#if ../edit}}
+                                <a href="#" class="pull-right ">
+                                  <em class="fa fa-times deleteUpload" data-id="{{_id}}"></em>
+                               </a>
+                               {{/if}}
+                            </div>
+                            <div class="panel-body">
+                               <a href="{{this.filepath}}" title="{{name}}" data-gallery><img src="{{this.filepath}}" height="auto" width="100%"></a><br/>
+                                {{numberWithCommas size }} KB
+                            </div>
+                         </div>
+                </div>
+            {{/each}}
+             <!-- END panel-->
+        </div>
+    </div>
+    {{> SpotlightGalleryModal}}
+</template>

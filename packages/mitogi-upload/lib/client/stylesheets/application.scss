@@ -1,0 +1,19 @@
+.upload-input {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  opacity: 0;
+}
+
+.preview {
+	max-width: 100%;
+}
+
+.video-player {
+  height: auto;
+  max-height: 500px;
+  width: 100%;
+}

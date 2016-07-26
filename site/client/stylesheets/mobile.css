@@ -1,0 +1,156 @@
+.post-btn{
+  height: 44px;
+    width: 44px;
+    padding: 4px;
+    font-size: 80%;
+}
+
+.mobile-menu-button{
+  background-color:transparent;
+}
+
+/* search */
+.search.primaryNav-module{ 
+  width:95%;
+}
+
+.search.empty .search-field {
+    max-width: 80%;
+}
+
+.search .search-field:focus {
+    max-width: 100%;
+}
+
+/* post */
+
+.post-admin-action a:link, .post-admin-actions a{
+  color:white;
+}
+
+/* mine */
+
+.mobile-nav .mobile-nav-open{
+  background: rgba(82,142,216,1);
+  background: -moz-linear-gradient(top, rgba(82,142,216,1) 0%, rgba(109,205,252,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(82,142,216,1)), color-stop(100%, rgba(109,205,252,1)));
+  background: -webkit-linear-gradient(top, rgba(82,142,216,1) 0%, rgba(109,205,252,1) 100%);
+  background: -o-linear-gradient(top, rgba(82,142,216,1) 0%, rgba(109,205,252,1) 100%);
+  background: -ms-linear-gradient(top, rgba(82,142,216,1) 0%, rgba(109,205,252,1) 100%);
+  background: linear-gradient(to bottom, rgba(82,142,216,1) 0%, rgba(109,205,252,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#528ed8', endColorstr='#6dcdfc', GradientType=0 );
+}
+
+@media screen and (max-width: 600px){
+  .top-nav .header {
+      height: 44px;
+  } 
+
+  .mobileNav {
+      z-index: 200;
+  }
+
+  .post-btn{
+      padding: 0;
+      background-color: transparent !important;
+      display: block;
+      font-size: 90%;
+  }
+
+  .mobileRight{
+    position: absolute;
+    right: 3px;
+    padding: 0px;
+    top: 2px;
+  }
+
+  .post-body{
+    padding: 0px;
+  }
+
+}
+
+.header{
+  background-color: #528fd8;
+}
+
+.post-btn:hover{
+  color: #528fd8; 
+}
+
+.grid-module{
+  border-top-width: 3px;
+  border-color: #cfdbe2;
+}
+
+.submitPostForm{
+  padding:25px;
+}
+
+.main-posts-list{
+  padding: 0 10%;
+}
+
+#home-header{
+  position: absolute;
+  width: 100%;
+  background-color: transparent;
+}
+
+.full-screen{
+  background-image:url('img/splash.png');
+    background-size:cover;
+    background-color: #EEEEEE;
+    height:400px;
+    color:white;
+}
+
+.post-submit{
+    padding: 40px 80px;
+    border-radius: 4px;
+}
+
+.bootstrap-tags-input{
+    line-height: 30px;
+}
+
+.note-editor{
+    min-height:200px;
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+.uploadPanel .form-control{
+  position: static!important;
+}
+
+.uploadPanel .btn {
+    /* display: table-cell; */
+    width: auto !important;
+}
+
+.post-body, .page-body {
+    padding: 30px 40px;
+}
+
+.module {
+    padding: 20px 40px;
+}
+
+#editPostForm{
+    padding: 20px 50px;
+}
+
+.splash-search{
+    max-width: 1000px;
+    background: rgba(255, 255, 255, .9);
+    color: black;
+    border-radius: 10px;
+    height: 46px;
+    font-size: 1.4em;
+}
+
+.post-vote .vote-action {
+    padding: 4px 7px !important;
+    font-size: 12px !important;
+}

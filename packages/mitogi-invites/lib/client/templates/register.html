@@ -1,0 +1,61 @@
+<template name="register">
+   {{> atForm state='signUp'}}
+</template>
+
+
+<template name="register1">
+    <div class="block-center mt-xl wd-xl">
+       <!-- START panel-->
+       <div class="panel panel-dark panel-flat">
+          <div class="panel-body">
+             <h2 class="text-center pv">Register</h2>
+             <form role="form" id="register-form" data-parsley-validate="" novalidate="" class="mb-lg">
+                <div class="form-group has-feedback">
+                   <label for="account-username" class="text-muted">Username</label>
+                   <input id="account-username" type="text" placeholder="Enter username" autocomplete="off" required="required" class="form-control" />
+                   <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                </div>
+                <div class="form-group has-feedback">
+                   <label for="account-password" class="text-muted">Password</label>
+                   <input id="account-password" type="password" placeholder="Password" autocomplete="off" required="required" class="form-control" />
+                   <span class="fa fa-lock form-control-feedback text-muted"></span>
+                </div>
+                <div class="form-group has-feedback">
+                   <label for="account-password1" class="text-muted">Retype Password</label>
+                   <input id="account-password1" type="password" placeholder="Retype Password" autocomplete="off" required="required" data-parsley-equalto="#signupInputPassword1" class="form-control" />
+                   <span class="fa fa-lock form-control-feedback text-muted"></span>
+                </div>
+                <div class="clearfix">
+                   <div class="checkbox c-checkbox pull-left mt0">
+                      <label>
+                         <input id="terms-box" type="checkbox" value="" required="required" name="agreed" />
+                         <span id="terms" class="fa fa-check"></span>I agree with the <u><a data-toggle="modal" data-target="#termsModal">Terms of Service</a></u>
+                      </label>
+                   </div>
+                </div>
+                <button type="submit" id="create-account" class="btn btn-block btn-primary mt-lg">Create Account</button>
+             </form>
+             <p class="pt-lg text-center">Have an account?</p><a href="{{pathFor 'login'}}" class="btn btn-block btn-default">Sign In</a>
+          </div>
+       </div>
+       <!-- END panel-->
+    </div>
+    {{> modal terms}}
+</template>
+
+
+<template name="modal">
+	<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Terms</h4>
+	      </div>
+	      <div class="modal-body">
+	        {{this}}
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</template>

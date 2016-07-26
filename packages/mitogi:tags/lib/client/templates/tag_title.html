@@ -1,0 +1,15 @@
+<!--almost done: css-->
+
+<template name="tag_title">
+  {{#if tags}}
+    <div class="category-heading-wrapper post-list-title">
+      {{#each tags}}
+        <div class="category-heading">
+          <div class="category-title">
+            <a href="{{this.getUrl}}">{{title}}</a> {{{icon "next"}}}           
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</template>

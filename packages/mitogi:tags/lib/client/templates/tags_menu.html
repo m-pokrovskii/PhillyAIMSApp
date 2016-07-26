@@ -1,0 +1,7 @@
+<template name="tags_menu">
+  <div class="categories-menu-wrapper {{moduleClass}}">
+    {{#if hasTags}}
+      {{> menuComponent menuName="tags" menuLabel=menuLabel itemTemplate="tags_menu_item" menuItems=menuItems menuType=menuType expandLevel=expandLevel}}
+    {{/if}}
+  </div>
+</template>

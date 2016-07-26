@@ -1,0 +1,95 @@
+<template name="files">
+  <div class="files">
+      {{> Template.dynamic template=templateName data=files}}
+  </div>
+</template>
+
+<template name="file-photo">
+    <div class="row">
+        <div id="spotlight-gallery">
+            {{#each this}}
+                <div class="col-xs-3">
+                 <!-- START panel-->
+                         <div class="panel panel-default bounceIn" id="panel-{{index}}">
+                            <div class="panel-heading">{{name}}
+                               
+                                <a href="#" class="pull-right ">
+                                  <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
+                               </a>
+                 
+                            </div>
+                            <div class="panel-body">
+                               <a href="{{filepath}}" title="{{name}}" data-gallery><img src="{{this.filepath}}" height="auto" width="100%"></a><br/>
+                                {{numberWithCommas size }} KB
+                            </div>
+                         </div>
+                </div>
+            {{/each}}
+             <!-- END panel-->
+        </div>
+    </div>
+    {{> SpotlightGalleryModal}}
+</template>
+
+<template name="file-video">
+
+    <div class="row">
+     
+            {{#each this}}
+                <div class="col-md-offset-1 col-md-10"> 
+	                <!--<iframe src="{{getPlayer _id filepath}}" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
+                  {{#if ../../edit}}
+                    <div class="row">
+                      <div class="pull-left">
+                        <h4>{{name}}</h4>
+                      </div>
+                      <div class="pull-right">
+                        <a class="btn btn-info" href="{{newExtension filepath 'mp4'}}" download>Download</a>
+                        <a class="btn btn-danger delete-file" data-id="{{_id}}">Delete</a>
+                      </div>
+                    </div>
+                  {{/if}}
+
+	                <video class="video-player" controls>
+	                	<!--need to encode videos-->
+        					  <source src="{{filepath}}" type="video/{{endsWith filepath}}">
+        					  <source src="{{newExtension filepath 'mp4'}}" type="video/mp4">
+        					  <source src="{{newExtension filepath 'webm'}}" type="video/webm">
+        					   Your browser does not support the video tag.
+        					</video>
+        					
+        					<br/>
+                    {{ size }}
+                </div>
+            {{/each}}
+     
+    </div>
+</template>
+
+
+<template name="file-attachment">
+    <div class="row">
+            {{#each this}}
+                <div class="col-xs-3">
+                 <!-- START panel-->
+                         <div class="panel panel-default bounceIn" id="panel-{{index}}">
+                            <div class="panel-heading">
+                                <a href="#" class="pull-right ">
+                                  <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
+                               </a>
+                            </div>
+                            <div class="panel-body text-center">
+                                <a href="{{filepath}}" download>
+                                    <i class="fa fa-4x {{getIcon filepath}}"></i>
+                                    <br>
+                                    {{name}}
+                                </a>
+                                <br/>
+                                {{numberWithCommas size }} KB
+                            </div>
+                         </div>
+                </div>
+            {{/each}}
+             <!-- END panel-->
+    </div>
+</template>

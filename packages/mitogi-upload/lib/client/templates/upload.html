@@ -1,0 +1,21 @@
+<template name="uploadNew">
+  <p><strong>Note</strong>: only <code>.png</code>, <code>.jpeg</code>, and <code>.gif</code> files are allowed in this demo.</p>
+  <h4 class="page-header">Upload a File to Amazon S3</h4>
+  {{> upload_video resourceID="lksdjflksdkl"}}
+  {{> upload_attachment resourceID="lksdjflksdkl"}}
+
+  
+</template>
+
+
+<template name="upload_photo">
+	{{> uploader type="photo" resourceID=resourceID fileTypes='image/*' callback=callback multiple="true"}}
+</template>
+
+<template name="upload_attachment">
+	{{> uploader type="attachment" resourceID=resourceID fileTypes='application/zip,application/x-zip,application/x-zip-compressed,application/msword,application/vnd.ms-excel,application/vnd.ms-powerpoint,text/plain,application/pdf,audio/*video/*image/*' callback=callback multiple="true"}}
+</template>
+
+<template name="upload_video">
+	{{> uploader type="video" resourceID=resourceID fileTypes='video/*' callback=callback multiple="true"}}
+</template>

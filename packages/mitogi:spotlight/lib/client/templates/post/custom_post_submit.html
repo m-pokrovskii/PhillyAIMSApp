@@ -1,0 +1,8 @@
+<template name="custom_post_submit">
+  <div class="form-page post-submit post-body">
+    <div class="grid grid-module">
+      {{> SpotlightUpload}}
+      {{> quickForm collection="Posts" id="submitPostForm" template="bootstrap3-horizontal" input-col-class="controls" type="method" meteormethod="submitPost" fields=postFields}}
+    </div>
+  </div>
+</template>

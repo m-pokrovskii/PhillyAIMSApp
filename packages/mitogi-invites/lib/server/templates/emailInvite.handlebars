@@ -1,0 +1,30 @@
+<style>
+	.body{
+		font-family: Arial;
+		font-size:12 px;
+		width: 60%;
+		margin: 0 auto;
+	}
+	.heading{
+		font-size: 20px;
+		font-weight: bold;
+		display:block;
+	}
+</style>
+
+<div class="body">
+
+<span class="heading">
+  {invitedBy}} invited you to join {{communityName}}
+</span><br><br>
+
+
+	{{#if defaultInviteMessage}}
+		{{{defaultInviteMessage}}}
+	{{else}}
+		We're excited to have you be part of our community!
+	{{/if}}
+	
+	Click on the link below to register:
+	<a href="{{siteUrl}}{{actionLink}}/{{userEmail}}/{{token}}">{{siteUrl}}{{actionLink}}/{{token}}</a>
+</div>

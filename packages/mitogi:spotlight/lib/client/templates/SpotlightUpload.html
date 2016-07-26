@@ -1,0 +1,48 @@
+<template name="SpotlightUpload">
+
+	<div class="container-wrapper">
+    
+          <div class="splash">
+             <div class="spotlight-button-container text-center">
+			      {{> panelButton option="video" fa="video-camera" button="info" count=(countItem "video")}}
+			      {{> panelButton option="photo" fa="camera" button="success" count=(countItem "photo")}}
+			    
+			      {{> panelButton option="attachment" fa="paperclip" button="danger" count=(countItem "attachment") }}
+			      {{> panelButton option="link" fa="link" button="warning" count=(countItem "link") }}
+			 
+			</div>
+			 
+			  	<div class="jumbotron {{set}}">
+				  	<div id="video-panel" class="hide-panel">
+					  	{{> upload_video resourceID=resourceID}}
+					</div>
+					<div id="photo-panel" class="hide-panel">
+						{{> upload_photo resourceID=resourceID}}
+					  	<!--{{> PhotoUpload spotlightData=spotlightData}}-->
+					</div>
+					<div id="attachment-panel" class="hide-panel">
+						{{> upload_attachment resourceID=resourceID}}
+					  	<!--{{> AttachmentUpload spotlightData=spotlightData}}-->
+					</div>
+					<div id="link-panel" class="hide-panel">
+					  	{{> LinkUpload spotlightData=spotlightData}}
+					</div>
+				</div>
+			 
+          </div>
+    </div>
+</template>
+
+
+
+<template name="panelButton">
+
+  	<div data-id="{{option}}" class="spotlight-button">
+      	<div class="btn-{{button}} panel-body resource-select" data-type="{{option}}"  id="{{option}}-select">
+	         <i class="fa fa-{{fa}} fa-4x"></i>
+	         <span>{{count}}</span>
+	         <p>{{option}}</p>
+         </div>
+     </div>
+
+</template>

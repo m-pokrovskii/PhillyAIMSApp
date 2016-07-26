@@ -1,0 +1,12 @@
+<template name="post_tags">
+  <div class="post-tags {{moduleClass}}">
+  	<h2>Tags</h2>
+    {{#each tags}}
+      <a href="{{tagsLink}}" class="post-tag">
+			<span class="tag label label-info">{{this}}</span>
+		</a>
+    {{/each}}
+  </div>
+</template>
+
+
