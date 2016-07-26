@@ -35,3 +35,32 @@ Posts.addField(
 );
 
 Posts.removeField("url");
+
+Links = new SimpleSchema({
+  title: {
+    type: String,
+    label: "Link Title",
+    max: 200
+  },
+  url: {
+    type: String,
+    label: "URL"
+  },
+  description: {
+    type: String,
+    label: "Description"
+  },
+});
+
+
+
+Posts.addField(
+  {
+    fieldName: 'links',
+    fieldSchema: {
+      type: [Links],
+      optional: true,
+      editableBy: ["member", "admin"]
+    }
+  }
+);
