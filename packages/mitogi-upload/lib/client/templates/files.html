@@ -52,9 +52,14 @@
 
 	                <video class="video-player" controls>
 	                	<!--need to encode videos-->
-        					  <source src="{{filepath}}" type="video/{{endsWith filepath}}">
-        					  <source src="{{newExtension filepath 'mp4'}}" type="video/mp4">
-        					  <source src="{{newExtension filepath 'webm'}}" type="video/webm">
+                    {{#if notwebm filepath}}
+          					  <source src="{{filepath}}" type="video/{{endsWith filepath}}">
+          					  <source src="{{newExtension filepath 'mp4'}}" type="video/mp4">
+          					  <source src="{{newExtension filepath 'webm'}}" type="video/webm">
+                    {{else}}
+                      <source src="{{filepath}}" type="video/{{endsWith filepath}}">
+                    {{/if}}
+
         					   Your browser does not support the video tag.
         					</video>
         					
