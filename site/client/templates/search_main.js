@@ -9,7 +9,11 @@ var delay = (function(){
 
 Template.search_main.onRendered(function(){
      $('.secondary-search').hide();
-     Meteor.typeahead.inject();
+     //Meteor.typeahead.inject();
+});
+
+Template.search_main.onDestroyed(function(){
+     $('.secondary-search').show();
 });
 
 Template.search_main.helpers({
@@ -61,7 +65,7 @@ Template.search_main.events({
     }
 
     delay(function(){
-      $('.secondary-search').show().focus();
+      $('.secondary-search').focus();
 
       if (FlowRouter.getRouteName() !== "postsDefault") {
         FlowRouter.go("postsDefault");

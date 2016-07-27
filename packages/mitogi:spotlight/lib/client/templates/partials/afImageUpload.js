@@ -15,7 +15,7 @@ Template['afImageUpload'].onCreated(function (){
 
 Template.afImageUpload.helpers({
   myCallbacks: function(data) {
-    Template.instance.uploadFile.set(data.url);
+    Template.instance().uploadFile.set(data.url);
   },
   uploadFile: function(){
     return Template.instance().uploadFile.get();

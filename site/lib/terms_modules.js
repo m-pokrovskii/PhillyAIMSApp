@@ -4,8 +4,9 @@ Settings.addField([
     fieldSchema: {
       type: String,
       optional: true,
+      label: "Terms",
       autoform: {
-        group: 'general',
+        group: "01_general",
         instructions: 'Specify Terms of Use.'
       }
     }

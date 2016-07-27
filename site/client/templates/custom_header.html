@@ -1,14 +1,13 @@
 <template name="custom_header">
   <header class="header {{class}} {{headerClass}}">
-    {{#if and (isNotActiveRoute 'postPage') isNotCordova}}
-      <a href="#menu" class="mobile-only mobile-menu-button button">
-        <i class="icon fa fa-bars" aria-hidden="true"></i>
-      </a>
-
-    {{ else}}  
-     <a id="back-button" class="mobile-back-button">
-        <i class="icon fa fa-chevron-left" aria-hidden="true"></i>
-      </a>
+      {{#if $and (isActiveRoute 'postPage') isCordova}}  
+          <a id="back-button" class="mobile-back-button">
+            <i class="icon fa fa-chevron-left" aria-hidden="true"></i>
+          </a>
+      {{else}}
+        <a href="#menu" class="mobile-only mobile-menu-button button">
+          <i class="icon fa fa-bars" aria-hidden="true"></i>
+        </a>
     {{/if}}
 
     

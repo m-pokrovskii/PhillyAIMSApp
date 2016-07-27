@@ -60,6 +60,9 @@ sergeyt:typeahead
 #mitogi:posts
 random
 
+#for headers
+raix:handlebar-helpers
+
 ###angle
 jquery
 twbs:bootstrap@3.3.5

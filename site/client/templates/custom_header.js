@@ -2,19 +2,17 @@ window.shouldRotateToOrientation = function(degrees) {
  return true;
 }
 
-Template.registerHelper("and", function(one, two) {
-  if (one && two) {
-    return true;
-  } 
-});
-
-Template.registerHelper("not", function(thing) {
-    return !thing;
-});
-
 Template.header.helpers({
   'isNotCordova': function(e){
     return !Meteor.isCordova;
+  },
+  'and': function(one, two){
+    if (one && two) {
+      return true;
+    } 
+  },
+  'not': function(thing){
+      return !thing;
   }
 });
 
