@@ -7,6 +7,12 @@ Template.register.onRendered(function(){
 	$('label[for="at-field-email"]').remove();
 });
 
+Template.register.events({
+	'click #terms': function(){
+		Session.set('modalTitle', 'Terms');
+		Session.set('modalBody', Settings.get("terms"));
+	}
+});
 
 /*Template.register.onCreated(function(){
 	this.email = new ReactiveVar(FlowRouter.getParam("email"));

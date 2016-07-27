@@ -9,6 +9,7 @@ var delay = (function(){
 
 Template.search_main.onRendered(function(){
      $('.secondary-search').hide();
+     Meteor.typeahead.inject();
 });
 
 Template.search_main.helpers({
@@ -20,7 +21,24 @@ Template.search_main.helpers({
   },
   searchQueryEmpty: function () {
     return !!FlowRouter.getQueryParam("query") ? "" : "empty";
-  }
+  },
+  
+  /*search : function(query, sync, callback) {
+
+    var func2 = function(callback) {
+      Meteor.call('search', query, {}, function(err, res) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        callback(res.map(function(v){ return {value: v.name}; }));
+      });
+    };
+
+    var wrapped2 = Meteor.wrapAsync(func2);
+
+      
+  }*/
 });
 
 Template.search_main.events({

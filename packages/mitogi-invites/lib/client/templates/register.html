@@ -29,7 +29,7 @@
                    <div class="checkbox c-checkbox pull-left mt0">
                       <label>
                          <input id="terms-box" type="checkbox" value="" required="required" name="agreed" />
-                         <span id="terms" class="fa fa-check"></span>I agree with the <u><a data-toggle="modal" data-target="#termsModal">Terms of Service</a></u>
+                         <span id="terms" class="fa fa-check"></span>I agree with the <u><a data-toggle="modal" data-target="#modal">Terms of Service</a></u>
                       </label>
                    </div>
                 </div>
@@ -43,19 +43,3 @@
     {{> modal terms}}
 </template>
 
-
-<template name="modal">
-	<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title">Terms</h4>
-	      </div>
-	      <div class="modal-body">
-	        {{this}}
-	      </div>
-	    </div>
-	  </div>
-	</div>
-</template>

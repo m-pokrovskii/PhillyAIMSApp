@@ -4,7 +4,7 @@ function manyOrs(terms){
   var array = new Array();
   for(var i=0; i< terms.length; i++){
     var term = terms[i].trim();
-    console.log(fillwords.indexOf("this"));
+    //console.log(fillwords.indexOf("this"));
     if(term && (fillwords.indexOf(term) == -1)){ //not empty string
       var obj = {
           $or: [
