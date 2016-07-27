@@ -3,16 +3,8 @@ window.shouldRotateToOrientation = function(degrees) {
 }
 
 Template.header.helpers({
-  'isNotCordova': function(e){
-    return !Meteor.isCordova;
-  },
-  'and': function(one, two){
-    if (one && two) {
-      return true;
-    } 
-  },
-  'not': function(thing){
-      return !thing;
+  'isCordova': function(e){
+    return Meteor.isCordova;
   }
 });
 
