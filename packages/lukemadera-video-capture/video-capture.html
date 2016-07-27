@@ -18,7 +18,7 @@
       </div>
 
       <div class='lm-video-capture-video'>
-        <video autoplay width='{{ data.videoDisplay.width }}' height='{{ data.videoDisplay.height }}' controls></video>
+        <video autoplay width='{{ data.videoDisplay.width }}' height='{{ data.videoDisplay.height }}' {{mute}}></video>
       </div>
       {{ #if data.countdownTimer }}
         <div class='lm-video-capture-countdown'>

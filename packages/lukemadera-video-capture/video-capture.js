@@ -48,6 +48,7 @@ lmVideoCapture.recordStart =function(templateInst) {
     _videoCapture.recordStartCordova(templateInst);
   }
   else {
+    templateInst.muteMe.set(true);
     _videoCapture.recordStartBrowser(templateInst);
   }
   
@@ -59,6 +60,7 @@ lmVideoCapture.recordStop =function(templateInst) {
   }
   else {
     _videoCapture.recordStopBrowser();
+    templateInst.muteMe.set(false);
   }
   
   clearTimeout(_videoCapture.timeouts.countdown);
@@ -455,6 +457,7 @@ if(Meteor.isClient) {
     });
     this.processing = new ReactiveVar(false);
     this.inited =false;
+    this.muteMe = new ReactiveVar(true);
   };
 
   // Template.lmVideoCapture.rendered =function() {
@@ -473,6 +476,9 @@ if(Meteor.isClient) {
         classes: _videoCapture.opts.classes,
         platformSupport: _videoCapture.platformSupport()
       };
+    },
+    mute : function(){
+      return Template.instance().muteMe.get() ? "muted" : "controls muted = 'false'";
     }
   });
 

@@ -10,7 +10,7 @@ Template.uploader.onCreated(function(){
   this.getURL = new ReactiveVar(false);
   this.getVideoSource = new ReactiveVar();
   this.enableURL = new ReactiveVar(false);
-
+  this.savedVideo = new ReactiveVar(false);
   this.videoCapture = new ReactiveVar(false);
 });
 
@@ -29,9 +29,6 @@ Template.uploader.helpers({
   getURL : function(){
   	return Template.instance().getURL.get();
   },
-  getVideoSource : function(){
-  	return Template.instance().getVideoSource.get();
-  },
   enableURLButton : function(){
   	return Template.instance().enableURL.get() ? '' : "disabled";
   },
@@ -40,6 +37,9 @@ Template.uploader.helpers({
   },
   videoCapture: function(){
   	return Template.instance().videoCapture.get();
+  },
+  savedVideo: function(){
+  	return Template.instance().savedVideo.get();
   },
   opts: function() {
   	  var template = Template.instance();
@@ -56,9 +56,8 @@ Template.uploader.helpers({
         // },
         onVideoRecorded: function(err, base64Data) {
           console.log('onVideoRecorded');
-          //template.getVideoSource.set(base64Data);
-          
-          //Template.instance().videoCapture.set(false);
+          template.getVideoSource.set(base64Data);
+          template.savedVideo.set(true);
         }
       };
       return opts;
@@ -86,7 +85,7 @@ Template.uploader.events({
 	},
    'click .upload-camera-video': function(e, template){
 	    e.preventDefault();
-	    Template.instance().videoCapture.set(true);
+	    Template.instance().savedVideo.set(false);
 	    var base64Data = template.getVideoSource.get();
 	    template.myUploader.upload( { base64: base64Data});
    },
@@ -180,8 +179,9 @@ MyUploader = function() {
 		  	let contentType = this._getContentType(options.base64);
 
 		  	let blob = this._dataURItoBlob(options.base64, contentType);
-		    let name = new Date().toString();
+		    let name = new Date().toString()+"."+contentType.split("/")[1];
 
+		    console.log(name);
 		    
 		  	file = this._blobToFile(blob, name);
 		  }

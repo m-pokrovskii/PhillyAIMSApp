@@ -32,7 +32,7 @@ Meteor.methods({
         type: data.type,
       });
 
-      if(data.type==="video"){
+      if(data.type==="video" && !key.endsWith("webm")){
         console.log("key"+key);
         Meteor.call('videoEncoder', key);
       }

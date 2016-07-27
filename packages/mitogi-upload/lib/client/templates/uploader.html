@@ -74,7 +74,11 @@
 		<div class="row">
 		{{#if videoCapture}}
 			{{> lmVideoCapture opts=opts}}
+			{{#if savedVideo}}
+			<button class="upload-camera-video btn btn-info">Upload Video</button>
+			{{/if}}
 		{{/if}}
+
 		</div>
 
 		<div class="row">

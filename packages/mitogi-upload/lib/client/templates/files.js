@@ -26,6 +26,9 @@ Template.files.helpers({
 });
 
 Template['file-video'].helpers({
+  notwebm: function(filepath) {
+    return !filepath.endsWith(".webm");
+  },
   endsWith: function(filepath) {
     return filepath.split(".").slice(-1)[0];
   },
