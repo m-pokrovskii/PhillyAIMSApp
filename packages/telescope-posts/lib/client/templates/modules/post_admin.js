@@ -13,10 +13,12 @@ Template.post_admin.helpers({
 Template.post_admin.events({
   'click .approve-link': function(e){
     Meteor.call('approvePost', this._id);
+    Bert.alert( 'The Post has been approved', 'success', 'growl-top-right' );
     e.preventDefault();
   },
   'click .reject-link': function(e){
     Meteor.call('rejectPost', this._id);
+    Bert.alert( 'The Post has been rejected', 'danger', 'growl-top-right' );
     e.preventDefault();
   },
   'click .delete-link': function(e){
@@ -29,9 +31,9 @@ Template.post_admin.events({
       Meteor.call("deletePostById", post._id, function(error) {
         if (error) {
           console.log(error);
-          Messages.flash(error.reason, 'error');
+          Bert.alert( error.reason, 'danger', 'fixed-top' );
         } else {
-          Messages.flash(i18n.t('your_post_has_been_deleted'), 'success');
+          Bert.alert( i18n.t('your_post_has_been_deleted'), 'success', 'fixed-top' );
         }
       });
     }

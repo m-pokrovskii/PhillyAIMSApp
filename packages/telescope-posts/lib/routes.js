@@ -5,13 +5,6 @@ var PostsController = FlowRouter.group({
         }]
 });
 
-PostsController.route( '/', {
-  name: 'all',
-  action: function(){
-    FlowRouter.go('postsDefault');
-  }
-});
-
 function authenticating(path) {
     if(!Meteor.loggingIn() && !Meteor.userId()){
         FlowRouter.go('signIn');

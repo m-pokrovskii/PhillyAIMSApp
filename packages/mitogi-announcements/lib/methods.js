@@ -10,7 +10,7 @@
  * @param {string} post.userId - the id of the user the post belongs to
  * @param {string} post.title - the post's title
  */
-Posts.submit = function (post) {
+Announcements.submit = function (post) {
 
   var userId = post.userId, // at this stage, a userId is expected
       user = Users.findOne(userId);

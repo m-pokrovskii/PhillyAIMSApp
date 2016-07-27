@@ -7,12 +7,11 @@ var delay = (function(){
   };
 })();
 
-Template.search.onRendered(function(){
-  FlowRouter.getQueryParam("query") ? $('#search').focus() : null;
-  this.search = new ReactiveVar();
-})
+Template.search_main.onRendered(function(){
+     $('.secondary-search').hide();
+});
 
-Template.search.helpers({
+Template.search_main.helpers({
   canSearch: function () {
     return Users.can.view(Meteor.user());
   },
@@ -24,20 +23,17 @@ Template.search.helpers({
   }
 });
 
-Template.search.events({
-  'keyup .search-field': function (e) {
+Template.search_main.events({
+  'keyup #search-main': function (e) {
     
     e.preventDefault();
     
     var val = $(e.target).val(),
-        $search = $('.search');
+        $search = $('#search-main');
 
     // if we're not on search route, go to it
 
-    if (FlowRouter.getRouteName() !== "postsDefault") {
-      FlowRouter.go("postsDefault");
-    }
-
+    
     if (val === '') {
       // if search field is empty
       $search.addClass('empty');
@@ -47,8 +43,15 @@ Template.search.events({
     }
 
     delay(function(){
+      $('.secondary-search').show().focus();
+
+      if (FlowRouter.getRouteName() !== "postsDefault") {
+        FlowRouter.go("postsDefault");
+      }
       FlowRouter.setQueryParams({query: val});
-    }, 700 );
+      
+
+    }, 500 );
 
   }
 });

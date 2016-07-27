@@ -52,20 +52,6 @@ var InviteSchema = new SimpleSchema({
 Invites = new Meteor.Collection("invites");
 Invites.attachSchema(InviteSchema);
 
-Settings.addField([
-  {
-    fieldName: "contact_email",
-    label: "Contact Email",
-      fieldSchema: {
-        type: String,
-        optional: true
-      },
-      autoform: {
-        group: '01_general',
-      }
-  }
-]);
-
 Users.addField([
   /**
     A count of the user's remaining invites

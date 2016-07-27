@@ -35,7 +35,7 @@ Posts.addField(
 );
 
 Posts.removeField("url");
-
+/*
 Links = new SimpleSchema({
   title: {
     type: String,
@@ -63,4 +63,4 @@ Posts.addField(
       editableBy: ["member", "admin"]
     }
   }
-);
+);*/

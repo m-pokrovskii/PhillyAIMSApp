@@ -4,9 +4,9 @@
     <div class="outer-wrapper {{currentPage}} {{navLayout}}">
       {{> mobile_nav}}
       <div class="inner-wrapper template-{{pageName}}">
-        {{> header}}
+        {{> header class=headerClass}}
         {{> mobile_nav_bottom}}
-        {{> modules zone="hero"}}
+        {{> Template.dynamic template=hero}}
         <div class="content-wrapper">
           {{#if notAllowed}}
             {{> Template.dynamic template=notAllowed.template data=notAllowed.data}}

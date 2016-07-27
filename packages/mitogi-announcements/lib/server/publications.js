@@ -1,70 +1,31 @@
-Posts._ensureIndex({"status": 1, "postedAt": 1});
+//Announcements._ensureIndex({"status": 1, "postedAt": 1});
 
 // Publish a list of posts
 
-Meteor.publish('postsList', function(terms) {
+Meteor.publish('announcementList', function(terms) {
 
   this.unblock();
-  
-  if (this.userId) { // add currentUserId to terms if a user is logged in
-    terms.currentUserId = this.userId; 
-  }
+    var parameters = Announcements.parameters.get(terms),
+        announcements = Announcements.find(parameters.find, parameters.options);
 
-  if(Users.can.viewById(this.userId)){
-    var parameters = Posts.parameters.get(terms),
-        posts = Posts.find(parameters.find, parameters.options);
-
-    return posts;
-  }
-  return [];
-});
-
-// Publish all the users that have posted the currently displayed list of posts
-// plus the commenters for each post
-
-Meteor.publish('postsListUsers', function(terms) {
-  
-  this.unblock();
-  
-  if (this.userId) {
-    terms.currentUserId = this.userId; // add userId to terms
-  }
-
-  if(Users.can.viewById(this.userId)){
-    var parameters = Posts.parameters.get(terms),
-        posts = Posts.find(parameters.find, parameters.options),
-        userIds = _.pluck(posts.fetch(), 'userId');
-
-    // for each post, add first four commenter's userIds to userIds array
-    posts.forEach(function (post) {
-      userIds = userIds.concat(_.first(post.commenters,4));
-    });
-
-    userIds = _.unique(userIds);
-
-    return Meteor.users.find({_id: {$in: userIds}}, {fields: Users.pubsub.avatarProperties, multi: true});
-  }
-  return [];
-});
-
-// Publish a single post
-
-Meteor.publish('singlePost', function(postId) {
-
-  check(postId, String);
-  this.unblock();
-
-  var user = Meteor.users.findOne(this.userId);
-  var post = Posts.findOne(postId);
-
-  if (Users.can.viewPost(user, post)){
-    return Posts.find(postId);
-  } else {
-    return [];
-  }
+    return announcements;
 
 });
 
+
+// Publish a single announcement
+
+Meteor.publish('singleAnnouncement', function(announcementId) {
+
+  check(announcementId, String);
+  this.unblock();
+
+  var announcement = Announcements.findOne(announcementId);
+  
+  return announcement;
+
+});
+/*
 // Publish author of the current post, authors of its comments, and upvoters of the post
 
 Meteor.publish('postUsers', function(postId) {
@@ -106,3 +67,4 @@ Meteor.publish('postUsers', function(postId) {
   }
   return [];
 });
+*/

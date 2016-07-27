@@ -24,11 +24,65 @@
 
 /* post */
 
-.post-admin-action a:link, .post-admin-actions a{
-  color:white;
+.post-meta a:link, .post-meta a:visited, .post-meta a:active {
+    color: #ffffff !important;
 }
 
-/* mine */
+/* home splash */
+@media screen and (min-width: 600px){
+  .home-header{
+    background-color: transparent !important;
+    position: absolute !important;
+    width: 100% !important;
+  }
+}
+
+#search-main{
+  font-size: 1.2em;
+  height: 40px;
+  margin-bottom:10px;
+  max-width: 80%;
+}
+
+.search.empty #search-main:focus {
+  background: white;
+  max-width: 100%;
+  color: #aaa;
+}
+
+.masthead {
+    color: white;
+    top: 0px;
+    margin-bottom:20px;
+    height: 60vh;
+    display: table;
+    width: 100%;
+    background: url('img/splash.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+.masthead .container{
+  margin:0 auto;
+  display:table-cell;
+  vertical-align: middle;
+  text-align:center;
+}
+
+.masthead .search{
+  margin:0 auto;
+}
+
+/*post editor*/
+
+.note-editor button{
+  color: black;
+}
+
+/*mobile */
 
 .mobile-nav .mobile-nav-open{
   background: rgba(82,142,216,1);
