@@ -8,7 +8,6 @@
 			      {{> panelButton option="photo" fa="camera" button="success" count=(countItem "photo")}}
 			    
 			      {{> panelButton option="attachment" fa="paperclip" button="danger" count=(countItem "attachment") }}
-			      {{> panelButton option="link" fa="link" button="warning" count=(countItem "link") }}
 			 
 			</div>
 			 
@@ -23,9 +22,6 @@
 					<div id="attachment-panel" class="hide-panel">
 						{{> upload_attachment resourceID=resourceID}}
 					  	<!--{{> AttachmentUpload spotlightData=spotlightData}}-->
-					</div>
-					<div id="link-panel" class="hide-panel">
-					  	{{> LinkUpload spotlightData=spotlightData}}
 					</div>
 				</div>
 			 

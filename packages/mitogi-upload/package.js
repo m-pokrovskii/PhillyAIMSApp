@@ -39,7 +39,7 @@ Package.onUse(function (api) {
     'lib/both/modules/_modules.js',
     'lib/both/modules/check-url-validity.js',
 
-    'lib/both/slingshot_file.js',
+    
   ], ['client', 'server']);
 
   // client
@@ -61,6 +61,7 @@ Package.onUse(function (api) {
   // server
 
   api.addFiles([
+    'lib/server/slingshot_file.js',
     'lib/server/slingshot_create.js',
     'lib/server/publish.js',
     'lib/server/startup.js'

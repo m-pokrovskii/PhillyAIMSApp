@@ -24,7 +24,7 @@ AutoForm.hooks({
 */
 Template.panelButton.inheritsHelpersFrom('SpotlightUpload');
 
-var types= ["video","photo","attachment", "link"];
+var types= ["video","photo","attachment"]; //"link"
 
 function animateButtonsSide(){
   $(".splash").find(".spotlight-button").each(function(index, value){
@@ -54,7 +54,7 @@ function switchPanels(myType){
 Template.SpotlightUpload.onCreated( function() {
   this.spotlightType = new ReactiveVar();
   this.open = new ReactiveVar(false);
-  this.spotlightData = new SpotlightData(Session.get('resourceID'));
+  //this.spotlightData = new SpotlightData(Session.get('resourceID'));
   Session.set('submitSpotlight', false);
   var self = this;
 
@@ -164,7 +164,7 @@ function SpotlightData (resourceID) {
     this.video = new ReactiveArray([]);
     this.photo = new ReactiveArray([]);
     this.attachment = new ReactiveArray([]);
-    this.link = new ReactiveArray([]);
+    //this.link = new ReactiveArray([]);
     this.resourceID = resourceID;
 
     this.setInitial = function(){
@@ -184,7 +184,7 @@ function SpotlightData (resourceID) {
         loadInit(this.initial.video, this.video);
         loadInit(this.initial.photo, this.photo);
         loadInit(this.initial.attachment, this.attachment);
-        loadInit(this.initial.link, this.link);
+        //loadInit(this.initial.link, this.link);
       }
     };
 
