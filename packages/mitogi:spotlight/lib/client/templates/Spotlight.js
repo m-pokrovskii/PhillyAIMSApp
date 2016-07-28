@@ -7,6 +7,7 @@ Template.SpotlightShow.onCreated( function() {
     this.mySpotlight = new ReactiveVar();
     var self = this;
     self.autorun(function () {
+
     var subscription = self.subscribe( 'resourceFiles', FlowRouter.getParam("_id"));
     if (subscription.ready()) {
 
@@ -25,23 +26,6 @@ Template.SpotlightShow.onCreated( function() {
     }
   });
 });
-
-Template.SpotlightShow.onRendered( function() {
-
-  var self = this;
-
-  
-/*
-  self.autorun(function () {
-  	var subscription = self.subscribe( 'SingleSpotlight', FlowRouter.getParam("_id"));
-  	if (subscription.ready()) {
-       	  self.mySpotlight.set(Spotlights.find().fetch()[0]);
-       	  self.ready.set(true);
-    }
-  });*/
-
-});
-
 
 Template.SpotlightShow.helpers({
 	ready: function () {

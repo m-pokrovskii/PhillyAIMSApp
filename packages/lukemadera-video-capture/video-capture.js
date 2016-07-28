@@ -478,7 +478,7 @@ if(Meteor.isClient) {
       };
     },
     mute : function(){
-      return Template.instance().muteMe.get() ? "muted" : "controls muted = 'false'";
+      return Template.instance().muteMe.get() ? "muted" : "controls";
     }
   });
 

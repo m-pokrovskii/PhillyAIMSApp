@@ -3,7 +3,7 @@
 // //////////////////////////////////
 
 AccountsTemplates.configure({
-  defaultLayout: 'layout',
+  defaultLayout: 'account_template_layout',
   defaultLayoutRegions: {},
   defaultContentRegion: 'main',
   enablePasswordChange: true,
@@ -23,18 +23,33 @@ AccountsTemplates.configureRoute('signIn', {
     path: '/sign-in',
 });
 
+AccountsTemplates.configureRoute('changePwd', {
+    name: 'changePwd',
+    path: '/change-password',
+});
+
+AccountsTemplates.configureRoute('forgotPwd', {
+    name: 'forgotPwd',
+    path: '/forgot-password',
+});
+
+AccountsTemplates.configureRoute('resetPwd', {
+    name: 'resetPwd',
+    path: '/reset-password',
+});
+
 /*
 AccountsTemplates.configureRoute('signUp', {
     name: 'signUp',
     path: '/register',
 });
-*/
+
 AccountsTemplates.configureRoute('changePwd');
 AccountsTemplates.configureRoute('forgotPwd');
 AccountsTemplates.configureRoute('resetPwd');
 AccountsTemplates.configureRoute('enrollAccount');
 AccountsTemplates.configureRoute('verifyEmail');
-
+*/
 // /* global
 //     AccountsTemplates: false,
 //     Settings: false

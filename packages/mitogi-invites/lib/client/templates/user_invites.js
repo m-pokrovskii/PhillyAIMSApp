@@ -1,13 +1,13 @@
 Template.user_invites.created = function () {
 
-  var user = this.data;
+  var userId = Meteor.userId();//this.data;
   var instance = this;
 
   instance.invites = new ReactiveVar({});
 
   Meteor.autorun(function () {
-    Telescope.subsManager.subscribe('invites', user._id);
-    var invites = Invites.find({invitingUserId: user._id});
+    Telescope.subsManager.subscribe('invites', userId);
+    var invites = Invites.find({invitingUserId: userId});
     instance.invites.set(invites);
   });
 };
@@ -33,6 +33,36 @@ Template.user_invites.helpers({
   }
 });
 
+Template.user_invites.events({
+  'click .resend': function (event) {
+    event.preventDefault();
+    var email = event.target.getAttribute('data-email');
+    Meteor.call('resend', email, function(error, result){
+      if(error){
+        Bert.alert( 'Error '+error, 'danger', 'growl-top-right' );
+      }
+      else{
+        Bert.alert( 'An invite has been resent out. Thank you!', 'success', 'growl-top-right' );
+      }
+    });
+    
+  },
+  'click .delete': function (event) {
+    event.preventDefault();
+    var email = event.target.getAttribute('data-email');
+    if (window.confirm("Are you sure?")) {
+      Meteor.call('deleteInvite', email, function(error, result){
+        if(error){
+          Bert.alert( 'Error '+error, 'danger', 'growl-top-right' );
+        }
+        else{
+          Bert.alert( 'Delete successful!', 'success', 'growl-top-right' );
+        }
+      });
+    }
+  }
+});
+
 var scrollUp = function(){
   Deps.afterFlush(function() {
     var element = $('.grid > .error');
@@ -53,18 +83,21 @@ AutoForm.hooks({
       }
     },*/
     onSuccess: function(operation, result) {
-      Messages.clearSeen();
+      //Messages.clearSeen();
 
       if(result && result.newUser){
         Bert.alert( 'An invite has been sent out. Thank you!', 'success', 'growl-top-right' );
       } else {
-        Messages.flash('Thank you!', "info");
+        Bert.alert( 'An invite has been sent out. Thank you!', 'success', 'growl-top-right' );
+        //Messages.flash('Thank you!', "info");
       }
       //scrollUp();
+
+      console.log(result);
     },
 
     onError: function(operation, error) {
-      Messages.clearSeen();
+      //Messages.clearSeen();
 
       if(error && error.reason){
         Bert.alert( 'Error '+error.reason, 'danger', 'growl-top-right' );

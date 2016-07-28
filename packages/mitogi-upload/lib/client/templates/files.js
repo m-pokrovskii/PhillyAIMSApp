@@ -34,7 +34,20 @@ Template['file-video'].helpers({
   },
   newExtension: function(filepath, ext) {
     return filepath.slice(0,-(filepath.split(".").slice(-1)[0].length))+ext;
-  }
+  },
+  getPlayer: function(url){
+
+    if(url.indexOf("vimeo.com") > -1){
+      var id = url.split(/[\=\/]+/).slice(-1)[0];
+      return "https://player.vimeo.com/video/"+id;
+    }
+
+    else if(url.indexOf("youtube.com") > -1 || url.indexOf("youtu.be") > -1){
+      var id = url.replace(/http:|https:|www.|youtube.com|watch\?v=|youtu.be|\//g,'');
+      return "https://www.youtube.com/embed/"+id;
+    }
+    return false;
+  },
 });
 
 Template['file-attachment'].events({

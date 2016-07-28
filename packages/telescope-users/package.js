@@ -34,6 +34,8 @@ Package.onUse(function (api) {
 
   api.addFiles([
     'lib/client/templates/account/user_account.html',
+    'lib/client/templates/account_template_layout.html',
+    'lib/client/templates/account_template_layout.js',
     'lib/client/templates/account/user_account.js',
     'lib/client/templates/account/user_password.html',
     'lib/client/templates/account/user_password.js',

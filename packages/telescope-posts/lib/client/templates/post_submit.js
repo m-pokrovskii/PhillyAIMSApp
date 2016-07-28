@@ -36,11 +36,12 @@ AutoForm.hooks({
     },
 
     onSuccess: function(operation, post) {
+      Session.set("unsavedChanges",false);
       Events.track("new post", {'postId': post._id});
       var template = this.template;
       Telescope.subsManager.subscribe('singlePost', post._id, function () {
         template.$('button[type=submit]').removeClass('loading');
-        FlowRouter.go('postPage', post);
+        FlowRouter.go('postPage', {slug: post.slug, _id: post._id});
       });
     },
 

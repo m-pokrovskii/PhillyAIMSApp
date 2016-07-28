@@ -41,6 +41,13 @@ Template.uploader.helpers({
   savedVideo: function(){
   	return Template.instance().savedVideo.get();
   },
+  urlPlaceholder: function(){
+  	if(Template.instance().data.type)
+  		return "www.image.com/image.jpg";
+  	else{
+  		return "youtube.com/7dom7zCvGC8 or vimeo.com/176508773"
+  	}
+  },
   opts: function() {
   	  var template = Template.instance();
       var opts ={
@@ -102,8 +109,9 @@ Template.uploader.events({
 	    //console.log(e.target.value);
 	    //var element = template.find('input:text[name=urlInput]');
     	var fileUrl = template.enableURL.get();
+    	console.log("mom"+template.data.type);
     	if(fileUrl){
-	    	if(!!template.data.type || template.data.type==="photo"){
+	    	if(template.data.type==="photo"){
 			    //element.val();
 			    
 			    var mytemp = template;
@@ -111,11 +119,10 @@ Template.uploader.events({
 				  // Handle the error or response here.
 			  		if(error){
 			  			console.log(error);
-			  			console.log("This isn't a valid image url");
+			  			Bert.alert("This isn't a valid image url", "danger", "growl-top-right");
 			  		}
 			  		else{
-			  			console.log(response);
-
+			  			 Bert.alert( "Image successfully saved.", "success", "growl-top-right" );
 						 template.myUploader.upload( { base64: response
 						 });
 			  		}
@@ -125,22 +132,31 @@ Template.uploader.events({
 
 			else if(template.data.type === "video"){
 				//var file = event.target.files[0];
-				var data = {
-					url : fileUrl,
-					name : "Default Name",
-					size : null,
-					type: "video",
-					id: this.data.resourceID
+
+				if(url.indexOf("vimeo.com") > -1 || url.indexOf("youtube.com") > -1){
+
+				
+					console.log("video url upload");
+					var data = {
+						url : fileUrl,
+						name : "Default Name",
+						size : null,
+						type: "video",
+						key: null,
+						id: template.data.resourceID
+					}
+					Meteor.call( "insertFiles", data, null, function ( error ) {
+					    if ( error ) {
+					      Bert.alert( error.reason, "warning" );
+					    } else {
+					      Bert.alert( "Video successfully saved.", "success" , "growl-top-right");
+					      //if(callback) callback(data);
+					    }
+					});
 				}
-				Meteor.call( "storeUrlInDatabase", data, function ( error ) {
-				    if ( error ) {
-				      Bert.alert( error.reason, "warning" );
-				      console.log(error);
-				    } else {
-				      Bert.alert( "File uploaded to Amazon S3!", "success" );
-				      //if(callback) callback(data);
-				    }
-				});
+				else{
+					Bert.alert("Links need to be youtube or vimeo.", "danger", "growl-top-right");
+				}
 			}
 		}
 

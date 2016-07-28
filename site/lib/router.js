@@ -18,6 +18,11 @@ Telescope.callbacks.add("postSubmitClient", submitSpotlight);*/
 FlowRouter.route('/', {
   name: 'all',
   action: function() {
-    BlazeLayout.render("layout", {main: "main_posts_list", hero: "home_hero", headerClass: "home-header"});
+    if(!Meteor.user()){
+      FlowRouter.go('signIn');
+    }
+    else{
+      BlazeLayout.render("layout", {main: "main_posts_list", hero: "home_hero", headerClass: "home-header"});
+    }
   }
 });

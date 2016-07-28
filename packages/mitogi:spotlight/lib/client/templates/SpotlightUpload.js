@@ -6,7 +6,8 @@
 */
 var hookSpotlight = {
     onSuccess: function(formType, post) {
-      Session.set('submitSpotlight', true);
+      Session.set('unsavedChanges', false);
+      //Session.set('submitSpotlight', true);
   }
 };
 
@@ -35,7 +36,7 @@ function animateButtonsSide(){
 }
 
 function switchPanels(myType){
-  
+  console.log("onenter");
   myType = myType.toString();
 
   for (var i = 0; i < types.length; i++) {
@@ -54,54 +55,61 @@ function switchPanels(myType){
 Template.SpotlightUpload.onCreated( function() {
   this.spotlightType = new ReactiveVar();
   this.open = new ReactiveVar(false);
-  //this.spotlightData = new SpotlightData(Session.get('resourceID'));
-  Session.set('submitSpotlight', false);
+  Session.set('unsavedChanges', false);
+  //Session.set('submitSpotlight', false);
+  var resourceID = Session.get('resourceID');
+
+  this.ready = new ReactiveVar(false);
+
+  this.photoCount = new ReactiveVar(0);
+  this.videoCount = new ReactiveVar(0);
+  this.attachmentCount = new ReactiveVar(0);
+
   var self = this;
 
-
-
-   self.autorun(function () {
-      var submitMe = Session.get('submitSpotlight');
-      if(submitMe){
-        self.spotlightData.submit();
-        self.spotlightData = new SpotlightData();
-        if(!!Posts.findOne(Session.get('resourceID'))){
-          Session.set('unsavedChanges', true);
-        }
-        Session.set('submitSpotlight', false);
-      }
-  });
+  var filesSubscription = Telescope.subsManager.subscribe('myFiles', resourceID);
 
   self.autorun(function () {
-      // subscribe to the posts publication
-      var subscription = self.subscribe( 'SingleSpotlight', ''+Session.get('resourceID'));
 
-      if (subscription.ready()) {
-          self.spotlightData.setInitial();
+      var subscriptionsReady = filesSubscription.ready(); // ⚡ reactive ⚡
 
-          for (var i = 0; i < types.length; i++) {
-            var type = types[i];
+      // if subscriptions are ready, set terms to subscriptionsTerms and update SEO stuff
+      if (subscriptionsReady) {
+        self.ready.set(true);
+        self.attachmentCount.set(Files.find({resourceID: resourceID, type: "attachment"}).count());
+        self.photoCount.set(Files.find({resourceID: resourceID, type: "photo"}).count());
+        self.videoCount.set(Files.find({resourceID: resourceID, type: "video"}).count());
 
-            if(self.spotlightData[type].list().length > 0){
-              self.spotlightType.set(type);
-              switchPanels(type);
-              animateButtonsSide();
-              
-              break;
-            }
-          }
-      }
-  });
+       
+
+      }//if sub ready
+  });//self run
   
 });
 
-Template.SpotlightUpload.onRendered(function(){
-  //var type = this.spotlightType.get();
-  var self = this;
-
+Template.SpotlightUpload.onRendered( function() {
+  var self= this;
+  self.autorun(function () {
+    if(self.ready){
+     if(self.attachmentCount.get() > 0){
+            switchPanels("attachment");
+            animateButtonsSide();
+          
+      }
+      else if(self.photoCount.get() > 0){
+            switchPanels("photo");
+            animateButtonsSide();
+          
+      }
+      else if(self.videoCount.get() > 0){
+            switchPanels("video");
+            animateButtonsSide();
+      
+      }
+    }
+  });
 
 });
-
 
 Template.SpotlightUpload.helpers({
   edit : function(){
@@ -113,21 +121,18 @@ Template.SpotlightUpload.helpers({
   spotlightType: function() {
     return Template.instance().spotlightType.get();
   },
-  templateType: function() {
-    var type = Template.instance().spotlightType.get();
-    if(!!type){
-      return type.capitalizeFirstLetter()+"Upload";
-    }
-    return null;
-  },
-  spotlightData: function() {
-    return Template.instance().spotlightData;
-  },
   countItem: function(name) {
-    return Template.instance().spotlightData.get(name).list().length;
+    var name = name+"Count";
+    return Template.instance()[name].get();
   },
   set: function(name) {
     return Template.instance().spotlightType.get() ? '' : "hide-panel";
+  },
+  ready: function() {
+    return Template.instance().ready.get();
+  },
+  callback: function() {
+    return Session.set('unsavedChanges', true);
   }
 });
 
@@ -143,21 +148,11 @@ Template.SpotlightUpload.events({
     }
 
     switchPanels(type);
-    
-    
-
-    /*event.target['resource-data']
-    
-    //$('#yourElement').addClass('animated bounceOutLeft');
-
-    Blaze.renderWithData(Template.someTemplate, {my: "data"}, $("#parent-node")[0])
- 
-    return Template.instance().spotlightType.get();*/
   },
 });
 
 
-
+/*
 
 function SpotlightData (resourceID) {
     this.initial = null;
@@ -250,4 +245,4 @@ function SpotlightData2 (resourceID) {
     };
 
     
-}
+}*/

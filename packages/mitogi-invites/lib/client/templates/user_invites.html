@@ -32,14 +32,26 @@
       <thead>
         <tr>
           <td>Email</td>
+          <td>Role</td>
           <td>Accepted</td>
+          <td>Uninvite</td>
         </tr>
       </thead>
       <tbody>
           {{#each invites}}
           <tr>
             <td>{{invitedUserEmail}}</td>
-            <td>{{#if accepted}}{{{icon "voted"}}}{{/if}}</td>
+            <td> {{role}} </td>
+            <td>{{#if accepted}}
+                {{{icon "voted"}}}
+              {{else}}
+                <button class="resend btn-info" data-email="{{invitedUserEmail}}">Resend</button>
+              {{/if}}</td>
+            <td> 
+              {{#if $not accepted}}
+                <i class="delete fa fa-times" data-email="{{invitedUserEmail}}"></i>
+              {{/if}}
+            </td>
           </tr>
           {{/each}}
       </tbody>

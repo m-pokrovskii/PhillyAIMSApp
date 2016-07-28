@@ -56,8 +56,10 @@ AutoForm.hooks({
     },
 
     onSuccess: function(formType, post) {
-      Events.track("edit post", {'postId': post._id});
+      //Events.track("edit post", {'postId': post._id});
       //FlowRouter.go('postPage', post);
+      Session.set("unsavedChanges",false);
+      FlowRouter.go('postPage', {slug: post.slug, _id: post._id});
     },
 
     onError: function(formType, error) {

@@ -20,6 +20,17 @@ Meteor.publish( 'myFiles', function(id, type){
   return this.ready();
 });
 
+Meteor.publish( 'resourceFiles', function(id, ){
+  var data = Files.find( { resourceID: id} );
+
+  if ( data ) {
+    return data;
+  }
+
+  return this.ready();
+});
+
+
 
 
 Meteor.methods({

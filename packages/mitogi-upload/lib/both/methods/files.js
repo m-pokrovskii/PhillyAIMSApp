@@ -32,7 +32,7 @@ Meteor.methods({
         type: data.type,
       });
 
-      if(data.type==="video" && !key.endsWith("webm")){
+      if(data.type==="video"){
         console.log("key"+key);
         Meteor.call('videoEncoder', key);
       }
@@ -41,6 +41,18 @@ Meteor.methods({
       console.log(exception);
       return exception;
     }
+  },
+  insertFiles: function(data, key){
+    Files.insert({
+        filepath: data.url,
+        userId: Meteor.userId(),
+        added: new Date(), 
+        name: data.name,
+        size: data.size,
+        key: key,
+        resourceID: data.id,
+        type: data.type,
+      });
   },
   deleteS3File: function( id ) {
     check( id, String );
@@ -114,7 +126,7 @@ Meteor.methods({
      var pipelineId = "1469104289463-i7ck5c";
     
      var srcKey = decodeURIComponent(key.replace(/\+/g, " ")); //the object may have spaces  
-     var newKey = key.split(".")[0].split("/")[1];
+     var newKey = srcKey.split(".")[0].split("/")[1];
 
         
         AWS.config.update({
@@ -129,6 +141,27 @@ Meteor.methods({
          region: "us-east-1"
         });
 
+        function outputsArray(){
+             var array = [];
+             if (!key.endsWith("webm")){
+              array.push({Key: newKey + ".webm",
+               //ThumbnailPattern: "thumbs-" + newKey,
+               PresetId: '1351620000001-100240', //Webm 720p
+              });
+             }
+
+            if (!key.endsWith("mp4")){
+              array.push({Key: newKey + ".mp4",
+               //ThumbnailPattern: "thumbs/" + newKey,
+               PresetId: '1351620000001-000010', //Webm 720p
+              });
+            }
+
+            return array;
+          }
+
+          var outputs = outputsArray();
+
         var params = {
           PipelineId: "1469110855793-ii3s3b",
           OutputKeyPrefix: "videos/",
@@ -140,17 +173,11 @@ Meteor.methods({
            Interlaced: "auto",
            Container: "auto"
           },
-          Outputs: [
-          {Key: newKey + ".webm",
-           ThumbnailPattern: "thumbs-" + newKey,
-           PresetId: '1351620000001-100240', //Webm 720p
-          },
-          {Key: newKey + ".mp4",
-           ThumbnailPattern: "thumbs/" + newKey,
-           PresetId: '1351620000001-000010', //Webm 720p
-          }]
+          Outputs: outputs
+
         };
 
+        console.log(params);
 
 
         var elasticGo = Meteor.wrapAsync(
@@ -172,6 +199,7 @@ Meteor.methods({
       
       //then delete from s3
     } catch( exception ) {
+      console.log(exception);
       return exception;
     }
   },

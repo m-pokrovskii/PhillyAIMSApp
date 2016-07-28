@@ -50,21 +50,18 @@
                     </div>
                   {{/if}}
 
-	                <video class="video-player" controls>
+                  {{#if $not key}}
+                    <iframe class="col-md-8 col-md-offset-2" height="400px" src="{{getPlayer filepath}}" frameborder="0" allowfullscreen></iframe>
+                  {{else}}
+	                <video class="video-player col-md-8 col-md-offset-2" controls>
 	                	<!--need to encode videos-->
-                    {{#if notwebm filepath}}
-          					  <source src="{{filepath}}" type="video/{{endsWith filepath}}">
+                      <source src="{{newExtension filepath 'webm'}}" type="video/webm">
           					  <source src="{{newExtension filepath 'mp4'}}" type="video/mp4">
-          					  <source src="{{newExtension filepath 'webm'}}" type="video/webm">
-                    {{else}}
-                      <source src="{{filepath}}" type="video/{{endsWith filepath}}">
-                    {{/if}}
 
         					   Your browser does not support the video tag.
         					</video>
+                  {{/if}}
         					
-        					<br/>
-                    {{ size }}
                 </div>
             {{/each}}
      

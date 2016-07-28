@@ -106,6 +106,38 @@ Meteor.methods({
       newUser : typeof user === 'undefined'
     };
   },
+  resend: function(email, role){
+    var newToken = Random.hexString(16);
+
+    Invites.update({invitedUserEmail: email}, 
+      {$set: {token: newToken, 
+        role: role, 
+        date: new Date()}
+      });
+
+    var invitation = Invites.findOne({invitedUserEmail: email});
+    var currentUser = Meteor.user();
+
+    var communityName = Settings.get('title','Philly AIMS'),
+          emailSubject = 'You are invited to the Philly AIMS Portal',
+          emailProperties = {
+            newUser : typeof user === 'undefined',
+            communityName : communityName,
+            actionLink : "/invite",//user ? Telescope.utils.getSigninUrl() : Telescope.utils.getSignupUrl(),
+            invitedBy : Users.getDisplayName(currentUser),
+            profileUrl : Users.getProfileUrl(currentUser),
+            siteUrl: Settings.get("siteUrl"),
+            userEmail : invitation.invitedUserEmail,
+            token: invitation.token,
+          };
+
+      Meteor.setTimeout(function () {
+        Telescope.email.buildAndSend(email, emailSubject, 'emailInvite', emailProperties);
+      }, 1);
+  },
+  deleteInvite : function (email){
+    Invites.remove({invitedUserEmail: email});
+  },
   validateInviteLink : function(token, email){
     if(Invites.findOne({"token":token, "invitedUserEmail":email})){
       return true;

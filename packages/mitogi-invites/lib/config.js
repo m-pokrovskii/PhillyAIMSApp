@@ -3,7 +3,7 @@ Telescope.menuItems.add("userMenu", {
   route: 'makeInvites',
   label: 'Invites',
   adminOnly: true,
-  order:20,
+  order:40,
  });
 
 

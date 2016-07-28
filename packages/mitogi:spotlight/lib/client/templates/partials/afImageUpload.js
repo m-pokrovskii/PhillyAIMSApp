@@ -19,6 +19,9 @@ Template.afImageUpload.helpers({
   },
   uploadFile: function(){
     return Template.instance().uploadFile.get();
+  },
+  resourceID: function(){
+    return Session.get("resourceID");
   }
 })
 

@@ -49,6 +49,9 @@ Posts.schema = new SimpleSchema({
     type: String,
     optional: false,
     max: 500,
+    defaultValue: function(){
+      return "Untitled"
+    },
     editableBy: ["member", "admin"],
     autoform: {
       order: 20

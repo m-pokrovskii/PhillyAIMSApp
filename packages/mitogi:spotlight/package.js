@@ -29,30 +29,17 @@ Package.onUse(function (api) {
 
   api.addFiles([
     'main.css',
-    'lib/client/templates/helpers.js',
-    'lib/client/templates/vimeo/vimeo-upload.js',
-    'lib/client/templates/vimeo/upload-cordova.js',
-    'lib/client/templates/AttachmentUpload.html',
-    'lib/client/templates/AttachmentUpload.js',
-    'lib/client/templates/init.js',
-    'lib/client/templates/PhotoUpload.html',
-    'lib/client/templates/PhotoUpload.js',
+
+
     'lib/client/templates/Spotlight.html',
     'lib/client/templates/Spotlight.js',
     'lib/client/templates/SpotlightUpload.html',
     'lib/client/templates/SpotlightUpload.js',
-    'lib/client/templates/VideoUpload.html',
-    'lib/client/templates/VideoUpload.js',
+ 
     'lib/client/templates/RouterHelper.js',
 
     'lib/client/templates/SpotlightTags.html',
 
-
-    'lib/client/templates/LinkUpload.html',
-    'lib/client/templates/LinkUpload.js',
-
-    'lib/client/templates/upload/customUpload.html',
-    'lib/client/templates/upload/customUpload.js',
 
     'lib/client/templates/partials/afImageUpload.html',
     'lib/client/templates/partials/afImageUpload.js',
@@ -74,7 +61,6 @@ Package.onUse(function (api) {
   api.addFiles([
     'lib/server/init.js',
     'lib/server/methods.js',
-    'lib/server/publish.js'
   ], ['server']);
 
   api.export('Spotlights');

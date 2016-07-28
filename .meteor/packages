@@ -62,6 +62,7 @@ random
 
 #for headers
 raix:handlebar-helpers
+themeteorchef:bert
 
 ###angle
 jquery

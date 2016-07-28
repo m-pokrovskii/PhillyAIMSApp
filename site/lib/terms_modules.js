@@ -7,6 +7,7 @@ Settings.addField([
       label: "Terms",
       autoform: {
         group: "01_general",
+        rows: 5,
         instructions: 'Specify Terms of Use.'
       }
     }

@@ -14,7 +14,8 @@ Package.onUse(function (api) {
     'telescope:i18n@0.25.7',
     'telescope:settings@0.25.7',
     'telescope:users@0.25.7',
-    'telescope:comments@0.25.7'
+    'telescope:comments@0.25.7',
+    'themeteorchef:bert'
   ]);
 
   api.addFiles([

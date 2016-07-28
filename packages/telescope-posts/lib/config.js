@@ -28,6 +28,10 @@ Posts.config.postStatuses = [
   {
     value: 5,
     label: function(){return i18n.t('deleted');}
+  },
+  {
+    value: 6,
+    label: function(){return "Saved";}
   }
 ];
 
@@ -36,3 +40,4 @@ Posts.config.STATUS_APPROVED = 2;
 Posts.config.STATUS_REJECTED = 3;
 Posts.config.STATUS_SPAM = 4;
 Posts.config.STATUS_DELETED = 5;
+Posts.config.STATUS_SAVED= 6;

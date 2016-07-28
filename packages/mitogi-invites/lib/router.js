@@ -9,12 +9,10 @@ FlowRouter.route( '/invite/:email/:token', {
     else{
       Meteor.call('validateInviteLink', params.token, params.email, function (error, result){
         if(result){
-          BlazeLayout.render( "layout", {main: 'register'} );
-          /*FlowRouter.go("/register/"+"?email="+
-                              params.email+"&token="+params.token);*/
+          BlazeLayout.render( 'register' );
         }
         else{
-          BlazeLayout.render( "layout" , {main: 'invalidInvite' } );
+          BlazeLayout.render( 'invalidInvite' );
         }
       });
     }
