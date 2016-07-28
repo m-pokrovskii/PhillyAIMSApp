@@ -9,8 +9,8 @@
 }
 
 .spotlight-button{
-	width: 160px;
-    height: 150px;
+    width: 220px;
+    height: 220px;
     float: left;
     padding-left: 15px;
     padding-right: 15px;
@@ -18,10 +18,11 @@
 
 .spotlight-button p {
     text-transform: capitalize;
+    font-size: 22px;
 }
 
-.spotlight-button .panel-body{
-	border-radius: 25px;
+.spotlight-button .panel-body {
+    border-radius: 200px;
 }
 
 .spotlight-button span {

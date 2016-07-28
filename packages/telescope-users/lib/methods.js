@@ -64,9 +64,11 @@ Meteor.methods({
 
       Meteor.users.remove(userId);
 
+      //Meteor.users(userId)
       if (removePosts) {
         var deletedPosts = Posts.remove({userId: userId});
         var deletedComments = Comments.remove({userId: userId});
+        //var deletedInvite = Invites.remove({invitedUserEmail: userId});
         return "Deleted "+deletedPosts+" posts and "+deletedComments+" comments";
       } else {
         // not sure if anything should be done in that scenario yet

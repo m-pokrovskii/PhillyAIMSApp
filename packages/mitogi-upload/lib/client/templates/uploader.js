@@ -52,12 +52,12 @@ Template.uploader.helpers({
   opts: function() {
   	  var template = Template.instance();
       var opts ={
-        // maxTime: 15,
-        // androidQuality: 0,
-        // videoDisplay: {
-        //   width: 600,
-        //   height: 460
-        // },
+         maxTime: 15 * 60,
+         androidQuality: 0,
+         videoDisplay: {
+           width: 600,
+           height: 460
+         },
         // classes: {
         //   recordBtn: 'video-capture-basic-record-btn',
         //   stopBtn: 'video-capture-basic-stop-btn'

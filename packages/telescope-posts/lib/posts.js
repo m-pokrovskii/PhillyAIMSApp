@@ -8,7 +8,8 @@ Posts.schema = new SimpleSchema({
   */
   _id: {
     type: String,
-    optional: true
+    optional: true,
+    editableBy: ["member", "admin"],
   },
   /**
     Timetstamp of post creation
