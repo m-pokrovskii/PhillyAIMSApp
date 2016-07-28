@@ -61,6 +61,7 @@ Package.onUse(function (api) {
   api.addFiles([
     'lib/server/init.js',
     'lib/server/methods.js',
+    'lib/server/publish.js',
   ], ['server']);
 
   api.export('Spotlights');

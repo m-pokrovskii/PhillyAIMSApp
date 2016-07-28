@@ -6,22 +6,24 @@
       <div class="inner-wrapper template-{{pageName}}">
         {{> header class=headerClass}}
         {{> mobile_nav_bottom}}
-        {{> Template.dynamic template=hero}}
-        <div class="content-wrapper">
-          {{#if notAllowed}}
-            {{> Template.dynamic template=notAllowed.template data=notAllowed.data}}
-          {{else}}
-            {{> Template.dynamic template=adminMenu}}
-            {{> modules zone="contentTop"}}
-            {{> Template.dynamic template=main}}
-            {{> modules zone="contentBottom"}}
-          {{/if}}
-          {{> modules zone="footer"}}
-          {{> Template.dynamic template="modal" data=modalData}}
+        <div class="body-wrapper">
+          {{> Template.dynamic template=hero}}
+          <div class="content-wrapper">
+            {{#if notAllowed}}
+              {{> Template.dynamic template=notAllowed.template data=notAllowed.data}}
+            {{else}}
+              {{> Template.dynamic template=adminMenu}}
+              {{> modules zone="contentTop"}}
+              {{> Template.dynamic template=main}}
+              {{> modules zone="contentBottom"}}
+            {{/if}}
+            {{> modules zone="footer"}}
+            {{> Template.dynamic template="modal" data=modalData}}
+          </div>
+          <div class="overlay hidden"></div>
         </div>
-        <div class="overlay hidden"></div>
+        {{{extraCode}}}
       </div>
-      {{{extraCode}}}
     </div>
   {{else}}
     <div class="app-loading">{{> loading}}</div>

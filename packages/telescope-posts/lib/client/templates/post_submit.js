@@ -15,6 +15,7 @@ AutoForm.hooks({
       method: function(doc) {
 
         var post = doc;
+        post._id = Session.get("resourceID");
 
         this.template.$('button[type=submit]').addClass('loading');
         this.template.$('input, textarea').not(":disabled").addClass("disabled").prop("disabled", true);

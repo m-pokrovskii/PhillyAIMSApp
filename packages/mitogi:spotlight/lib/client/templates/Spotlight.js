@@ -8,7 +8,7 @@ Template.SpotlightShow.onCreated( function() {
     var self = this;
     self.autorun(function () {
 
-    var subscription = self.subscribe( 'resourceFiles', FlowRouter.getParam("_id"));
+    var subscription = Telescope.subsManager.subscribe('resourceFiles', FlowRouter.getParam("_id")); //self.subscribe( 'resourceFiles', FlowRouter.getParam("_id"));
     if (subscription.ready()) {
 
         var spotlight = {

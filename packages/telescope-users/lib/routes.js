@@ -46,6 +46,6 @@ FlowRouter.route('/sign-out', {
   triggersEnter: [function(context, redirect) {
     AccountsTemplates.logout();
     Bert.alert(i18n.t("you_have_been_logged_out"), "success", "fixed-top");
-    FlowRouter.go("/");
+    FlowRouter.go("/sign-in");
   }]
 });

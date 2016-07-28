@@ -8,7 +8,7 @@
     <div class="row">
         <div id="spotlight-gallery">
             {{#each this}}
-                <div class="col-lg-3">
+                <div class="col-md-3">
                  <!-- START panel-->
                          <div class="panel panel-default bounceIn" id="panel-{{index}}">
                             <div class="panel-heading">{{name}}
@@ -34,36 +34,33 @@
 <template name="file-video">
 
     <div class="row">
-     
-            {{#each this}}
-                <div class="col-md-offset-1 col-md-10"> 
-	                <!--<iframe src="{{getPlayer _id filepath}}" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
-                  {{#if ../../edit}}
-                    <div class="row">
-                      <div class="pull-left">
-                        <h4>{{name}}</h4>
-                      </div>
-                      <div class="pull-right">
-                        <a class="btn btn-info" href="{{newExtension filepath 'mp4'}}" download>Download</a>
-                        <a class="btn btn-danger delete-file" data-id="{{_id}}">Delete</a>
-                      </div>
-                    </div>
-                  {{/if}}
+      {{#each this}}
+      <div class="panel panel-default col-md-6">
+            <div class="panel-heading">{{name}}
 
-                  {{#if $not key}}
-                    <iframe class="col-md-8 col-md-offset-2" height="400px" src="{{getPlayer filepath}}" frameborder="0" allowfullscreen></iframe>
-                  {{else}}
-	                <video class="video-player col-md-8 col-md-offset-2" controls>
-	                	<!--need to encode videos-->
-                      <source src="{{newExtension filepath 'webm'}}" type="video/webm">
-          					  <source src="{{newExtension filepath 'mp4'}}" type="video/mp4">
+               
+                <a href="#" class="pull-right ">             
+                  <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
+               </a>
+            
+            </div>
 
-        					   Your browser does not support the video tag.
-        					</video>
-                  {{/if}}
-        					
-                </div>
-            {{/each}}
+            <div class="panel-body">             
+              {{#if $not key}}
+                <iframe width="100%" height="auto" src="{{getPlayer filepath}}" frameborder="0" allowfullscreen></iframe>
+              {{else}}
+              <video class="video-player" width="100%" height="auto" controls>
+              	<!--need to encode videos-->
+                  <source src="{{newExtension filepath 'webm'}}" type="video/webm">
+      					  <source src="{{newExtension filepath 'mp4'}}" type="video/mp4">
+
+    					   Your browser does not support the video tag.
+    					</video>
+              {{/if}}
+    					<a class="pull-right btn btn-info" href="{{newExtension filepath 'mp4'}}" download>Download</a>
+            </div>
+      </div>
+      {{/each}}
      
     </div>
 </template>
@@ -72,7 +69,7 @@
 <template name="file-attachment">
     <div class="row">
             {{#each this}}
-                <div class="col-xs-3">
+                <div class="col-md-3">
                  <!-- START panel-->
                          <div class="panel panel-default bounceIn" id="panel-{{index}}">
                             <div class="panel-heading">

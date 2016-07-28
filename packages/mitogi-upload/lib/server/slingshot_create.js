@@ -14,17 +14,17 @@ Slingshot.createDirective( "uploadToAmazonS3", Slingshot.S3Storage, {
     return true;
   },
   key: function ( file , metaContext) {
-    var pathname = '';
-    if(file.name.match(/\.(jpg|jpeg|png|gif)$/)){
+    /*var pathname = '';
+    if(file.name.toLowerCase().match(/\.(jpg|jpeg|png|gif|bmp|)$/)){
       pathname = "images/"
     }
-    else if(file.name.match(/\.(avi|mpeg|mp4|mov|wav)$/)){
+    else if(file.name.toLowerCase().match(/\.(avi|mpeg|mp4|mov|wav)$/)){
       pathname = "videos/"
     }
     else{
       pathname = "uploads/"
-    }
+    }*/
     var user = Meteor.users.findOne( this.userId );
-    return pathname + metaContext.mini_key+file.name;
+    return metaContext.type+"/" + metaContext.mini_key+file.name;
   }
 });

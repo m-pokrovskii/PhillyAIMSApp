@@ -82,6 +82,11 @@
   color: black;
 }
 
+.note-editing-area{
+  height:100%;
+  min-height:200px;
+}
+
 /*mobile */
 
 .mobile-nav .mobile-nav-open{
@@ -102,6 +107,10 @@
 
   .mobileNav {
       z-index: 200;
+  }
+
+  .body-wrapper {
+      margin-top: 55px;
   }
 
   .post-btn{

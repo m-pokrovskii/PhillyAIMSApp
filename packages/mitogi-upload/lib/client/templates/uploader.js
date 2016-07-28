@@ -216,8 +216,7 @@ MyUploader = function() {
 			return base64.split(":")[1].split(";")[0];
 		},
 		_uploadFileToAmazon :function ( file , options) {
-		  var bucket = this.type==="video" ? "uploadToVideoBucket" : "uploadToAmazonS3" ;
-		  var metaContext = {mini_key: Random.id(5)+"_"};
+		  var metaContext = {mini_key: Random.id(5)+"_", type: this.type};
 		  this.uploader = new Slingshot.Upload( "uploadToAmazonS3", metaContext);
 
 		  this.template.filename.set(file.name);

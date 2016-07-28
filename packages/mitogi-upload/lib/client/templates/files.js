@@ -29,6 +29,9 @@ Template['file-video'].helpers({
   notwebm: function(filepath) {
     return !filepath.endsWith(".webm");
   },
+  edit: function(){
+    return Template.instance().data.edit;
+  },
   endsWith: function(filepath) {
     return filepath.split(".").slice(-1)[0];
   },

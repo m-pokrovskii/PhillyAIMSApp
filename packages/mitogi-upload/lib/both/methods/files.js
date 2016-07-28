@@ -8,17 +8,7 @@ Meteor.methods({
     //check( data.size, Number );
     Modules.both.checkUrlValidity( data.url );
 
-    var pathname = '';
-    if(data.name.match(/\.(jpg|jpeg|png|gif)$/)){
-      pathname = "images/"
-    }
-    else if(data.name.match(/\.(avi|mpeg|mp4|mov|wav)$/)){
-      pathname = "videos/"
-    }
-    else{
-      pathname = "uploads/"
-    }
-    var key = pathname + data.name;
+    var key = data.type + "/" + data.name;
     
     try {
       Files.insert({
@@ -56,45 +46,73 @@ Meteor.methods({
   },
   deleteS3File: function( id ) {
     check( id, String );
-    //check( data.name, String );
-    //check( data.size, Number );
-    //Modules.both.checkUrlValidity( url );
 
     try {
 
         var key = Files.findOne({_id: id}).key;
-        AWS.config.update({
-           accessKeyId: Meteor.settings.AWSAccessKeyId,
-           secretAccessKey: Meteor.settings.AWSSecretAccessKey
-        });
+        var type = Files.findOne({_id: id}).type;
 
-        var s3 = new AWS.S3();
-        var params = {
-           Bucket: Meteor.settings.AWSBucket,
-           Key: filename
-        };
+        Files.remove({_id: id});
+        //if not just a link
+        if(key){
 
-        console.log(params);
+          var objKey = [];
+          if(type==="video"){
+            var shortKey = key.substring(0, key.lastIndexOf("."));
+            objKey.push(shortKey+".webm");
+            objKey.push(shortKey+".mp4");
+          }
+          else{
+            objKey.push(key);
+          }
 
-        var deleteObject = Meteor.wrapAsync(
-           s3.deleteObject(params, function(error, data) {
-              if(error) {
-                 console.log(error);
-              } else {
-                 return true;
-              }
-           })
-        );
-
-        if(deleteObject( params )){
-          Files.remove({_id: id});
-        }
-
+          Meteor.call("_deleteFilesWithKey",objKey);
+     
+      }
       
       //then delete from s3
     } catch( exception ) {
+      console.log(exception);
       return exception;
     }
+  },
+  //pass an array of keys to delete
+  _deleteFilesWithKey: function(objKey){
+
+    try{
+      AWS.config.update({
+             accessKeyId: Meteor.settings.AWSAccessKeyId,
+             secretAccessKey: Meteor.settings.AWSSecretAccessKey
+          });
+
+      var s3 = new AWS.S3();
+
+      if(typeof objKey === "string"){
+        objKey = [objKey];
+      }
+
+      for(var i =0; i< objKey.length; i++){
+        var params = {
+            Bucket: Meteor.settings.AWSBucket,
+            Key : objKey[i]
+          };
+
+        var deleteObject = Meteor.wrapAsync(s3.deleteObject(params, function(error, data) {
+              if(error) {
+                 console.log(error);
+              } else {
+                return true;
+              }
+          })
+        );
+      }
+
+      deleteObject(params);
+    } catch( exception ) {
+      console.log(exception);
+      return exception;
+    }
+
   },
   updateMetadata: function( id , name ) {
     //check( data.url, String );
@@ -123,7 +141,7 @@ Meteor.methods({
        //var key = Files.findOne({_id: id}).key;
 
      var bucket = Meteor.settings.AWSBucket;
-     var pipelineId = "1469104289463-i7ck5c";
+     var pipelineId = "1469110855793-ii3s3b";
     
      var srcKey = decodeURIComponent(key.replace(/\+/g, " ")); //the object may have spaces  
      var newKey = srcKey.split(".")[0].split("/")[1];
@@ -164,7 +182,7 @@ Meteor.methods({
 
         var params = {
           PipelineId: "1469110855793-ii3s3b",
-          OutputKeyPrefix: "videos/",
+          OutputKeyPrefix: "video/",
           Input: {
            Key: srcKey,
            FrameRate: "auto",
@@ -185,7 +203,7 @@ Meteor.methods({
               if(error) {
                  console.log(error);
               } else {
-                 console.log(data);
+                 Meteor.call("_deleteFilesWithKey",[key]);
                  console.log("Job well done");
                  return true;
               }

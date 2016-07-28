@@ -9,9 +9,9 @@ Meteor.publish( 'files', function(){
 });
 
 
-Meteor.publish( 'myFiles', function(id, type){
-  console.log({ resourceID: id, type: type } );
-  var data = Files.find( { resourceID: id, type: type } );
+Meteor.publish( 'myFiles', function(resourceID, type){
+
+  var data = Files.find( { resourceID: resourceID, type: type } );
 
   if ( data ) {
     return data;
@@ -19,19 +19,6 @@ Meteor.publish( 'myFiles', function(id, type){
 
   return this.ready();
 });
-
-Meteor.publish( 'resourceFiles', function(id, ){
-  var data = Files.find( { resourceID: id} );
-
-  if ( data ) {
-    return data;
-  }
-
-  return this.ready();
-});
-
-
-
 
 Meteor.methods({
 	urlCall : function(fileUrl){
