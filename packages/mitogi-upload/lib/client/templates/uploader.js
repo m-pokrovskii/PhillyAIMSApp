@@ -42,10 +42,11 @@ Template.uploader.helpers({
   	return Template.instance().savedVideo.get();
   },
   urlPlaceholder: function(){
-  	if(Template.instance().data.type)
+  	if(Template.instance().data.type==="photo"){
   		return "www.image.com/image.jpg";
+  	}
   	else{
-  		return "youtube.com/7dom7zCvGC8 or vimeo.com/176508773"
+  		return "youtube.com/7dom7zCvGC8 or vimeo.com/176508773";
   	}
   },
   opts: function() {
@@ -86,6 +87,12 @@ Template.uploader.events({
           
 	    });
 	},
+   'click .notUrl': function(e, template){
+   		template.getURL.set(false);
+   },
+   'click .notVideoCapture': function(e, template){
+   		template.videoCapture.set(false);
+   },
    'click .camera-video': function(e, template){
 	    e.preventDefault();
 	    Template.instance().videoCapture.set(true);
@@ -133,7 +140,7 @@ Template.uploader.events({
 			else if(template.data.type === "video"){
 				//var file = event.target.files[0];
 
-				if(url.indexOf("vimeo.com") > -1 || url.indexOf("youtube.com") > -1){
+				if(fileUrl.indexOf("vimeo.com") > -1 || fileUrl.indexOf("youtube.com") > -1){
 
 				
 					console.log("video url upload");

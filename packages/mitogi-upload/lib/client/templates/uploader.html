@@ -8,7 +8,7 @@
 		  <div class="upload-container">
 		    <div class="col-lg-4 col-sm-4 ">
 		       <!-- START widget-->
-		       <div class="uploadPicture btn-file btn-primary  panel widget bg-primary">
+		       <div class="uploadPicture notUrl notVideoCapture btn-file btn-primary  panel widget bg-primary">
 		        
 		          <div class="row row-table">
 		             <div class="col-xs-4 text-center pv-lg">
@@ -29,7 +29,7 @@
 		    {{#if notEquals type "attachment"}}
 			<div class="col-lg-4 col-sm-4">
 			   <!-- START widget-->
-			   <div class="camera-{{type}} panel btn-purple widget bg-purple">
+			   <div class="camera-{{type}} notUrl panel btn-purple widget bg-purple">
 			      <div class="row row-table">
 			         <div class="col-xs-4 text-center pv-lg">
 			            <i class="fa-camera fa fa-3x"></i>
@@ -44,7 +44,7 @@
   
 			    <div class="col-lg-4 col-sm-4">
 			       <!-- START widget-->
-			       <div  class="urlPicture panel widget btn-success bg-green">
+			       <div  class="urlPicture panel notVideoCapture widget btn-success bg-green">
 			          <div class="row row-table">
 			             <div class="col-xs-4 text-center pv-lg">
 			                <i class="fa-link fa fa-3x"></i>
@@ -62,7 +62,7 @@
 		{{#if getURL}}
 			<div class="row">
 				<div class="col-md-offset-2 col-md-4">
-					<input type="text" name="urlInput" class="urlInput" placeholder="{{url placeholder}}">
+					<input type="text" name="urlInput" class="urlInput" placeholder="{{urlPlaceholder}}">
 				</div>
 				<div class="col-md-2">
 				<button type="submit" class="urlSubmit btn btn-info {{enableURLButton}}" >
