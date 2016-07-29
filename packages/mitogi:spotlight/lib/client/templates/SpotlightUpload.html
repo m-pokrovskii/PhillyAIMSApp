@@ -13,14 +13,14 @@
 			 
 			  	<div class="jumbotron {{set}}">
 				  	<div id="video-panel" class="hide-panel">
-					  	{{> upload_video resourceID=resourceID}}
+					  	{{> upload_video resourceID=resourceID multiple="true"}}
 					</div>
 					<div id="photo-panel" class="hide-panel">
-						{{> upload_photo resourceID=resourceID}}
+						{{> upload_photo resourceID=resourceID multiple="true"}}
 					  	<!--{{> PhotoUpload spotlightData=spotlightData}}-->
 					</div>
 					<div id="attachment-panel" class="hide-panel">
-						{{> upload_attachment resourceID=resourceID}}
+						{{> upload_attachment resourceID=resourceID multiple="true"}}
 					  	<!--{{> AttachmentUpload spotlightData=spotlightData}}-->
 					</div>
 				</div>

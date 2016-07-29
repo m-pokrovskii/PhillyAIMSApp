@@ -1,12 +1,16 @@
 Template.uploader.onCreated(function(){
   let callback = this.data.callback;
-  console.log("mckmd"+this.data.type);
   this.myUploader = new MyUploader();
 
   this.onUpload = new ReactiveVar();
   this.filename = new ReactiveVar();
 
-  this.myUploader.init(this, callback, this.data.type);
+  if(!this.data.multiple){
+  	
+  	console.log("single:"+ this.data.resourceID)
+  }
+
+  this.myUploader.init(this);
   this.getURL = new ReactiveVar(false);
   this.getVideoSource = new ReactiveVar();
   this.enableURL = new ReactiveVar(false);
@@ -32,9 +36,6 @@ Template.uploader.helpers({
   enableURLButton : function(){
   	return Template.instance().enableURL.get() ? '' : "disabled";
   },
-  notEquals : function(item1, item2){
-  	return item1 !== item2;
-  },
   videoCapture: function(){
   	return Template.instance().videoCapture.get();
   },
@@ -55,8 +56,8 @@ Template.uploader.helpers({
          maxTime: 15 * 60,
          androidQuality: 0,
          videoDisplay: {
-           width: 600,
-           height: 460
+           width: 600*1.5,
+           height: 460*1.5,
          },
         // classes: {
         //   recordBtn: 'video-capture-basic-record-btn',
@@ -77,7 +78,6 @@ Template.uploader.helpers({
 Template.uploader.events({
   'change input[type="file"]' ( event, template ) {
   		event.preventDefault();
-  		console.log("fielchange "+template.data.type);
     	template.myUploader.upload( { event: event});
   },
   'click .camera-photo': function(e, template){
@@ -104,7 +104,6 @@ Template.uploader.events({
 	    template.myUploader.upload( { base64: base64Data});
    },
   'click .urlPicture': function(e, template){
-  		console.log(template.getURL.get());
 	    template.getURL.set(true);
   },
   'change input:text[name=urlInput]': function(e, template){
@@ -116,7 +115,6 @@ Template.uploader.events({
 	    //console.log(e.target.value);
 	    //var element = template.find('input:text[name=urlInput]');
     	var fileUrl = template.enableURL.get();
-    	console.log("mom"+template.data.type);
     	if(fileUrl){
 	    	if(template.data.type==="photo"){
 			    //element.val();
@@ -125,7 +123,6 @@ Template.uploader.events({
 			    var callme = function( error, response ) {
 				  // Handle the error or response here.
 			  		if(error){
-			  			console.log(error);
 			  			Bert.alert("This isn't a valid image url", "danger", "growl-top-right");
 			  		}
 			  		else{
@@ -145,7 +142,7 @@ Template.uploader.events({
 				
 					console.log("video url upload");
 					var data = {
-						url : fileUrl,
+						filepath : fileUrl,
 						name : "Default Name",
 						size : null,
 						type: "video",
@@ -186,15 +183,16 @@ MyUploader = function() {
 		},
 		//give either event or file and template
 		//give callback
-		init : function(template, callback, type){
+		init : function(template){
 			this.template = template;
-			this.callback = callback;
-			this.type = type;
+			this.callback = template.data.callback;
+			this.type = template.data.type;
 
 			return this;
 		},
 		upload : function( options ) {
 		  var file = null;
+		  if(this.callback && this.callback.start) this.callback.start();
 		  if(options.event){
 		  	file = this._getFileFromInput( options.event );
 		  }
@@ -234,10 +232,10 @@ MyUploader = function() {
 		    }
 		  });
 		},
-		_addUrlToDatabase : function( url , file, metaContext) {
+		_addUrlToDatabase : function( filepath , file, metaContext) {
 			console.log("here "+this.type);
 			var data = {
-				url : url,
+				filepath : filepath,
 				name : metaContext.mini_key+file.name,
 				size : file.size,
 				type: this.type,//this.template.data.type,
@@ -245,16 +243,14 @@ MyUploader = function() {
 			}
 			console.log(metaContext.mini_key+file.name);
 		  var self = this;
-		  Meteor.call( "storeUrlInDatabase", data, function ( error ) {
+		  Meteor.call( "storeUrlInDatabase", data, function ( error, result ) {
 		    if ( error ) {
 		      Bert.alert( error.reason, "warning" );
 		      self._setPlaceholderText();
 		    } else {
 		      Bert.alert( "File uploaded to Amazon S3!", "success" );
 		      self._setPlaceholderText();
-
-		      
-		      if(self.callback) self.callback(data);
+		      if(self.callback && self.callback.finished) self.callback.finished(result);
 		    }
 		  });
 		},

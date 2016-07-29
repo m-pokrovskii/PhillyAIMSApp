@@ -13,7 +13,7 @@ Template.files.onRendered( function () {
 
 Template.files.helpers({
   files: function() {
-    var files = Files.find( {type: Template.instance().data.type}, { sort: { "added": -1 } } );
+    var files = Files.find( {resourceID: Template.instance().data.resourceID, type: Template.instance().data.type}, { sort: { "added": -1 } } );
     if ( files ) {
       return files;
     }

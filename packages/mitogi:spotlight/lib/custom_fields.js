@@ -23,11 +23,11 @@ Posts.addField(
   {
     fieldName: 'thumbnailUrl',
     fieldSchema: {
-      type: String,
+      type: String, //fileurl
       optional: true,
       editableBy: ["member", "admin"],
       autoform: {
-       // type: 'imageUpload',
+        type: 'imageUpload',
         order: 20
       }
     }

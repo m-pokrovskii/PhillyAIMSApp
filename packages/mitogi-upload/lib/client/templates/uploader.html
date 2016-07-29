@@ -26,7 +26,7 @@
 		            accept="{{ fileTypes }}">
 		           </div>
 		        </div>
-		    {{#if notEquals type "attachment"}}
+		    {{#if $neq type "attachment"}}
 			<div class="col-lg-4 col-sm-4">
 			   <!-- START widget-->
 			   <div class="camera-{{type}} notUrl panel btn-purple widget bg-purple">
@@ -90,6 +90,7 @@
 		       
 		</div>
 	</form>
-
-	{{> files type=type edit="true" resourceID=resourceID}}
+	{{#if multiple}}
+		{{> files type=type edit="true" resourceID=resourceID}}
+	{{/if}}
 </template>

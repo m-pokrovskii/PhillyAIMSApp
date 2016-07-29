@@ -10,6 +10,14 @@ Posts.schema = new SimpleSchema({
     type: String,
     optional: true,
     editableBy: ["member", "admin"],
+    autoform: {
+      afFieldInput: {
+        type: "hidden"
+      },
+      afFormGroup: {
+        label: false
+      }
+    }
   },
   /**
     Timetstamp of post creation

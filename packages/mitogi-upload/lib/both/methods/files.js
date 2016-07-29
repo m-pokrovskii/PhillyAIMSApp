@@ -6,13 +6,13 @@ Meteor.methods({
     //check( data.url, String );
     //check( data.name, String );
     //check( data.size, Number );
-    Modules.both.checkUrlValidity( data.url );
+    Modules.both.checkUrlValidity( data.filepath );
 
     var key = data.type + "/" + data.name;
     
     try {
       Files.insert({
-        filepath: data.url,
+        filepath: data.filepath,
         userId: Meteor.userId(),
         added: new Date(), 
         name: data.name,
@@ -26,6 +26,8 @@ Meteor.methods({
         console.log("key"+key);
         Meteor.call('videoEncoder', key);
       }
+      
+      return data;
 
     } catch( exception ) {
       console.log(exception);
@@ -34,7 +36,7 @@ Meteor.methods({
   },
   insertFiles: function(data, key){
     Files.insert({
-        filepath: data.url,
+        filepath: data.filepath,
         userId: Meteor.userId(),
         added: new Date(), 
         name: data.name,
@@ -69,6 +71,7 @@ Meteor.methods({
           Meteor.call("_deleteFilesWithKey",objKey);
      
       }
+
       
       //then delete from s3
     } catch( exception ) {

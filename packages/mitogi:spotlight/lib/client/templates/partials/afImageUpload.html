@@ -1,4 +1,26 @@
 <template name="afImageUpload">	
-	{{> upload_photo type="photo" resourceID=resourceID fileTypes='image/*' callback=callback multiple="false" callbacks=myCallbacks}}
-  <input type="hidden" value="{{uploadFile}}" {{this.atts}}>
+	{{> upload_photo resourceID="single" callback=callback}}
+
+	{{#if uploadFile}}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+         <!-- START panel-->
+                 <div class="panel panel-default">
+                    <div class="panel-heading">{{uploadFile.name}}
+                       
+                        <a href="#" class="pull-right ">
+                          <em class="fa fa-times delete-file" data-id="{{uploadFile._id}}"></em>
+                       </a>
+         
+                    </div>
+                    <div class="panel-body">
+                       <a href="{{uploadFile.filepath}}" title="{{uploadFile.name}}" target="_blank"><img src="{{uploadFile.filepath}}" height="auto" width="100%"></a><br/>
+                        {{numberWithCommas uploadFile.size }} KB
+                    </div>
+                 </div>
+        </div>
+     <!-- END panel-->
+    </div>
+    {{/if}}
+  <input type="hidden" value="{{uploadFile.filepath}}" {{this.atts}}>
 </template>

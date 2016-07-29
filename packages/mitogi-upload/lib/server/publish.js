@@ -1,5 +1,5 @@
-Meteor.publish( 'files', function(){
-  var data = Files.find( { "userId": this.userId } );
+Meteor.publish( 'filesByURL', function(url){
+  var data = Files.find( { filepath: url} );
 
   if ( data ) {
     return data;
