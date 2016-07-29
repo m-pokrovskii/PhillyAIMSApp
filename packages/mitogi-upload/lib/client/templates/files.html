@@ -36,33 +36,40 @@
     <div class="row">
       {{#each this}}
       <div class="panel panel-default col-md-6">
-            <div class="panel-heading">{{name}}
+            <div class="panel-heading">
 
                
                 <a href="#" class="pull-right ">             
                   <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
                </a>
+               {{> video_player video=this width="100%" height="100%"}}
             
             </div>
 
             <div class="panel-body">             
-              {{#if $not key}}
-                <iframe width="100%" height="auto" src="{{getPlayer filepath}}" frameborder="0" allowfullscreen></iframe>
-              {{else}}
-              <video class="video-player" width="100%" height="auto" controls>
-              	<!--need to encode videos-->
-                  <source src="{{newExtension filepath 'webm'}}" type="video/webm">
-      					  <source src="{{newExtension filepath 'mp4'}}" type="video/mp4">
-
-    					   Your browser does not support the video tag.
-    					</video>
-              {{/if}}
-    					<a class="pull-right btn btn-info" href="{{newExtension filepath 'mp4'}}" download>Download</a>
+              
             </div>
       </div>
       {{/each}}
      
     </div>
+</template>
+
+<template name="video_player">
+  {{name}}
+  {{#if $not video.key}}
+    <iframe width="100%" height="auto" src="{{getPlayer video.filepath}}" frameborder="0" allowfullscreen></iframe>
+  {{else}}
+  <video class="video-player" width={{width}} height={{height}} controls>
+    <!--need to encode videos-->
+      <source src="{{newExtension video.filepath 'webm'}}" type="video/webm">
+      <source src="{{newExtension video.filepath 'mp4'}}" type="video/mp4">
+
+     Your browser does not support the video tag.
+  </video>
+  {{/if}}
+  <a class="pull-right btn btn-info" href="{{newExtension video.filepath 'mp4'}}" download>Download</a>
+
 </template>
 
 
@@ -73,9 +80,12 @@
                  <!-- START panel-->
                          <div class="panel panel-default bounceIn" id="panel-{{index}}">
                             <div class="panel-heading">
+
+                              {{#if $or (isActiveRoute 'postEdit') (isActiveRoute 'postSubmit')}}
                                 <a href="#" class="pull-right ">
                                   <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
                                </a>
+                               {{/if}}
                             </div>
                             <div class="panel-body text-center">
                                 <a href="{{filepath}}" download>

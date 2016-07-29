@@ -25,12 +25,9 @@ Template.files.helpers({
   }
 });
 
-Template['file-video'].helpers({
+Template['video_player'].helpers({
   notwebm: function(filepath) {
     return !filepath.endsWith(".webm");
-  },
-  edit: function(){
-    return Template.instance().data.edit;
   },
   endsWith: function(filepath) {
     return filepath.split(".").slice(-1)[0];

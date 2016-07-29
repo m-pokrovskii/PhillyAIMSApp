@@ -79,15 +79,23 @@ Telescope.schemas.userData = new SimpleSchema({
   },
   /**
     A hash of the email, used for Gravatar // TODO: change this when email changes
-  */
   emailHash: {
     type: String,
     public: true,
     optional: true
-  },
+  },*/
   /**
     The HTML version of the bio field
   */
+  avatarURL: {
+    type: String,
+    public: true,
+    optional: true,
+    editableBy: ["member", "admin"],
+    autoform:{
+      type: "imageUpload",
+    }
+  },
   htmlBio: {
     type: String,
     public: true,

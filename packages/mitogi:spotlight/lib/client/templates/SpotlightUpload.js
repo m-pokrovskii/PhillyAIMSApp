@@ -5,10 +5,16 @@
 * save when resources do
 */
 var hookSpotlight = {
-    onSuccess: function(formType, post) {
-      Session.set('unsavedChanges', false);
-      //Session.set('submitSpotlight', true);
-  }
+    before:{
+      "method" : function(doc){
+        Session.set('unsavedChanges', false);
+        this.result(doc);
+      },
+      "method-update" : function(doc){
+        Session.set('unsavedChanges', false);
+        this.result(doc);
+      },
+    }
 };
 
 String.prototype.capitalizeFirstLetter = function() {
@@ -36,18 +42,15 @@ function animateButtonsSide(){
 }
 
 function switchPanels(myType){
-  console.log("onenter");
+  
   myType = myType.toString();
 
   for (var i = 0; i < types.length; i++) {
-    var type = types[i].toString();
-
-    if(type==myType){
-  
-      $("#"+type+"-panel").show().switchClass( "hide-panel", "show-panel", 400, "easeInOutQuad" );
+    if(myType === types[i]){
+      $("#"+types[i]+"-panel").show().switchClass( "hide-panel", "show-panel", 400, "easeInOutQuad" );
     }
     else{
-       $("#"+type+"-panel").switchClass( "show-panel", "hide-panel", 400, "easeInOutQuad" ).hide();
+       $("#"+types[i]+"-panel").switchClass( "show-panel", "hide-panel", 400, "easeInOutQuad" ).hide();
     }
   }
 }
@@ -89,23 +92,30 @@ Template.SpotlightUpload.onCreated( function() {
 
 Template.SpotlightUpload.onRendered( function() {
   var self= this;
+  this.once = false;
   self.autorun(function () {
-    if(self.ready){
-     if(self.attachmentCount.get() > 0){
-            switchPanels("attachment");
-            animateButtonsSide();
-          
+    if(self.ready && !self.once){
+      if(self.videoCount.get() > 0){
+          self.spotlightType.set("video");
+          switchPanels("video");
+          animateButtonsSide();
+          self.once = true;
       }
       else if(self.photoCount.get() > 0){
-            switchPanels("photo");
-            animateButtonsSide();
+          self.spotlightType.set("photo");
+          switchPanels("photo");
+          animateButtonsSide();
+          self.once = true;
           
       }
-      else if(self.videoCount.get() > 0){
-            switchPanels("video");
-            animateButtonsSide();
-      
+      else if(self.attachmentCount.get() > 0){
+          self.spotlightType.set("attachment");
+          switchPanels("attachment");
+          animateButtonsSide();
+          self.once = true;
+          
       }
+
     }
   });
 
@@ -131,8 +141,14 @@ Template.SpotlightUpload.helpers({
   ready: function() {
     return Template.instance().ready.get();
   },
+  //only callback on submits
   callback: function() {
-    return Session.set('unsavedChanges', true);
+    //if(FlowRouter.getParam("_id")==null){
+      return {start: function(){
+          Session.set('unsavedChanges', true)
+        }
+      }//end return obj
+    //}//end callback function
   }
 });
 

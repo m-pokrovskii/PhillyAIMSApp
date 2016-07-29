@@ -62,7 +62,7 @@ Users.before.update(function (userId, doc, fieldNames, modifier) {
       }
 
       // update email hash
-      modifier.$set["telescope.emailHash"] = Gravatar.hash(newEmail);
+      //modifier.$set["telescope.emailHash"] = Gravatar.hash(newEmail);
 
     }
   });
@@ -109,9 +109,10 @@ function setupUser (user, options) {
   }
 
   // generate email hash
+  /*
   if (!!user.telescope.email) {
     user.telescope.emailHash = Gravatar.hash(user.telescope.email);
-  }
+  }*/
 
   // look in a few places for the displayName
   if (user.profile.username) {

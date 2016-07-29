@@ -101,13 +101,22 @@ Users.getEmailById = function (userId) {return Users.getEmail(Meteor.users.findO
 /**
  * Get a user's email hash
  * @param {Object} user
- */
+
 Users.getEmailHash = function (user) {
   // has to be this way to work with Gravatar
   return Gravatar.hash(Users.getEmail(user));
 };
 Users.helpers({getEmailHash: function () {return Users.getEmailHash(this);}});
 Users.getEmailHashById = function (userId) {return Users.getEmailHash(Meteor.users.findOne(userId));};
+ */
+
+/** Get a user's email hash
+ * @param {Object} user
+
+Users.getAvatarUrl = function (user) {
+  // has to be this way to work with Gravatar
+  return Gravatar.hash(Users.getEmail(user));
+};*/
 
 /**
  * Check if a user's profile is complete

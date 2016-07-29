@@ -5,10 +5,12 @@
 // Return true to 'prevent' the route from changing.
 function preventRouteChange (targetContext) {
   if (Session.get('unsavedChanges')) {
+    console.log(targetContext);
     if (!window.confirm('Unsaved changes will be lost. Are you sure?')) {
+      Session.set('unsavedChanges', false);
+
       return true;
     }
-    Session.set('unsavedChanges', false);
   }
   return false;
 }

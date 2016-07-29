@@ -1,26 +1,42 @@
 <template name="afImageUpload">	
-	{{> upload_photo resourceID="single" callback=callback}}
+  {{#if ready}}
+  	{{> upload_photo resourceID="single" callback=callback}}
 
-	{{#if uploadFile}}
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-         <!-- START panel-->
-                 <div class="panel panel-default">
-                    <div class="panel-heading">{{uploadFile.name}}
-                       
-                        <a href="#" class="pull-right ">
-                          <em class="fa fa-times delete-file" data-id="{{uploadFile._id}}"></em>
-                       </a>
-         
-                    </div>
-                    <div class="panel-body">
-                       <a href="{{uploadFile.filepath}}" title="{{uploadFile.name}}" target="_blank"><img src="{{uploadFile.filepath}}" height="auto" width="100%"></a><br/>
-                        {{numberWithCommas uploadFile.size }} KB
-                    </div>
-                 </div>
+  	{{#if uploadFile}}  
+        <div class="row">
+          {{#if avatar}}
+            <div class="col-md-3 col-md-offset-6">
+                      <a href="#" class="pull-right ">
+                        <em class="fa fa-times delete-file" data-id="{{uploadFile._id}}"></em>
+                     </a>
+                  <div class="panel-body">
+                     <a href="{{uploadFile.filepath}}" title="{{uploadFile.name}}" target="_blank" height="100px" width="100px" style="border-radius:100px; overflow:hidden;"><img src="{{uploadFile.filepath}}" height="auto" width="100%" style="border-radius:"></a>
+                  </div>
+            </div>
+          {{else}}
+            <div class="col-md-6 col-md-offset-3">
+             <!-- START panel-->
+                     <div class="panel panel-default">
+                        <div class="panel-heading">{{uploadFile.name}}
+                           
+                            <a href="#" class="pull-right ">
+                              <em class="fa fa-times delete-file" data-id="{{uploadFile._id}}"></em>
+                           </a>
+             
+                        </div>
+                        <div class="panel-body">
+                           <a href="{{uploadFile.filepath}}" title="{{uploadFile.name}}" target="_blank"><img src="{{uploadFile.filepath}}" height="auto" width="100%"></a><br/>
+                            {{numberWithCommas uploadFile.size }} KB
+                        </div>
+                     </div>
+            </div>
+            {{/if}}
+         <!-- END panel-->
         </div>
-     <!-- END panel-->
-    </div>
     {{/if}}
+
+  {{else}}
+    {{> loading}}
+  {{/if}}
   <input type="hidden" value="{{uploadFile.filepath}}" {{this.atts}}>
 </template>

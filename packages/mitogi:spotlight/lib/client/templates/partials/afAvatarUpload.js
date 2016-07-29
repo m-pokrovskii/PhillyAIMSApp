@@ -1,5 +1,5 @@
-AutoForm.addInputType("imageUpload", {
-  template: "afImageUpload",
+AutoForm.addInputType("avatarUpload", {
+  template: "afAvatarUpload",
   isHidden: false,
   valueOut: function () {
     //saves fileID
@@ -13,26 +13,20 @@ function deleteSingle(oldFile){
   }
 }
 //template level subscription
-Template['afImageUpload'].onCreated(function (){
+Template['afAvatarUpload'].onCreated(function (){
   var self = this;
-  this.ready = new ReactiveVar();
-  this.settings = this.data.atts.settings || {};
   self.uploadFile = new ReactiveVar(this.data.value);
   console.log("values "+self.data.value);
   self.autorun(function () {
     var subscription = Telescope.subsManager.subscribe('filesByURL', self.data.value);
     if (subscription.ready()) {
       self.uploadFile.set(Files.findOne({filepath:self.data.value}));
-      self.ready.set(true);
     }
   });
  });
 
 
-Template.afImageUpload.helpers({
-  ready: function(){
-    return Template.instance().ready.get();
-  },
+Template.afAvatarUpload.helpers({
   callback: function() {
     var template = Template.instance();
     return {finished: function(data){
@@ -42,9 +36,6 @@ Template.afImageUpload.helpers({
       }
     }
   },
-  avatar: function(){
-    return Template.instance().settings.avatar;
-  },
   uploadFile: function(){
     return Template.instance().uploadFile.get();
   },
@@ -53,7 +44,7 @@ Template.afImageUpload.helpers({
   }
 })
 
-Template['afImageUpload'].events({
+Template['afAvatarUpload'].events({
   'click .delete-file':function(event, template) {
     if (confirm('Are you sure?')) {
       deleteSingle(template.uploadFile.get());
