@@ -59,12 +59,14 @@ Meteor.methods({
         throw new Meteor.Error(403, "Somebody has already invited this person.");
       }
 
+      var newToken = Random.hexString(16);
+
       // create an invite
       // consider invite accepted if the invited person has an account already
       Invites.insert({
         invitingUserId: Meteor.userId(),
         invitedUserEmail: userEmail,
-        token: invitation.token,
+        token: newToken,
         role: invitation.role,
         accepted: typeof user !== "undefined"
       });
@@ -93,7 +95,7 @@ Meteor.methods({
             profileUrl : Users.getProfileUrl(currentUser),
             siteUrl: Settings.get("siteUrl"),
             userEmail : userEmail,
-            token: invitation.token,
+            token: newToken,
           };
 
       Meteor.setTimeout(function () {
@@ -106,7 +108,7 @@ Meteor.methods({
       newUser : typeof user === 'undefined'
     };
   },
-  resend: function(email, role){
+  resend: function(email){
     var newToken = Random.hexString(16);
 
     Invites.update({invitedUserEmail: email}, 
@@ -128,7 +130,7 @@ Meteor.methods({
             profileUrl : Users.getProfileUrl(currentUser),
             siteUrl: Settings.get("siteUrl"),
             userEmail : invitation.invitedUserEmail,
-            token: invitation.token,
+            token: newToken,
           };
 
       Meteor.setTimeout(function () {

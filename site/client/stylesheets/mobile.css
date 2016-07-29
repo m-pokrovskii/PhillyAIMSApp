@@ -24,7 +24,7 @@
 
 /* post */
 
-.post-meta a:link, .post-meta a:visited, .post-meta a:active {
+.post-meta i {
     color: #ffffff !important;
 }
 

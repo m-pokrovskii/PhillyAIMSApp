@@ -29,14 +29,15 @@ Template.user_invites.helpers({
     return Template.instance().invites.get();
   },
   userIsAdmin: function () {
-    return Users.is.admin(this);
+    return Users.is.admin(Meteor.user());
   }
 });
 
 Template.user_invites.events({
-  'click .resend': function (event) {
+  'click .resend': function (event, template) {
     event.preventDefault();
     var email = event.target.getAttribute('data-email');
+    
     Meteor.call('resend', email, function(error, result){
       if(error){
         Bert.alert( 'Error '+error, 'danger', 'growl-top-right' );
