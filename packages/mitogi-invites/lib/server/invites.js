@@ -112,8 +112,7 @@ Meteor.methods({
     var newToken = Random.hexString(16);
 
     Invites.update({invitedUserEmail: email}, 
-      {$set: {token: newToken, 
-        role: role, 
+      {$set: {token: newToken,
         date: new Date()}
       });
 

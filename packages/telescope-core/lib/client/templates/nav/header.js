@@ -37,6 +37,9 @@ Template.header.helpers({
   },
   hasMoreThanThreeItems: function () {
     return this.length > 3;
+  },
+  user: function () {
+    return !!Meteor.user();
   }
 });
 
