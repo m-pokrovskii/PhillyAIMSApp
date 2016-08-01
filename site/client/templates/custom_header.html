@@ -1,7 +1,7 @@
 <template name="custom_header">
 
   <header class="header {{class}} {{headerClass}}">
-    {{#if user}}
+    {{#if $.Meteor.userId}}
       {{#if $and (isActiveRoute 'postPage') isCordova}}  
             <a id="back-button" class="mobile-back-button">
               <i class="icon fa fa-chevron-left" aria-hidden="true"></i>
@@ -15,7 +15,7 @@
     
     {{> logo}}
 
-    {{#if user}}
+    {{#if $.Meteor.userId}}
       {{#if hasPrimaryNav}}
         {{> modules zone="primaryNav" zoneClass="nav primary-nav desktop-nav header-module desktop-only" moduleClass="header-submodule"}}
       {{/if}}
