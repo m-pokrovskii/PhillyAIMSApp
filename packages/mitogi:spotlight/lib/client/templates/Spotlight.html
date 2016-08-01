@@ -1,47 +1,36 @@
 <template name="SpotlightShow">
   {{#if ready}}
-	    {{#if arrayHasObject spotlight.video}}
+	    {{#if arrayHasObject (spotlight "video")}}
 			<div class="post-body">
 			    <h2>
 			       Videos
 			    </h2>
 			    <div class="panel-body">
-			    	{{> SpotlightVideo spotlight.video}}
+			    	{{> SpotlightVideo (spotlight "video")}}
 			    </div>
 			</div>
 		{{/if}}
 
-		{{#if arrayHasObject spotlight.attachment}}
+		{{#if arrayHasObject (spotlight "attachment")}}
 
 			<div class="post-body">
 			    <h2>
 			       Attachments
 			    </h2>
 			    <div class="panel-body">
-			    	{{> Template.dynamic template="file-attachment" data=spotlight.attachment}}
+			    	{{> Template.dynamic template="file-attachment" data=(spotlight "attachment")}}
 			    </div>
 			</div>
 			
 		{{/if}}
 
-		{{#if arrayHasObject spotlight.photo}}
+		{{#if arrayHasObject (spotlight "photo")}}
 			<div class="post-body">
 			    <h2>
-			       Gallery
+			       Photos
 			    </h2>
 			    <div class="panel-body">
-			    	{{> Template.dynamic template="SpotlightGallery" data=spotlight.photo}}
-			    </div>
-			</div>
-		{{/if}}	
-
-		{{#if arrayHasObject spotlight.link}}
-			<div class="post-body">
-			    <h2>
-			       Links
-			    </h2>
-			    <div class="panel-body">
-			    	{{> linkShow spotlight.link}}
+			    	{{> Template.dynamic template="SpotlightGallery" data=(spotlight "photo")}}
 			    </div>
 			</div>
 		{{/if}}	

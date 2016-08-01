@@ -11,7 +11,7 @@ Package.onUse(function (api) {
   api.use(["telescope:core",
     "tomi:upload-jquery",
     "tomi:upload-server",
-    "manuel:reactivearray",
+    "reactive-dict",
    // "browser-policy",
     "andruschka:bootstrap-image-gallery"
   ]);

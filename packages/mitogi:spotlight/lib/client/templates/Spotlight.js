@@ -3,8 +3,9 @@ Template.registerHelper( 'arrayHasObject', ( array ) => {
 });
 
 Template.SpotlightShow.onCreated( function() {
+
 	this.ready = new ReactiveVar(false);
-    this.mySpotlight = new ReactiveVar();
+    this.mySpotlight = new ReactiveDict();
     var self = this;
     self.autorun(function () {
 
@@ -21,7 +22,10 @@ Template.SpotlightShow.onCreated( function() {
           spotlight[doc.type].push(doc);
         });
 
-          self.mySpotlight.set(spotlight);
+        self.mySpotlight.set("attachment", spotlight["attachment"]);
+        self.mySpotlight.set("video", spotlight["video"]);
+        self.mySpotlight.set("photo", spotlight["photo"]);
+        //   self.mySpotlight.set(spotlight);
           self.ready.set(true);
     }
   });
@@ -31,8 +35,9 @@ Template.SpotlightShow.helpers({
 	ready: function () {
 	  return Template.instance().ready.get();
 	},
-	spotlight: function(){
-		return Template.instance().mySpotlight.get();
+	spotlight: function(type){
+    //console.log(Template.instance().mySpotlight.get("video"));
+		return Template.instance().mySpotlight.get(type);
 	},
 	editMode: function(){
 		return false;
