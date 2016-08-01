@@ -3,7 +3,7 @@
 // //////////////////////////////////
 
 AccountsTemplates.configure({
-  defaultLayout: 'account_template_layout',
+  defaultLayout: 'layout',
   defaultLayoutRegions: {},
   defaultContentRegion: 'main',
   enablePasswordChange: true,

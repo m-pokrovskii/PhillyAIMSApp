@@ -1,30 +1,32 @@
 <template name="custom_header">
-  <header class="header {{class}} {{headerClass}}">
-    {{#if $and (isActiveRoute 'postPage') isCordova}}  
-          <a id="back-button" class="mobile-back-button">
-            <i class="icon fa fa-chevron-left" aria-hidden="true"></i>
-          </a>
-      {{else}}
-        <a href="#menu" class="mobile-only mobile-menu-button button">
-          <i class="icon fa fa-bars" aria-hidden="true"></i>
-        </a>
-    {{/if}}
 
+  <header class="header {{class}} {{headerClass}}">
+    {{#if noUser}}
+      {{#if $and (isActiveRoute 'postPage') isCordova}}  
+            <a id="back-button" class="mobile-back-button">
+              <i class="icon fa fa-chevron-left" aria-hidden="true"></i>
+            </a>
+        {{else}}
+          <a href="#menu" class="mobile-only mobile-menu-button button">
+            <i class="icon fa fa-bars" aria-hidden="true"></i>
+          </a>
+      {{/if}}
+    {{/if}}
     
     {{> logo}}
 
-    {{#if hasPrimaryNav}}
-      {{> modules zone="primaryNav" zoneClass="nav primary-nav desktop-nav header-module desktop-only" moduleClass="header-submodule"}}
+    {{#if noUser}}
+      {{#if hasPrimaryNav}}
+        {{> modules zone="primaryNav" zoneClass="nav primary-nav desktop-nav header-module desktop-only" moduleClass="header-submodule"}}
+      {{/if}}
+
+      {{> modules zone="mobileCenter" zoneClass="nav header-module mobile-only mobileCenter" moduleClass="header-submodule"}}
+      {{> modules zone="mobileRight" zoneClass="nav header-module mobile-only mobileRight" moduleClass="header-submodule"}}
+
+      {{#if hasSecondaryNav}}
+        {{> modules zone="secondaryNav" zoneClass="nav secondary-nav desktop-nav header-module desktop-only" moduleClass="header-submodule"}}
+      {{/if}}
     {{/if}}
-
-    {{> modules zone="mobileCenter" zoneClass="nav header-module mobile-only mobileCenter" moduleClass="header-submodule"}}
-    {{> modules zone="mobileRight" zoneClass="nav header-module mobile-only mobileRight" moduleClass="header-submodule"}}
-
-    {{#if hasSecondaryNav}}
-      {{> modules zone="secondaryNav" zoneClass="nav secondary-nav desktop-nav header-module desktop-only" moduleClass="header-submodule"}}
-    {{/if}}
-
-
-    
   </header>
+ 
 </template>

@@ -5,6 +5,9 @@ window.shouldRotateToOrientation = function(degrees) {
 Template.header.helpers({
   'isCordova': function(e){
     return Meteor.isCordova;
+  },
+  'noUser': function(e){
+    return !Meteor.isUser();
   }
 });
 
