@@ -79,7 +79,6 @@ Posts.schema = new SimpleSchema({
   body: {
     type: String,
     optional: true,
-    max: 3000,
     editableBy: ["member", "admin"],
     autoform: {
             type: "summernote"

@@ -18,9 +18,7 @@ var InviteSchema = new SimpleSchema({
   token : {
     type: String,
     label: 'Token',
-    autoValue: function(){
-      return Random.hexString(16);
-    },
+    optional: true,
     autoform : {
       omit: true,
       type: "hidden"
