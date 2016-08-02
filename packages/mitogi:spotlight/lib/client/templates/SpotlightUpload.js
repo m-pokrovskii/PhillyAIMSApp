@@ -70,7 +70,7 @@ Template.SpotlightUpload.onCreated( function() {
 
   var self = this;
 
-  var filesSubscription = Telescope.subsManager.subscribe('myFiles', resourceID);
+  var filesSubscription = Telescope.subsManager.subscribe('resourceFiles', resourceID);
 
   self.autorun(function () {
 

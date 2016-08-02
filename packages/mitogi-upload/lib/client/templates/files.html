@@ -1,6 +1,8 @@
 <template name="files">
   <div class="files">
-      {{> Template.dynamic template=templateName data=files}}
+      {{#if ready}}
+        {{> Template.dynamic template=templateName data=files}}
+      {{/if}}
   </div>
 </template>
 
@@ -11,18 +13,15 @@
                 <div class="col-md-3">
                  <!-- START panel-->
                          <div class="panel panel-default bounceIn" id="panel-{{index}}">
-                            <div class="panel-heading">{{name}}
-                               
-                                <a href="#" class="pull-right ">
-                                  <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
-                               </a>
-                 
+                            <div class="panel-heading">
+                              {{> metadata_files_form this}}
                             </div>
                             <div class="panel-body">
                                <a href="{{filepath}}" title="{{name}}" data-gallery><img src="{{this.filepath}}" height="auto" width="100%"></a><br/>
                                  <div class="row">
                                   {{numberWithCommas size }} KB
                                 </div>
+                                
                             </div>
                          </div>
                 </div>
@@ -39,27 +38,40 @@
       {{#each this}}
       <div class="panel panel-default col-md-6">
             <div class="panel-heading">
-
-                <a href="#" class="pull-right ">             
-                  <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
-               </a>
-               <div class="row">
-                  <input class="col-md-8" type="text" placeholder={{name}} name="filename" data-id="{{_id}}"/>
-                  <input class="col-md-2" type="number" name="order" data-id="{{_id}}" placeholder={{order}}>
-                  <button class="submit-metadata">Submit</button>
-                </div>
-               {{> video_player video=this width="100%" height="100%"}}
-            
+                 {{> metadata_files_form this}}
             </div>
 
             <div class="panel-body">             
-              
+              {{> video_player video=this width="100%" height="100%"}}
+                
             </div>
       </div>
       {{/each}}
      
     </div>
 </template>
+
+<template name="metadata_files_form">
+  {{#if $or (isActiveRoute 'postEdit') (isActiveRoute 'postSubmit')}}
+    <a href="#" class="pull-right ">
+      <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
+   </a>
+  <div class="row">
+      <form class="form-inline col-md-11" role="form">
+      <div class="form-group">
+        <label for="Name">Name</label>
+        <input class="form-control" type="text" placeholder="{{name}}" name="filename" data-id="{{_id}}"/>
+      </div>
+      <div class="form-group">
+        <label for="Order">Order</label>
+        <input class="form-control" type="number" name="order" data-id="{{_id}}" placeholder="{{order}}">
+      </div>
+    </form>             
+    
+  </div>
+  {{/if}}
+</template>
+
 
 <template name="video_player">
   {{#if ready}}
@@ -75,7 +87,6 @@
        Your browser does not support the video tag.
     </video>
     {{/if}}
-    <a class="pull-right btn btn-info" href="{{newExtension video.filepath 'mp4'}}" download>Download</a>
   {{else}}
     {{> loading}}
    <p class="text-center"> Video is processing and should be up shortly.</p>
@@ -91,12 +102,7 @@
                  <!-- START panel-->
                          <div class="panel panel-default bounceIn" id="panel-{{index}}">
                             <div class="panel-heading">
-
-                              {{#if $or (isActiveRoute 'postEdit') (isActiveRoute 'postSubmit')}}
-                                <a href="#" class="pull-right ">
-                                  <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
-                               </a>
-                               {{/if}}
+                              {{> metadata_files_form this}}
                             </div>
                             <div class="panel-body text-center">
                                 <a href="{{filepath}}" download>
@@ -104,8 +110,9 @@
                                     <br>
                                     {{name}}
                                 </a>
-                                <br/>
-                                {{numberWithCommas size }} KB
+                                <div class="row">
+                                  {{numberWithCommas size }} KB
+                                </div>
                             </div>
                          </div>
                 </div>

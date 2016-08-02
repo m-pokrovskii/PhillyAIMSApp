@@ -125,23 +125,6 @@ Meteor.methods({
     }
 
   },
-  updateMetadata: function( id , name ) {
-    //check( data.url, String );
-    //check( data.name, String );
-    //check( data.size, Number );
-    Modules.both.checkUrlValidity( url );
-
-    try {
-      Files.update({_id: id},
-        {$set:
-        {name: name,
-        description: description}
-      });
-      //then delete from s3
-    } catch( exception ) {
-      return exception;
-    }
-  },
   getBucket: function(){
     return Meteor.settings.AWSBucket;
   },

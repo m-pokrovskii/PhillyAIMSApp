@@ -3,18 +3,31 @@ Template.registerHelper( 'numberWithCommas', ( string ) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 });
 
-Template.files.onRendered( function () {
+Template.files.onCreated( function () {
   var self = this;
-  	this.subscribe( 'myFiles' , this.data.resourceID , this.data.type);
+  this.ready = new ReactiveVar(false);
+  this.filesArray = new ReactiveVar();
+  self.autorun(function () {
+
+    var subscription = Telescope.subsManager.subscribe( 'myFiles' , self.data.resourceID , self.data.type);
+
+    if (subscription.ready()) {
+
+        var files = Files.find( {resourceID: self.data.resourceID, type: self.data.type}, { sort: { "order": 1, "added": -1 } } );
+        self.filesArray.set(files);
+        self.ready.set(true);
+    }
+  });
+  	
   	//this.subscribe( 'files' ) ;
 });
 
 Template.files.helpers({
+  ready: function() {
+    return Template.instance().ready.get();
+  },
   files: function() {
-    var files = Files.find( {resourceID: Template.instance().data.resourceID, type: Template.instance().data.type}, { sort: { "order": 1, "added": -1 } } );
-    if ( files ) {
-      return files;
-    }
+      return Template.instance().filesArray.get();
   },
   templateName : function(){
   	return "file-"+Template.instance().data.type;
@@ -46,14 +59,29 @@ Template['video_player'].helpers({
   },
 });
 
-Template['file-attachment'].events({
-  'click .submit-metadata': function (event, template) {
+/*Template['file-attachment'].events({
+
+
+  'blur input[name="filename"]': function (event, template) {
     event.preventDefault();
     var targetId = event.target.getAttribute("data-id");
-    var name = template.find("input[name='filename' data-id="+targetId+"]");
-    var order = template.find("input[name='order' data-id="+targetId+"]");
+    //var name = template.find("input[name='filename' data-id="+targetId+"]");
+    //var order = template.find("input[name='order' data-id="+targetId+"]");
+    var name = event.target.value;
+    console.log(name);
+    Meteor.call("setFileName" ,targetId, name);
+    //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
 
-    Meteor.call("setFilesMetadata" ,targetId, name, order);
+  },
+
+  'blur input[name="order"]': function (event, template) {
+    event.preventDefault();
+    var targetId = event.target.getAttribute("data-id");
+    //var name = template.find("input[name='filename' data-id="+targetId+"]");
+    //var order = template.find("input[name='order' data-id="+targetId+"]");
+    var order = event.target.value;
+    console.log(order);
+    Meteor.call("setFileOrder" ,targetId, order);
     //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
 
   },
@@ -67,22 +95,58 @@ Template['file-attachment'].events({
 });
 
 Template['file-photo'].events({
+  'blur input[name="filename"]': function (event, template) {
+    event.preventDefault();
+    var targetId = event.target.getAttribute("data-id");
+    //var name = template.find("input[name='filename' data-id="+targetId+"]");
+    //var order = template.find("input[name='order' data-id="+targetId+"]");
+    var name = event.target.value;
+    console.log(name);
+    Meteor.call("setFileName" ,targetId, name);
+    //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
+
+  },
+
+  'blur input[name="order"]': function (event, template) {
+    event.preventDefault();
+    var targetId = event.target.getAttribute("data-id");
+    //var name = template.find("input[name='filename' data-id="+targetId+"]");
+    //var order = template.find("input[name='order' data-id="+targetId+"]");
+    var order = event.target.value;
+    console.log(order);
+    Meteor.call("setFileOrder" ,targetId, order);
+    //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
+
+  },
   'click .delete-file': function (event, template) {
     event.preventDefault();
     if (confirm('Are you sure?')) {
       FileViewController.deleteFile(event);
     }
   }
-});
+});*/
 
-Template['file-video'].events({
-  'click .submit-metadata': function (event, template) {
+Template['metadata_files_form'].events({
+  'blur input[name="filename"]': function (event, template) {
     event.preventDefault();
     var targetId = event.target.getAttribute("data-id");
-    var name = template.find("input[name='filename' data-id="+targetId+"]");
-    var order = template.find("input[name='order' data-id="+targetId+"]");
+    //var name = template.find("input[name='filename' data-id="+targetId+"]");
+    //var order = template.find("input[name='order' data-id="+targetId+"]");
+    var name = event.target.value;
+    console.log(name);
+    Meteor.call("setFileName" ,targetId, name);
+    //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
 
-    Meteor.call("setFilesMetadata" ,targetId, name, order);
+  },
+
+  'blur input[name="order"]': function (event, template) {
+    event.preventDefault();
+    var targetId = event.target.getAttribute("data-id");
+    //var name = template.find("input[name='filename' data-id="+targetId+"]");
+    //var order = template.find("input[name='order' data-id="+targetId+"]");
+    var order = event.target.value;
+    console.log(order);
+    Meteor.call("setFileOrder" ,targetId, order);
     //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
 
   },
