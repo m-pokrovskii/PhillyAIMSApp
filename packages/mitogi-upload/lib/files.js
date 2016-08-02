@@ -1,16 +1,6 @@
 Files = new Meteor.Collection( 'files' );
 
-/*SimpleSchema  =
 
-filepath: data.filepath,
-        userId: Meteor.userId(),
-        added: new Date(), 
-        name: data.name,
-        size: data.size,
-        key: data.key,
-        resourceID: data.id,
-        type: data.type,
-*/
 Files.allow({
   insert: function() { return false; },
   update: function() { return false; },
@@ -23,6 +13,35 @@ Files.deny({
   remove: function(){ return true; }
 });
 
+FilesSchema = new SimpleSchema({
+  userId: {
+    type: String
+  },
+  added: {
+    type: Date,
+    optional: true
+  },
+  name: {
+    type: String,
+    optional: true
+  },
+  size: {
+    type: Number,
+    optional: true
+  },
+  key: {
+    type: String
+  },
+  resourceID: {
+    type: String,
+    optional: true
+  },
+  type: {
+    type: String
+  }
+});
+
+Files.attachSchema(FilesSchema);
 
 Meteor.methods({
 	urlCall : function(fileUrl){

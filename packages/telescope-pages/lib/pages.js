@@ -13,7 +13,8 @@ Pages.schema = new SimpleSchema({
   content: {
     type: String,
     autoform: {
-      rows: 10
+      rows: 10,
+      type:"summernote"
     }
   },
   order: {

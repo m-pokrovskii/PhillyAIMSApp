@@ -38,10 +38,14 @@
       <div class="panel panel-default col-md-6">
             <div class="panel-heading">
 
-               
                 <a href="#" class="pull-right ">             
                   <em class="fa fa-times delete-file" data-id="{{_id}}"></em>
                </a>
+               <div class="row">
+                  <input class="col-md-8" type="text" placeholder={{name}} name="filename" data-id="{{_id}}"/>
+                  <input class="col-md-2" type="number" name="order" data-id="{{_id}}" placeholder={{order}}>
+                  <button class="submit-metadata">Submit</button>
+                </div>
                {{> video_player video=this width="100%" height="100%"}}
             
             </div>

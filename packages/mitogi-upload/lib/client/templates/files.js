@@ -11,7 +11,7 @@ Template.files.onRendered( function () {
 
 Template.files.helpers({
   files: function() {
-    var files = Files.find( {resourceID: Template.instance().data.resourceID, type: Template.instance().data.type}, { sort: { "added": -1 } } );
+    var files = Files.find( {resourceID: Template.instance().data.resourceID, type: Template.instance().data.type}, { sort: { "order": 1, "added": -1 } } );
     if ( files ) {
       return files;
     }
@@ -47,11 +47,17 @@ Template['video_player'].helpers({
 });
 
 Template['file-attachment'].events({
- /* 'change .name-attach': function (event, template) {
+  'click .submit-metadata': function (event, template) {
     event.preventDefault();
-    var targetIndex = event.target.getAttribute("data-index");
-    template.uploadAttach.list()[targetIndex].name = event.target.text.value;
-  },*/
+    var targetId = event.target.getAttribute("data-id");
+    var name = template.find("input[name='filename' data-id="+targetId+"]");
+    var order = template.find("input[name='order' data-id="+targetId+"]");
+
+    Meteor.call("setFilesMetadata" ,targetId, name, order);
+    //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
+
+  },
+  
   'click .delete-file': function (event, template) {
     event.preventDefault();
     if (confirm('Are you sure?')) {
@@ -70,6 +76,16 @@ Template['file-photo'].events({
 });
 
 Template['file-video'].events({
+  'click .submit-metadata': function (event, template) {
+    event.preventDefault();
+    var targetId = event.target.getAttribute("data-id");
+    var name = template.find("input[name='filename' data-id="+targetId+"]");
+    var order = template.find("input[name='order' data-id="+targetId+"]");
+
+    Meteor.call("setFilesMetadata" ,targetId, name, order);
+    //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
+
+  },
   'click .delete-file': function (event, template) {
     event.preventDefault();
     if (confirm('Are you sure?')) {

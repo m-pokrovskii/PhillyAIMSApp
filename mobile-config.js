@@ -2,13 +2,15 @@
 /* eslint-disable quote-props */
 
 App.info({
-  name: 'Todos',
-  description: 'A simple todo list app built in Meteor.',
-  author: 'Percolate Studio Team',
-  email: 'us@percolatestudio.com',
-  website: 'http://percolatestudio.com',
+  name: 'Philly AIMS',
+  description: 'A collection of resources for teachers.',
+  author: 'Michelle Partogi',
+  email: 'michelle.partogi@gmail.com',
+  website: 'http://michellepartogi.com',
   version: '0.0.1',
 });
+
+App.accessRule('*');
 
 App.icons({
   // iOS
@@ -33,11 +35,8 @@ App.launchScreens({
 
   // Android
   'android_mdpi_portrait': 'public/mobile/splash/splash-320x480.png',
-  'android_mdpi_landscape': 'public/mobile/splash/splash-480x320.png',
   'android_hdpi_portrait': 'public/mobile/splash/splash-480x800.png',
-  'android_hdpi_landscape': 'public/mobile/splash/splash-800x480.png',
   'android_xhdpi_portrait': 'public/mobile/splash/splash-720x1280.png',
-  'android_xhdpi_landscape': 'public/mobile/splash/splash-1280x720.png',
 });
 
 App.setPreference('StatusBarOverlaysWebView', 'false');
