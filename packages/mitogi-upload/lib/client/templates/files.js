@@ -198,8 +198,8 @@ Template['video_player'].onCreated(function(){
     catch(exception){
     }
   }
-
-  this.interval = setInterval(this.check, 5000);
+  this.check();
+  this.interval = setInterval(this.check, 2000);
 });
 
 Template['video_player'].helpers({
