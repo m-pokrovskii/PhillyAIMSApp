@@ -20,7 +20,7 @@ Package.onUse(function (api) {
     "themeteorchef:bert",
    // "meteorhacks:ssr",
 
-   "peerlibrary:aws-sdk",
+   "peerlibrary:aws-sdk@2.4.9_1",
    "lukemadera:video-capture",
     "froatsnook:request",
     "fourseven:scss",
