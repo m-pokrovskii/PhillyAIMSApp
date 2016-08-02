@@ -186,10 +186,10 @@ Template['video_player'].onCreated(function(){
     try{
       HTTP.call("HEAD", fileCheck, null, function(error, result){
 
-          if (error) {
-            console.log(error);
-          }
-          else if(result){
+          //if (error) {
+          //  console.log(error);
+         // }
+          if(result){
             clearInterval(self.interval);
             self.ready.set(true);
           }

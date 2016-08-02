@@ -1,4 +1,51 @@
-Meteor.methods({
+  //pass an array of keys to delete
+  function _deleteFilesWithKey(objKey){
+
+    try{
+      AWS.config.update({
+             accessKeyId: Meteor.settings.AWSAccessKeyId,
+             secretAccessKey: Meteor.settings.AWSSecretAccessKey
+          });
+
+      var s3 = new AWS.S3();
+
+      if(typeof objKey === "string"){
+        objKey = [objKey];
+      }
+
+      for(var i =0; i< objKey.length; i++){
+        var params = {
+            Bucket: Meteor.settings.AWSBucket,
+            Key : objKey[i]
+          };
+
+        //var deleteObject = Meteor.wrapAsync(s3.deleteObject , params,);
+
+        s3.deleteObject(params, Meteor.bindEnvironment(
+            function(err, data){
+                if(err)
+                    console.log("error");
+                console.log("success");
+            },
+            function(e){
+                //bind failure
+                console.log("bind failure");
+            }
+        ));
+        //);
+
+        //deleteObject(params);
+      }
+
+      //deleteObject(params);
+    } catch( exception ) {
+      console.log(exception);
+      return exception;
+    }
+
+  }
+
+  Meteor.methods({
   /*cleanKey : function(key){
     return key.replace(/\+/g, " ").split(".")[-2];
   },*/
@@ -32,16 +79,18 @@ Meteor.methods({
     }
   },
   nameFiles: function(firstKey){
-    var key = firstKey;
-    var breakIndex = key.lastIndexOf(".");
-    var shortKey = key.substring(0, breakIndex);
-    var end = key.substring(breakIndex);
-    var count = 0;
-    while(key!==null && !!Files.findOne({key: key})){
-      count++;
-      key = shortKey+" ("+count+")"+end;
-      if(count>300){
-        break;
+    if(firstKey!==null){
+      var key = firstKey;
+      var breakIndex = key.lastIndexOf(".");
+      var shortKey = key.substring(0, breakIndex);
+      var end = key.substring(breakIndex);
+      var count = 0;
+      while(!!Files.findOne({key: key})){
+        count++;
+        key = shortKey+" ("+count+")"+end;
+        if(count>300){
+          break;
+        }
       }
     }
     return key;
@@ -68,8 +117,9 @@ Meteor.methods({
             objKey.push(key);
           }
 
-          Meteor.call("_deleteFilesWithKey",objKey);
-     
+          //Meteor.call("_deleteFilesWithKey",objKey);
+
+          _deleteFilesWithKey(objKey);
       }
 
       
@@ -79,52 +129,7 @@ Meteor.methods({
       return exception;
     }
   },
-  //pass an array of keys to delete
-  _deleteFilesWithKey: function(objKey){
 
-    try{
-      AWS.config.update({
-             accessKeyId: Meteor.settings.AWSAccessKeyId,
-             secretAccessKey: Meteor.settings.AWSSecretAccessKey
-          });
-
-      var s3 = new AWS.S3();
-
-      if(typeof objKey === "string"){
-        objKey = [objKey];
-      }
-
-      for(var i =0; i< objKey.length; i++){
-        var params = {
-            Bucket: Meteor.settings.AWSBucket,
-            Key : objKey[i]
-          };
-
-        /*var deleteObject = Meteor.wrapAsync(s3.deleteObject(params, function(error, data) {
-              if(error) {
-                 console.log(error);
-              } else {
-                return true;
-              }
-          })
-        );*/
-
-        s3.deleteObject(params, Meteor.bindEnvironment(function (error, data) {
-            if(error) {
-              console.log(error);
-            } else {
-              return true;
-            }
-        }));
-      }
-
-      //deleteObject(params);
-    } catch( exception ) {
-      console.log(exception);
-      return exception;
-    }
-
-  },
   getBucket: function(){
     return Meteor.settings.AWSBucket;
   },
@@ -189,16 +194,29 @@ Meteor.methods({
 
         };
 
-        var elasticGo = Meteor.wrapAsync(
-           elastictranscoder.createJob(params, function(error, data) {
+        var elasticGo = //Meteor.wrapAsync(
+           elastictranscoder.createJob(params, Meteor.bindEnvironment(function(error, data) {
               if(error) {
                  console.log(error);
               } else {
                  console.log("Job well done");
-                 Meteor.call("_deleteFilesWithKey", key);
+                 //Meteor.call("_deleteFilesWithKey", key);
+                 
               }
            })
-        );
+         );
+
+        var waitParam = {
+            Id: elasticGo /* required */
+        };
+
+          elastictranscoder.waitFor('jobComplete', waitParam, Meteor.bindEnvironment(function(err, data) {
+          if (err) console.log(err, err.stack); // an error occurred
+          else{console.log("Job completed");
+            _deleteFilesWithKey(key); 
+            }        // successful response
+        })); 
+        //);
 
       
       //then delete from s3
