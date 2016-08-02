@@ -39,7 +39,7 @@ FilesSchema = new SimpleSchema({
   },
   type: {
     type: String
-  }
+  },
   filepath: {
     type: String
   }
