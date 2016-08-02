@@ -5,6 +5,10 @@ Telescope.modules.add("postsListTop", {
 
 Telescope.modules.add("postComponents", [
   {
+    template: 'post_status',
+    order: 0
+  },
+  {
     template: 'post_rank',
     order: 1
   },

@@ -1,0 +1,9 @@
+<template name="post_status">
+	{{#if status}}
+	  <div class="post-status {{moduleClass}} {{status.color}}">
+	    <div class="post-status-inner" aria-live="off">
+	      <span>{{status.text}}</span>
+	    </div>
+	  </div>
+	 {{/if}}
+</template>

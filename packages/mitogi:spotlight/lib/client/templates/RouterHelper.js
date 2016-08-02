@@ -4,14 +4,17 @@
 // This function will be called on every route change.
 // Return true to 'prevent' the route from changing.
 function preventRouteChange (targetContext) {
-  if (Session.get('unsavedChanges')) {
+  if (FlowRouter.getRouteName() === "postSubmit" && Session.get('unsavedChanges')) {
     console.log(targetContext);
     if (!window.confirm('Unsaved changes will be lost. Are you sure?')) {
-      Session.set('unsavedChanges', false);
-
+      //Session.set('unsavedChanges', false);
       return true;
     }
+    else{
+      //change route, delete files
+    }
   }
+  Session.set('unsavedChanges', false);
   return false;
 }
 

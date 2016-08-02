@@ -84,6 +84,16 @@ Posts.schema = new SimpleSchema({
             type: "summernote"
         }
   },
+  q_a: {
+    type: String,
+
+    optional: true,
+    editableBy: ["member", "admin"],
+    autoform: {
+          label: "Q & A",
+          type: "summernote"
+        }
+  },
   /**
     HTML version of the post body
   */

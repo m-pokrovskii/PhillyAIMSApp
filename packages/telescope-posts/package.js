@@ -53,6 +53,8 @@ Package.onUse(function (api) {
     'lib/client/templates/modules/post_info.js',
     'lib/client/templates/modules/post_rank.html',
     'lib/client/templates/modules/post_rank.js',
+    'lib/client/templates/modules/post_status.html',
+    'lib/client/templates/modules/post_status.js',
     'lib/client/templates/modules/post_title.html',
     'lib/client/templates/modules/post_vote.html',
     'lib/client/templates/modules/post_vote.js',

@@ -100,17 +100,25 @@ Meteor.methods({
             Key : objKey[i]
           };
 
-        var deleteObject = Meteor.wrapAsync(s3.deleteObject(params, function(error, data) {
+        /*var deleteObject = Meteor.wrapAsync(s3.deleteObject(params, function(error, data) {
               if(error) {
                  console.log(error);
               } else {
                 return true;
               }
           })
-        );
+        );*/
+
+        s3.deleteObject(params, Meteor.bindEnvironment(function (error, data) {
+            if(error) {
+              console.log(error);
+            } else {
+              return true;
+            }
+        }));
       }
 
-      deleteObject(params);
+      //deleteObject(params);
     } catch( exception ) {
       console.log(exception);
       return exception;
@@ -206,7 +214,6 @@ Meteor.methods({
               if(error) {
                  console.log(error);
               } else {
-                 Meteor.call("_deleteFilesWithKey",[key]);
                  console.log("Job well done");
                  return true;
               }
@@ -214,6 +221,7 @@ Meteor.methods({
         );
 
         if(elasticGo( params )){
+          Meteor.call("_deleteFilesWithKey",[key]);
           return true;
         }
 
