@@ -13,7 +13,7 @@ Template.files.onCreated( function () {
 
     if (subscription.ready()) {
 
-        var files = Files.find( {resourceID: self.data.resourceID, type: self.data.type}, { sort: { "order": 1, "added": -1 } } );
+        var files = Files.find( {resourceID: self.data.resourceID, type: self.data.type}, { sort: { "order": 1, "added": 1 } } );
         self.filesArray.set(files);
         self.ready.set(true);
     }

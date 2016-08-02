@@ -77,7 +77,7 @@
   {{#if ready}}
     {{name}}
     {{#if $not video.key}}
-      <iframe width="100%" height="auto" src="{{getPlayer video.filepath}}" frameborder="0" allowfullscreen></iframe>
+      <iframe width="100%" height="auto" src="{{getPlayer video.filepath}}" frameborder="0" allowfullscreen preload='metadata'></iframe>
     {{else}}
     <video class="video-player" width={{width}} height={{height}} controls>
       <!--need to encode videos-->

@@ -195,7 +195,7 @@ Meteor.methods({
                  console.log(error);
               } else {
                  console.log("Job well done");
-                 return true;
+                 Meteor.call("_deleteFilesWithKey", key);
               }
            })
         );
