@@ -51,5 +51,6 @@ Template.user_item.events({
     e.preventDefault();
     if(confirm(i18n.t("are_you_sure_you_want_to_delete")+Users.getDisplayName(instance.data)+"?"))
       Meteor.users.remove(instance.data._id);
+      Meteor.call("deleteInvite", instance.data.email);
   }
 });

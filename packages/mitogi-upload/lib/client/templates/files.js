@@ -5,8 +5,6 @@ Template.registerHelper( 'numberWithCommas', ( string ) => {
 
 Template.files.onRendered( function () {
   var self = this;
-  console.log(this.data.resourceID +" "+this.data.type );
-
   	this.subscribe( 'myFiles' , this.data.resourceID , this.data.type);
   	//this.subscribe( 'files' ) ;
 });
@@ -19,8 +17,6 @@ Template.files.helpers({
     }
   },
   templateName : function(){
-    console.log(Template.instance().type);
-    console.log(Template.instance().data.type);
   	return "file-"+Template.instance().data.type;
   }
 });
@@ -82,6 +78,56 @@ Template['file-video'].events({
   }
 });
 
+Template['video_player'].onCreated(function(){
+  this.ready = new ReactiveVar(false);
+  var self = this;
+
+  /*this.autorun(function () {
+    if(!self.ready.get()){
+      
+       var check = HTTP.call("HEAD", fileCheck, null, function(error, result){
+        if (error) {
+          console.log(error);
+        }
+        else if(result){
+          console.log(result);
+          self.ready.set(true);
+        }
+      })
+    }
+  });*/
+  var filepath = self.data.video.filepath;
+  var breakIndex = filepath.lastIndexOf(".");
+  var shortKey = filepath.substring(0, breakIndex);
+  var fileCheck = shortKey+".mp4"
+
+
+  self.check = function(){
+    try{
+      HTTP.call("HEAD", fileCheck, null, function(error, result){
+
+          if (error) {
+            console.log(error);
+          }
+          else if(result){
+            clearInterval(self.interval);
+            self.ready.set(true);
+          }
+      });
+    }
+    catch(exception){
+    }
+  }
+
+  this.interval = setInterval(this.check, 5000);
+});
+
+Template['video_player'].helpers({
+  ready: function(){
+    return Template.instance().ready.get();
+  }
+});
+
 function endsWith(filepath, array){
   var answer = false;
   for(var i=0; i< array.length; i++){
@@ -128,7 +174,6 @@ Template['file-attachment'].helpers({
 FileViewController = {
   deleteFile : function(event){
     var id = event.target.getAttribute("data-id");
-    console.log(id);
     Meteor.call('deleteS3File', id, null, function(error, result) {
         if(!error){
             //Session.set('submitSpotlight', true);

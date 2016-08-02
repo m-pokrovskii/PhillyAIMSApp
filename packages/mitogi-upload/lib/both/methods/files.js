@@ -2,14 +2,12 @@ Meteor.methods({
   /*cleanKey : function(key){
     return key.replace(/\+/g, " ").split(".")[-2];
   },*/
-  storeUrlInDatabase: function( data ) {
+  storeUrlInDatabase: function( data) {
     //check( data.url, String );
     //check( data.name, String );
     //check( data.size, Number );
-    Modules.both.checkUrlValidity( data.filepath );
+    //Modules.both.checkUrlValidity( data.filepath );
 
-    var key = data.type + "/" + data.name;
-    
     try {
       Files.insert({
         filepath: data.filepath,
@@ -17,14 +15,13 @@ Meteor.methods({
         added: new Date(), 
         name: data.name,
         size: data.size,
-        key: key,
+        key: data.key,
         resourceID: data.id,
         type: data.type,
       });
 
-      if(data.type==="video"){
-        console.log("key"+key);
-        Meteor.call('videoEncoder', key);
+      if(data.type==="video" && data.key!==null){
+        Meteor.call('videoEncoder', data.key);
       }
       
       return data;
@@ -34,17 +31,20 @@ Meteor.methods({
       return exception;
     }
   },
-  insertFiles: function(data, key){
-    Files.insert({
-        filepath: data.filepath,
-        userId: Meteor.userId(),
-        added: new Date(), 
-        name: data.name,
-        size: data.size,
-        key: key,
-        resourceID: data.id,
-        type: data.type,
-      });
+  nameFiles: function(firstKey){
+    var key = firstKey;
+    var breakIndex = key.lastIndexOf(".");
+    var shortKey = key.substring(0, breakIndex);
+    var end = key.substring(breakIndex);
+    var count = 0;
+    while(key!==null && !!Files.findOne({key: key})){
+      count++;
+      key = shortKey+" ("+count+")"+end;
+      if(count>300){
+        break;
+      }
+    }
+    return key;
   },
   deleteS3File: function( id ) {
     check( id, String );
@@ -206,9 +206,6 @@ Meteor.methods({
 
         };
 
-        console.log(params);
-
-
         var elasticGo = Meteor.wrapAsync(
            elastictranscoder.createJob(params, function(error, data) {
               if(error) {
@@ -219,11 +216,6 @@ Meteor.methods({
               }
            })
         );
-
-        if(elasticGo( params )){
-          Meteor.call("_deleteFilesWithKey",[key]);
-          return true;
-        }
 
       
       //then delete from s3

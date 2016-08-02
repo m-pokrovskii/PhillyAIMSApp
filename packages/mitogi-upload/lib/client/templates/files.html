@@ -56,19 +56,24 @@
 </template>
 
 <template name="video_player">
-  {{name}}
-  {{#if $not video.key}}
-    <iframe width="100%" height="auto" src="{{getPlayer video.filepath}}" frameborder="0" allowfullscreen></iframe>
-  {{else}}
-  <video class="video-player" width={{width}} height={{height}} controls>
-    <!--need to encode videos-->
-      <source src="{{newExtension video.filepath 'webm'}}" type="video/webm">
-      <source src="{{newExtension video.filepath 'mp4'}}" type="video/mp4">
+  {{#if ready}}
+    {{name}}
+    {{#if $not video.key}}
+      <iframe width="100%" height="auto" src="{{getPlayer video.filepath}}" frameborder="0" allowfullscreen></iframe>
+    {{else}}
+    <video class="video-player" width={{width}} height={{height}} controls>
+      <!--need to encode videos-->
+        <source src="{{newExtension video.filepath 'webm'}}" type="video/webm">
+        <source src="{{newExtension video.filepath 'mp4'}}" type="video/mp4">
 
-     Your browser does not support the video tag.
-  </video>
+       Your browser does not support the video tag.
+    </video>
+    {{/if}}
+    <a class="pull-right btn btn-info" href="{{newExtension video.filepath 'mp4'}}" download>Download</a>
+  {{else}}
+    {{> loading}}
+   <p class="text-center"> Video is processing and should be up shortly.</p>
   {{/if}}
-  <a class="pull-right btn btn-info" href="{{newExtension video.filepath 'mp4'}}" download>Download</a>
 
 </template>
 

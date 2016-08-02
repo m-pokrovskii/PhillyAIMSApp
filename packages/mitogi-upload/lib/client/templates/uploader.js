@@ -5,11 +5,6 @@ Template.uploader.onCreated(function(){
   this.onUpload = new ReactiveVar();
   this.filename = new ReactiveVar();
 
-  if(!this.data.multiple){
-  	
-  	console.log("single:"+ this.data.resourceID)
-  }
-
   this.myUploader.init(this);
   this.getURL = new ReactiveVar(false);
   this.getVideoSource = new ReactiveVar();
@@ -139,8 +134,6 @@ Template.uploader.events({
 
 				if(fileUrl.indexOf("vimeo.com") > -1 || fileUrl.indexOf("youtube.com") > -1){
 
-				
-					console.log("video url upload");
 					var data = {
 						filepath : fileUrl,
 						name : "Default Name",
@@ -149,7 +142,7 @@ Template.uploader.events({
 						key: null,
 						id: template.data.resourceID
 					}
-					Meteor.call( "insertFiles", data, null, function ( error ) {
+					Meteor.call( "storeUrlInDatabase", data, null, function ( error ) {
 					    if ( error ) {
 					      Bert.alert( error.reason, "warning" );
 					    } else {
@@ -178,7 +171,6 @@ MyUploader = function() {
 			return event.target.files[0];
 		},
 		_setPlaceholderText: function( string = "Click or Drag a File Here to Upload" ) {
-		  console.log(this.template);
 		  this.template.find( "span.placeholder" ).innerText = string;
 		},
 		//give either event or file and template
@@ -201,9 +193,6 @@ MyUploader = function() {
 
 		  	let blob = this._dataURItoBlob(options.base64, contentType);
 		    let name = new Date().toString()+"."+contentType.split("/")[1];
-
-		    console.log(name);
-		    
 		  	file = this._blobToFile(blob, name);
 		  }
 
@@ -214,34 +203,44 @@ MyUploader = function() {
 			return base64.split(":")[1].split(";")[0];
 		},
 		_uploadFileToAmazon :function ( file , options) {
-		  var metaContext = {mini_key: Random.id(5)+"_", type: this.type};
-		  this.uploader = new Slingshot.Upload( "uploadToAmazonS3", metaContext);
-
-		  this.template.filename.set(file.name);
-		  this.template.onUpload.set(this.uploader);
-
 		  var self = this;
-		  this.uploader.send( file, function( error, url ){
-		  	//self.template.onUpload.set();
-		    if ( error ) {
-		      Bert.alert( error.message, "warning" );
-		      self._setPlaceholderText();
-		    } else {
-		      console.log("there "+this.type);
-		      self._addUrlToDatabase( url , file, metaContext);
-		    }
+		  Meteor.call("nameFiles", self.type+"/"+file.name, function(error, key){
+
+		  	if(error){
+		  		console.log(error);
+		  	}
+			else{
+					console.log(key);
+			  	  var metaContext = {key: key};
+				  self.uploader = new Slingshot.Upload( "uploadToAmazonS3", metaContext);
+
+				  self.template.filename.set(file.name);
+				  self.template.onUpload.set(self.uploader);
+
+				  //var self = this;
+				  self.uploader.send( file, function( error, url ){
+				  	//self.template.onUpload.set();
+				    if ( error ) {
+				      Bert.alert( error.message, "warning" );
+				      self._setPlaceholderText();
+				    } else {
+				      self._addUrlToDatabase( url , file, key);
+				    }
+				  });
+			 }
 		  });
+		  
 		},
-		_addUrlToDatabase : function( filepath , file, metaContext) {
-			console.log("here "+this.type);
+		_addUrlToDatabase : function( filepath , file, key) {
 			var data = {
 				filepath : filepath,
-				name : metaContext.mini_key+file.name,
+				name : file.name,
 				size : file.size,
 				type: this.type,//this.template.data.type,
-				id: this.template.data.resourceID
+				id: this.template.data.resourceID,
+				key: key,
+
 			}
-			console.log(metaContext.mini_key+file.name);
 		  var self = this;
 		  Meteor.call( "storeUrlInDatabase", data, function ( error, result ) {
 		    if ( error ) {
@@ -249,6 +248,8 @@ MyUploader = function() {
 		      self._setPlaceholderText();
 		    } else {
 		      Bert.alert( "File uploaded to Amazon S3!", "success" );
+		      self.template.find(".upload-input").value="";
+		      self.template.onUpload.set(0);
 		      self._setPlaceholderText();
 		      if(self.callback && self.callback.finished) self.callback.finished(result);
 		    }

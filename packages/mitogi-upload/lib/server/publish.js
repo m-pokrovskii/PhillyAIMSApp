@@ -20,19 +20,6 @@ Meteor.publish( 'myFiles', function(resourceID, type){
   return this.ready();
 });
 
-Meteor.methods({
-	urlCall : function(fileUrl){
-		try{
-			check(fileUrl, String);
-			 var result = request.getSync(fileUrl, {encoding: null}).response;
-	        return 'data:'+result.headers['content-type']+';base64,' + new Buffer(result.body).toString('base64');
-    	}
-    	catch(err) {
-    		console.log(err);
-    	}
-    }
-});
-
 	
 
 //https://atmospherejs.com/froatsnook/request

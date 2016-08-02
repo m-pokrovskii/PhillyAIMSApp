@@ -76,14 +76,6 @@ Posts.schema = new SimpleSchema({
   /**
     Post body (markdown)
   */
-  body: {
-    type: String,
-    optional: true,
-    editableBy: ["member", "admin"],
-    autoform: {
-            type: "summernote"
-        }
-  },
   q_a: {
     type: String,
 
@@ -92,6 +84,14 @@ Posts.schema = new SimpleSchema({
     autoform: {
           label: "Q & A",
           type: "summernote"
+        }
+  },
+  body: {
+    type: String,
+    optional: true,
+    editableBy: ["member", "admin"],
+    autoform: {
+            type: "summernote"
         }
   },
   /**

@@ -1,7 +1,11 @@
 Meteor.methods({
   makeInvitedUser: function(username, password, email){
  
-      Accounts.createUser({username: username, password : password, email: email });
+      var userId = Accounts.createUser({username: username, password : password, email: email });
+      console.log(userId);
+      //Meteor.connection.setUserId(userId);
+      this.setUserId(userId);
+      return userId;
 
   },
   checkInvitedUsers: function(username, email){

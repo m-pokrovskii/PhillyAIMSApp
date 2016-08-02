@@ -1,4 +1,4 @@
-Template.register.onRendered(function(){
+/*Template.register.onRendered(function(){
 	//this.find("#at-field-email").value = ;
 	//change type to hidden
 	$("#at-field-email").each(function() {
@@ -12,9 +12,9 @@ Template.register.events({
 		Session.set('modalTitle', 'Terms');
 		Session.set('modalBody', Settings.get("terms"));
 	}
-});
+});*/
 
-/*Template.register.onCreated(function(){
+Template.register.onCreated(function(){
 	this.email = new ReactiveVar(FlowRouter.getParam("email"));
 	this.token = new ReactiveVar(FlowRouter.getParam("token"));
 });
@@ -74,14 +74,26 @@ Template.register.events({
 			if(error){
 				 Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
 			}
-			if(allGood){
-				Meteor.call('makeInvitedUser', username, password,t.email.get() ,function(error, result){
+			else{
+			
+				/*Accounts.createUser({username: username, password : password, email: t.email.get() }, function(error, result){
+					if(error){
+						Bert.alert( error, 'danger', 'fixed-top', 'fa-frown-o' );
+					}
+					else if(result){
+						Bert.alert( 'You successfully registered!', 'success', 'growl-top-right', 'fa-check' );
+			    		FlowRouter.go("/");
+					}
+				});
+				
+				*/
+				Meteor.call('makeInvitedUser', username, password,t.email.get() ,function(error, userId){
 						if (error) {
-			               Bert.alert( err, 'danger', 'fixed-top', 'fa-frown-o' );
-			         	   return err;
+			               Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
 				        } 
 				        else {
-				          Bert.alert( 'You successfully registered!', 'success', 'growl-top-right', 'fa-check' );
+				          Bert.alert( 'You successfully registered! ', 'success', 'growl-top-right', 'fa-check' );
+				          Meteor.connection.setUserId(userId);
 				          FlowRouter.go("/");
 				        }
 			    });
@@ -90,4 +102,4 @@ Template.register.events({
 			
 	}
 });
-*/
+

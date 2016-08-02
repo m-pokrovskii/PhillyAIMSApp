@@ -11,6 +11,8 @@ AccountsTemplates.configure({
   confirmPassword: false,
   overrideLoginErrors: true,
   lowercaseUsername: true,
+  forbidClientAccountCreation: false,
+  hideSignUpLink: true,
 
   negativeFeedback: false,
   positiveFeedback: false,
