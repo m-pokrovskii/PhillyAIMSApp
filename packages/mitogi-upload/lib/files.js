@@ -30,13 +30,17 @@ FilesSchema = new SimpleSchema({
     optional: true
   },
   key: {
-    type: String
+    type: String,
+    optional: true
   },
   resourceID: {
     type: String,
     optional: true
   },
   type: {
+    type: String
+  }
+  filepath: {
     type: String
   }
 });
