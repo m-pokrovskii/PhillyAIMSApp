@@ -18,7 +18,7 @@ Template.SpotlightShow.onCreated( function() {
           video: new Array(),
         }
         
-        Files.find({resourceID: FlowRouter.getParam("_id")}, { sort: { "order": 1, "added": 1 }).forEach(function(doc){
+        Files.find({resourceID: FlowRouter.getParam("_id")}, { sort: { "order": 1, "added": 1 }}).forEach(function(doc){
           spotlight[doc.type].push(doc);
         });
 
