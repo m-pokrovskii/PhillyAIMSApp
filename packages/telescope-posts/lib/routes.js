@@ -30,6 +30,7 @@ PostsController.route('/posts/:_id/:slug?', {
   name: "postPage",
   action: function(params, queryParams) {
     //trackRouteEntry(params._id);
+    trackRouteEntry(params);
     BlazeLayout.render("layout", {main: "post_page"});
   }
 });
@@ -42,9 +43,9 @@ PostsController.route('/posts/:_id/?', {
   }
 });
 
-var trackRouteEntry = function (context) {
+var trackRouteEntry = function (params) {
   var sessionId = Meteor.default_connection && Meteor.default_connection._lastSessionId ? Meteor.default_connection._lastSessionId : null;
-  Meteor.call('increasePostViews', context.params._id, sessionId);
+  Meteor.call('increasePostViews', params._id, sessionId);
 }
 
 FlowRouter.route('/submit', {

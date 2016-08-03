@@ -69,36 +69,37 @@ Template.register.events({
 			allGood = false;
 			Bert.alert( "Usernames should contain only alphanumerics, underscores, and dots and be between 5-20 characters long.", 'danger', 'growl-top-right', 'fa-frown-o' );
 		}
-
-		Meteor.call('checkInvitedUsers', username, t.email.get(), function(error){
-			if(error){
-				 Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
-			}
-			else{
-			
-				/*Accounts.createUser({username: username, password : password, email: t.email.get() }, function(error, result){
-					if(error){
-						Bert.alert( error, 'danger', 'fixed-top', 'fa-frown-o' );
-					}
-					else if(result){
-						Bert.alert( 'You successfully registered!', 'success', 'growl-top-right', 'fa-check' );
-			    		FlowRouter.go("/");
-					}
-				});
+		if(allGood){
+			Meteor.call('checkInvitedUsers', username, t.email.get(), function(error){
+				if(error){
+					 Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
+				}
+				else{
 				
-				*/
-				Meteor.call('makeInvitedUser', username, password,t.email.get() ,function(error, userId){
-						if (error) {
-			               Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
-				        } 
-				        else {
-				          Bert.alert( 'You successfully registered! ', 'success', 'growl-top-right', 'fa-check' );
-				          Meteor.connection.setUserId(userId);
-				          FlowRouter.go("/");
-				        }
-			    });
-			}
-		});
+					/*Accounts.createUser({username: username, password : password, email: t.email.get() }, function(error, result){
+						if(error){
+							Bert.alert( error, 'danger', 'fixed-top', 'fa-frown-o' );
+						}
+						else if(result){
+							Bert.alert( 'You successfully registered!', 'success', 'growl-top-right', 'fa-check' );
+				    		FlowRouter.go("/");
+						}
+					});
+					
+					*/
+					Meteor.call('makeInvitedUser', username, password,t.email.get() ,function(error, userId){
+							if (error) {
+				               Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
+					        } 
+					        else {
+					          Bert.alert( 'You successfully registered! ', 'success', 'growl-top-right', 'fa-check' );
+					          Meteor.connection.setUserId(userId);
+					          FlowRouter.go("/");
+					        }
+				    });
+				}
+			});
+		}
 			
 	}
 });

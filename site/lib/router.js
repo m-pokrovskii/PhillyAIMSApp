@@ -16,7 +16,7 @@ Telescope.callbacks.add("postSubmitClient", submitSpotlight);*/
 
 
 FlowRouter.route('/', {
-  name: 'all',
+  name: 'home',
   action: function() {
     if(!Meteor.user()){
       FlowRouter.go('signIn');
