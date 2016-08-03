@@ -200,22 +200,23 @@
                  console.log(error);
               } else {
                  console.log("Job well done");
-                 //Meteor.call("_deleteFilesWithKey", key);
+
+                console.log(data);
+                 var waitParam = {
+                    Id: data.Job.Id /* required */
+                };
+
+                elastictranscoder.waitFor('jobComplete', waitParam, Meteor.bindEnvironment(function(err, data) {
+                    if (err) console.log(err, err.stack); // an error occurred
+                    else{console.log("Job completed");
+                      _deleteFilesWithKey(key); 
+                      }        // successful response
+                })); 
                  
               }
            })
          );
-
-        var waitParam = {
-            Id: elasticGo /* required */
-        };
-
-          elastictranscoder.waitFor('jobComplete', waitParam, Meteor.bindEnvironment(function(err, data) {
-          if (err) console.log(err, err.stack); // an error occurred
-          else{console.log("Job completed");
-            _deleteFilesWithKey(key); 
-            }        // successful response
-        })); 
+        
         //);
 
       
