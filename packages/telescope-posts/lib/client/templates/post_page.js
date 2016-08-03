@@ -36,6 +36,8 @@ var doSEOStuff = function (post) {
   
 };
 
+
+
 Template.post_page.onCreated(function () {
 
   var template = this;
@@ -44,9 +46,17 @@ Template.post_page.onCreated(function () {
   // initialize the reactive variables
   template.ready = new ReactiveVar(false);
 
+
   var postSubscription = Telescope.subsManager.subscribe('singlePost', postId);
   var postUsersSubscription = Telescope.subsManager.subscribe('postUsers', postId);
   var commentSubscription = Telescope.subsManager.subscribe('commentsList', {view: 'postComments', postId: postId});
+
+  var trackRouteEntry = function (id) {
+    var sessionId = Meteor.default_connection && Meteor.default_connection._lastSessionId ? Meteor.default_connection._lastSessionId : null;
+    Meteor.call('increasePostViews', id, sessionId);
+  }
+
+  trackRouteEntry(postId);
   
   // Autorun 3: when subscription is ready, update the data helper's terms
   template.autorun(function () {
