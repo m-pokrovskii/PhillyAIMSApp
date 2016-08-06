@@ -6,11 +6,12 @@ Telescope.menuItems.add("userMenu", {
   order:40,
  });
 
-
+/*
 AccountsTemplates.configureRoute('signUp', {
     name: 'signUp',
     path: "/"+Random.hexString(16),
 });
+*/
 
 AccountsTemplates.configure({
     // Behavior

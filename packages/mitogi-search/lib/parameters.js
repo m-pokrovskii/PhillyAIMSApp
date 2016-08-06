@@ -35,7 +35,7 @@ function splitTerms(termsString){
   }
 
   if(termsString){
-   termsString = termsString.split(",");////[\s,]+/);
+   termsString = termsString.split(/[\s,]+/); //",");//
   }
   else{
     termsString = [];

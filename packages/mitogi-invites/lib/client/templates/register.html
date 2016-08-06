@@ -15,6 +15,13 @@
                    <input id="account-username" type="text" placeholder="Enter username" autocomplete="off" required="required" class="form-control" />
                    <span class="fa fa-user form-control-feedback text-muted"></span>
                 </div>
+                {{#if $not email}}
+                <div class="form-group has-feedback">
+                   <label for="account-email" class="text-muted">Email</label>
+                   <input id="account-email" type="email" placeholder="Enter email" autocomplete="off" required="required" class="form-control" />
+                   <span class="fa fa-email form-control-feedback text-muted"></span>
+                </div>
+                {{/if}}
                 <div class="form-group has-feedback">
                    <label for="account-password" class="text-muted">Password</label>
                    <input id="account-password" type="password" placeholder="Password" autocomplete="off" required="required" class="form-control" />

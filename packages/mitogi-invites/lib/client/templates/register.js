@@ -22,6 +22,9 @@ Template.register.onCreated(function(){
 Template.register.helpers({
 	terms: function(){
 		return Settings.get("userTerms");
+	},
+	email : function(){
+		return Template.instance().email.get();
 	}
 });
 
@@ -33,6 +36,7 @@ Template.register.events({
 	  var username = t.find('#account-username').value
 	    , password = t.find('#account-password').value
 	    , password1 = t.find('#account-password1').value
+	    , email = t.find('#account-email').value ? t.find('#account-email').value : t.email.get()
 	    , terms = $('#terms-box').is(":checked");//terms = $('input').is(":checked").val(); 
 
 	    // Trim and validate the input
@@ -65,40 +69,45 @@ Template.register.events({
 			Bert.alert( "Passwords don't match", 'danger', 'growl-top-right', 'fa-frown-o' );
 		}
 
-		if (!/^([A-Za-z0-9_.]{5,20})$/.test(username) ) {
+		if (!/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i.test(email) ) {
 			allGood = false;
-			Bert.alert( "Usernames should contain only alphanumerics, underscores, and dots and be between 5-20 characters long.", 'danger', 'growl-top-right', 'fa-frown-o' );
+			Bert.alert( "Not a valid email.", 'danger', 'growl-top-right', 'fa-frown-o' );
 		}
 		if(allGood){
-			Meteor.call('checkInvitedUsers', username, t.email.get(), function(error){
-				if(error){
-					 Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
-				}
-				else{
-				
-					/*Accounts.createUser({username: username, password : password, email: t.email.get() }, function(error, result){
-						if(error){
-							Bert.alert( error, 'danger', 'fixed-top', 'fa-frown-o' );
-						}
-						else if(result){
-							Bert.alert( 'You successfully registered!', 'success', 'growl-top-right', 'fa-check' );
-				    		FlowRouter.go("/");
-						}
-					});
+			if(Settings.get("requireViewInvite")){
+				Meteor.call('checkInvitedUsers', username, email, function(error){
+					if(error){
+						 Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
+					}
+					else{
 					
-					*/
-					Meteor.call('makeInvitedUser', username, password,t.email.get() ,function(error, userId){
-							if (error) {
-				               Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
-					        } 
-					        else {
-					          Bert.alert( 'You successfully registered! ', 'success', 'growl-top-right', 'fa-check' );
-					          Meteor.connection.setUserId(userId);
-					          FlowRouter.go("/");
-					        }
-				    });
-				}
-			});
+						Meteor.call('makeInvitedUser', username, password, email ,function(error, userId){
+								if (error) {
+					               Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
+						        } 
+						        else {
+						          Bert.alert( 'You successfully registered! ', 'success', 'growl-top-right', 'fa-check' );
+						          Meteor.connection.setUserId(userId);
+						          FlowRouter.go("/");
+						        }
+					    });
+					}
+				});
+			}
+			else{
+
+				Meteor.call('makeInvitedUser', username, password, email ,function(error, userId){
+						if (error) {
+			               Bert.alert( error, 'danger', 'growl-top-right', 'fa-check' );
+				        } 
+				        else {
+				          Bert.alert( 'You successfully registered! ', 'success', 'growl-top-right', 'fa-check' );
+				          Meteor.connection.setUserId(userId);
+				          FlowRouter.go("/");
+				        }
+			    });
+
+			}
 		}
 			
 	}

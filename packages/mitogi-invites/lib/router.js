@@ -26,3 +26,11 @@ FlowRouter.route( '/user/invite', {
   }
 });
 
+
+FlowRouter.route( '/register/', {
+  name: 'signUp',
+  action(params) {
+      if(!Settings.get("requireViewInvite"))
+        BlazeLayout.render( "layout" , {main: 'register' } );
+  }
+});
