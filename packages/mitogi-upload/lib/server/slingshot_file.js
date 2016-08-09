@@ -1,7 +1,7 @@
 
 Slingshot.fileRestrictions("uploadToAmazonS3", {
   allowedFileTypes: ["image/png", "image/jpeg", "image/gif", "image/bmp", "image/tiff",
-  "video/mp4", "video/mpeg", "video/webm", "video/avi", "video/quicktime", 
+  "video/*", "video/mp4", "video/mpeg", "video/webm", "video/avi", "video/quicktime", "video/m4v",
 	"video/3gpp", "video/3gpp2", "video/3gpp", "video/3gpp2", "video/x-ms-wmv",
 	"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 	"application/msword",
@@ -17,7 +17,7 @@ Slingshot.fileRestrictions("uploadToAmazonS3", {
 
 Slingshot.fileRestrictions("uploadToVideoBucket", {
   allowedFileTypes: [
-  "video/mp4", "video/mpeg", "video/webm", "video/avi", "video/quicktime", 
+  "video/mp4", "video/m4v", "video/mpeg", "video/webm", "video/avi", "video/quicktime", 
 	"video/3gpp", "video/3gpp2", "video/3gpp", "video/3gpp2", "video/x-ms-wmv",
   ],
   maxSize: 5000 * 1024 * 1024 // 5 GB (use null for unlimited)

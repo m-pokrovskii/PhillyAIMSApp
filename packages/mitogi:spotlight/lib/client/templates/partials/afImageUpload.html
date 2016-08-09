@@ -34,9 +34,9 @@
          <!-- END panel-->
         </div>
     {{/if}}
-
+    <input type="hidden" value="{{uploadFile.filepath}}" {{this.atts}}>
   {{else}}
     {{> loading}}
   {{/if}}
-  <input type="hidden" value="{{uploadFile.filepath}}" {{this.atts}}>
+  
 </template>
