@@ -59,8 +59,6 @@ Template.SpotlightUpload.onCreated( function() {
   this.spotlightType = new ReactiveVar();
   this.open = new ReactiveVar(false);
   Session.set('unsavedChanges', false);
-  //Session.set('submitSpotlight', false);
-  var resourceID = Session.get('resourceID');
 
   this.ready = new ReactiveVar(false);
 
@@ -68,8 +66,15 @@ Template.SpotlightUpload.onCreated( function() {
   this.videoCount = new ReactiveVar(0);
   this.attachmentCount = new ReactiveVar(0);
 
-  var self = this;
+  
+});
 
+Template.SpotlightUpload.onRendered( function() {
+  var self= this;
+  this.once = false;
+
+  var self = this;
+  var resourceID = Session.get('resourceID');
   var filesSubscription = Telescope.subsManager.subscribe('resourceFiles', resourceID);
 
   self.autorun(function () {
@@ -83,42 +88,39 @@ Template.SpotlightUpload.onCreated( function() {
         self.photoCount.set(Files.find({resourceID: resourceID, type: "photo"}).count());
         self.videoCount.set(Files.find({resourceID: resourceID, type: "video"}).count());
 
-       
-
-      }//if sub ready
-  });//self run
-  
-});
-
-Template.SpotlightUpload.onRendered( function() {
-  var self= this;
-  this.once = false;
-  self.autorun(function () {
-    if(self.ready && !self.once){
-      if(self.videoCount.get() > 0){
+        if(self.videoCount.get() > 0){
           self.spotlightType.set("video");
           switchPanels("video");
           animateButtonsSide();
           self.once = true;
-      }
-      else if(self.photoCount.get() > 0){
-          self.spotlightType.set("photo");
-          switchPanels("photo");
-          animateButtonsSide();
-          self.once = true;
-          
-      }
-      else if(self.attachmentCount.get() > 0){
-          self.spotlightType.set("attachment");
-          switchPanels("attachment");
-          animateButtonsSide();
-          self.once = true;
-          
-      }
+        }
+        else if(self.photoCount.get() > 0){
+            self.spotlightType.set("photo");
+            switchPanels("photo");
+            animateButtonsSide();
+            self.once = true;
+            
+        }
+        else if(self.attachmentCount.get() > 0){
+            self.spotlightType.set("attachment");
+            switchPanels("attachment");
+            animateButtonsSide();
+            self.once = true;
+            
+        }
+       
+
+      }//if sub ready
+  });//self run
+
+/*
+  self.autorun(function () {
+    if(self.ready && !self.once){
+      
 
     }
   });
-
+*/
 });
 
 Template.SpotlightUpload.helpers({

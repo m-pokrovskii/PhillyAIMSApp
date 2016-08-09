@@ -24,8 +24,9 @@
         s3.deleteObject(params, Meteor.bindEnvironment(
             function(err, data){
                 if(err)
-                    console.log("error");
-                console.log("success");
+                    console.log(error);
+                else
+                  console.log("success");
             },
             function(e){
                 //bind failure
@@ -56,7 +57,7 @@
     //Modules.both.checkUrlValidity( data.filepath );
 
     try {
-      Files.insert({
+      var fileID = Files.insert({
         filepath: data.filepath,
         userId: Meteor.userId(),
         added: new Date(), 
@@ -71,7 +72,9 @@
         Meteor.call('videoEncoder', data.key);
       }
       
-      return data;
+      var result = Files.findOne({_id: fileID});
+
+      return result;
 
     } catch( exception ) {
       console.log(exception);
@@ -99,6 +102,9 @@
     check( id, String );
 
     try {
+        console.log(id);
+        console.log(Files.find({_id: id}));
+        console.log(Files.find({_id: id}).fetch()[0]);
 
         var key = Files.findOne({_id: id}).key;
         var type = Files.findOne({_id: id}).type;
@@ -120,7 +126,7 @@
           //Meteor.call("_deleteFilesWithKey",objKey);
 
           _deleteFilesWithKey(objKey);
-      }
+        }
 
       
       //then delete from s3
