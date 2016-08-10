@@ -19,8 +19,8 @@ Template['afImageUpload'].onCreated(function (){
   this.settings = this.data.atts.settings || {};
   self.uploadFile = new ReactiveVar();
   self.url = new ReactiveVar(this.data.value);
+  console.log(this.data.value);
 
-  console.log("values "+self.data.value);
   self.autorun(function () {
     var subscription = Telescope.subsManager.subscribe('filesByURL', self.url);
     if (subscription.ready()) {
