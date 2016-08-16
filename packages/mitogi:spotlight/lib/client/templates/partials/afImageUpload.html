@@ -1,6 +1,5 @@
 <template name="afImageUpload">	
   {{#if ready}}
-  	{{> upload_photo resourceID="single" callback=callback}}
 
   	{{#if uploadFile}}  
         <div class="row">
@@ -14,10 +13,10 @@
                   </div>
             </div>
           {{else}}
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-12">
              <!-- START panel-->
                      <div class="panel panel-default">
-                        <div class="panel-heading">{{uploadFile.name}}
+                        <div class="panel-heading">
                            
                             <a href="#" class="pull-right ">
                               <em class="fa fa-times delete-file" data-id="{{uploadFile._id}}"></em>
@@ -33,8 +32,10 @@
             {{/if}}
          <!-- END panel-->
         </div>
+
     {{/if}}
     <input type="hidden" value="{{uploadFile.filepath}}" {{this.atts}}>
+    {{> upload_photo resourceID="single" callback=callback resize=resizeTh}}
   {{else}}
     {{> loading}}
   {{/if}}

@@ -1,3 +1,7 @@
+[data-required] label:after {
+    content: '*';
+}
+
 .splash{
     width: 90%;
     margin: 0 auto;

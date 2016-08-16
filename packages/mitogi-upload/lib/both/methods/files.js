@@ -146,7 +146,6 @@
        //var key = Files.findOne({_id: id}).key;
 
      var bucket = Meteor.settings.AWSBucket;
-     var pipelineId = "1469110855793-ii3s3b";
     
      var srcKey = decodeURIComponent(key.replace(/\+/g, " ")); //the object may have spaces  
      var newKey = srcKey.split(".")[0].split("/")[1];
@@ -186,7 +185,7 @@
           var outputs = outputsArray();
 
         var params = {
-          PipelineId: "1469110855793-ii3s3b",
+          PipelineId: Meteor.settings.AWSPipelineId,
           OutputKeyPrefix: "video/",
           Input: {
            Key: srcKey,
@@ -231,5 +230,5 @@
       console.log(exception);
       return exception;
     }
-  },
+  }
 });

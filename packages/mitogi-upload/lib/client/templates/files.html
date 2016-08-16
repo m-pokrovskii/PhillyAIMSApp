@@ -77,7 +77,7 @@
   {{#if ready}}
     {{name}}
     {{#if $not video.key}}
-      <iframe width="100%" height="auto" src="{{getPlayer video.filepath}}" frameborder="0" allowfullscreen preload='metadata'></iframe>
+      <iframe width="100%" height="350px" src="{{getPlayer video.filepath}}" frameborder="0" allowfullscreen preload='metadata'></iframe>
     {{else}}
     <video class="video-player" width={{width}} height={{height}} controls>
       <!--need to encode videos-->
@@ -106,7 +106,11 @@
                             </div>
                             <div class="panel-body text-center">
                                 <a href="{{filepath}}" download>
-                                    <i class="fa fa-4x {{getIcon filepath}}"></i>
+                                    {{#if isPdf filepath}}
+                                      <img src="{{getPdfThumbnail filepath _id}}" height="auto" id="th-{{_id}}">
+                                    {{else}}
+                                       <i class="fa fa-4x {{getIcon filepath}}"></i>
+                                    {{/if}}
                                     <br>
                                     {{name}}
                                 </a>

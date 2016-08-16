@@ -19,7 +19,7 @@ Template['afImageUpload'].onCreated(function (){
   this.settings = this.data.atts.settings || {};
   self.uploadFile = new ReactiveVar();
   self.url = new ReactiveVar(this.data.value);
-  console.log(this.data.value);
+  //console.log(this.data.value);
 
   self.autorun(function () {
     var subscription = Telescope.subsManager.subscribe('filesByURL', self.url);
@@ -34,6 +34,9 @@ Template['afImageUpload'].onCreated(function (){
 Template.afImageUpload.helpers({
   ready: function(){
     return Template.instance().ready.get();
+  },
+  resizeTh : function(){
+    return {width:200, height:175, cropSquare: true};
   },
   callback: function() {
     var template = Template.instance();
@@ -53,7 +56,7 @@ Template.afImageUpload.helpers({
     return Template.instance().settings.avatar;
   },
   uploadFile: function(){
-    //console.log(Template.instance().uploadFile.get());
+    console.log(Template.instance().uploadFile.get());
     return Template.instance().uploadFile.get();
   },
   user: function(){

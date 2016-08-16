@@ -1,96 +1,124 @@
 
 
 <template name="uploader">
-
-	<h2 style="text-transform: capitalize;">{{type}}</h2>
-	<form>
-		<div class="row">
-		  <div class="upload-container">
-		    <div class="col-lg-4 col-sm-4 ">
-		       <!-- START widget-->
-		       <div class="uploadPicture notUrl notVideoCapture btn-file btn-primary  panel widget bg-primary">
-		        
-		          <div class="row row-table">
-		             <div class="col-xs-4 text-center pv-lg">
-		                <i class="fa-cloud-upload fa fa-3x"></i>
-		             </div>
-		             <div class="col-xs-8 pv-lg">
-		                <div class="h2 mt0">Upload</div>
-		                <div class="text-uppercase">From Files</div>
-		             </div>
-		          </div>
-		          <input type="file"
-		            class="upload-input"
-		            multiple="{{ multiple }}"
-		            data-form-data='{{ submitData }}'
-		            accept="{{ fileTypes }}">
-		           </div>
-		        </div>
-		    {{#if $neq type "attachment"}}
-			<div class="col-lg-4 col-sm-4">
-			   <!-- START widget-->
-			   <div class="camera-{{type}} notUrl panel btn-purple widget bg-purple">
-			      <div class="row row-table">
-			         <div class="col-xs-4 text-center pv-lg">
-			            <i class="fa-camera fa fa-3x"></i>
-			         </div>
-			         <div class="col-xs-8 pv-lg">
-			            <div class="h2 mt0">Capture</div>
-			            <div class="text-uppercase">From Camera</div>
-			         </div>
-			      </div>
-			   </div>
-			</div>
-  
-			    <div class="col-lg-4 col-sm-4">
-			       <!-- START widget-->
-			       <div  class="urlPicture panel notVideoCapture widget btn-success bg-green">
-			          <div class="row row-table">
-			             <div class="col-xs-4 text-center pv-lg">
-			                <i class="fa-link fa fa-3x"></i>
-			             </div>
-			             <div class="col-xs-8 pv-lg">
-			                <div class="h2 mt0">Paste URL</div>
-			                <div class="text-uppercase">From Internet</div>
-			             </div>
-			          </div>
-			       </div>
-			    </div>
-		    {{/if}}
-		  </div>
-		</div>
-		{{#if getURL}}
+	{{#if $not multiple}}
+	  <div class="row">
+         <input type="file" data-input="false" data-buttonname="btn btn-info" data-buttontext="UPLOAD" data-iconname="fa fa-upload mr" multiple="{{ multiple }}" data-form-data='{{ submitData }}' accept="{{ fileTypes }}" class="form-control upload-input filestyle" id="filestyle-0" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
+         <div class="col-md-12 bootstrap-filestyle input-group notVideoCapture"><span class="group-span-filestyle " tabindex="0"><label for="filestyle-0" style="float:none" class="btn btn btn-info notUrl col-md-10 col-md-offset-1"><span class="icon-span-filestyle fa fa-upload mr"></span> <span class="buttonText">UPLOAD</span></label></span></div>
+      </div>
+      <div class="row">
+      	<div class="input-group col-md-12"><span class="group-span-filestyle " tabindex="0"><label style="float:none" for="camera" class="camera-{{type}} col-md-10 col-md-offset-1 btn btn notUrl btn-warning"><span class="icon-span-filestyle fa fa-camera mr"></span> <span class="buttonText">CAMERA</span></label></span></div>
+      </div>
+      <div class="row">
+      	<div class="input-group col-md-12"><label style="float:none" for="link" class="col-md-10 col-md-offset-1 btn urlPicture panel notVideoCapture widget btn-success bg-green"><span class="icon-span-filestyle fa fa-link mr"></span> <span class="buttonText">LINK</span></label></div>
+      </div>
+      {{#if getURL}}
 			<div class="row">
-				<div class="col-md-offset-2 col-md-4">
+				<div class="col-md-8">
 					<input type="text" name="urlInput" class="urlInput" placeholder="{{urlPlaceholder}}">
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 				<button type="submit" class="urlSubmit btn btn-info {{enableURLButton}}" >
 					Upload</button>
 				</div>
 			</div>
 		{{/if}}
-		
 		<div class="row">
-		{{#if videoCapture}}
-			{{> lmVideoCapture opts=opts}}
-			{{#if savedVideo}}
-			<button class="upload-camera-video btn btn-info">Upload Video</button>
-			{{/if}}
-		{{/if}}
-
+          <div class="progress">
+		    <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+		      <span class="sr-only"><span class="placeholder">{{progress}}% Complete</span></span> 
+		    </div>
+		  </div>
 		</div>
-
-		<div class="row">
-		          <div class="progress">
-				    <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
-				      <span class="sr-only"><span class="placeholder"></span> {{progress}}% Complete</span>
+	{{else}}
+		<form>
+			<div class="row">
+			  <div class="upload-container">
+			    <div class="col-lg-4 col-sm-4 ">
+			       <!-- START widget-->
+			       <div class="uploadPicture notUrl notVideoCapture btn-file btn-primary  panel widget bg-primary">
+			        
+			          <div class="row row-table">
+			             <div class="col-xs-4 text-center pv-lg">
+			                <i class="fa-cloud-upload fa fa-3x"></i>
+			             </div>
+			             <div class="col-xs-8 pv-lg">
+			                <div class="h2 mt0">Upload</div>
+			                <div class="text-uppercase">From Files</div>
+			             </div>
+			          </div>
+			          <input type="file"
+			            class="upload-input"
+			            multiple="{{ multiple }}"
+			            data-form-data='{{ submitData }}'
+			            accept="{{ fileTypes }}">
+			           </div>
+			        </div>
+			    {{#if $neq type "attachment"}}
+				<div class="col-lg-4 col-sm-4">
+				   <!-- START widget-->
+				   <div class="camera-{{type}} notUrl panel btn-warning widget bg-warning">
+				      <div class="row row-table">
+				         <div class="col-xs-4 text-center pv-lg">
+				            <i class="fa-camera fa fa-3x"></i>
+				         </div>
+				         <div class="col-xs-8 pv-lg">
+				            <div class="h2 mt0">Capture</div>
+				            <div class="text-uppercase">From Camera</div>
+				         </div>
+				      </div>
+				   </div>
+				</div>
+	  
+				    <div class="col-lg-4 col-sm-4">
+				       <!-- START widget-->
+				       <div  class="urlPicture panel notVideoCapture widget btn-success bg-green">
+				          <div class="row row-table">
+				             <div class="col-xs-4 text-center pv-lg">
+				                <i class="fa-link fa fa-3x"></i>
+				             </div>
+				             <div class="col-xs-8 pv-lg">
+				                <div class="h2 mt0">Paste URL</div>
+				                <div class="text-uppercase">From Internet</div>
+				             </div>
+				          </div>
+				       </div>
 				    </div>
-				  </div>
-		       
-		</div>
-	</form>
-	{{#if multiple}}
-		{{> files type=type edit="true" resourceID=resourceID}}
+			    {{/if}}
+			  </div>
+			</div>
+			{{#if getURL}}
+				<div class="row">
+					<div class="col-md-offset-2 col-md-4">
+						<input type="text" name="urlInput" class="urlInput" placeholder="{{urlPlaceholder}}">
+					</div>
+					<div class="col-md-2">
+					<button type="submit" class="urlSubmit btn btn-info {{enableURLButton}}" >
+						Upload</button>
+					</div>
+				</div>
+			{{/if}}
+			
+			<div class="row">
+			{{#if videoCapture}}
+				{{> lmVideoCapture opts=opts}}
+				{{#if savedVideo}}
+				<button class="upload-camera-video btn btn-info">Upload Video</button>
+				{{/if}}
+			{{/if}}
+
+			</div>
+
+			<div class="row">
+	          <div class="progress">
+			    <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+			      <span class="sr-only"><span class="placeholder"></span> {{progress}}% Complete</span>
+			    </div>
+			  </div>
+			</div>
+		</form>
+		{{#if multiple}}
+			{{> files type=type edit="true" resourceID=resourceID}}
+		{{/if}}
 	{{/if}}
 </template>

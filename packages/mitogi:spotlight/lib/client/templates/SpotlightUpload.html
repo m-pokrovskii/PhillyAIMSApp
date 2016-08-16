@@ -1,9 +1,79 @@
 <template name="SpotlightUpload">
 	{{#if ready}}
 	<div class="container-wrapper">
+	     
+		<div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group">
+		   <div class="panel panel-default">
+		   		<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
+			      <div id="headingOne" role="tab" class="panel-heading panel bg-warning-light">
+			         <h4 class="panel-title"> <em class="fa fa-video-camera"></em> Upload Videos 
+			         
+				         <span data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Collapse Panel">
+			                  <em class="fa fa-plus"></em>
+			              </span>
+		              </h4>
+			      </div>
+		      </a>
+		      <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" class="panel-collapse collapse in" aria-expanded="true">
+		         <div class="panel-body">
+		         	<h3>Videos</h3>
+		         		{{> upload_video resourceID=resourceID multiple="true"}}
+		         </div>
+		       </div>
+		   </div>
+		   <div class="panel panel-default">
+		      	<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="">
+			      <div id="headingTwo" role="tab" class="panel-heading panel bg-danger-light">
+			         <h4 class="panel-title"> <em class="fa fa-camera"></em> Upload Photos 
+			         
+				         <span data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Collapse Panel">
+			                  <em class="fa fa-plus"></em>
+			              </span>
+		              </h4>
+			      </div>
+		      </a>
+		      <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+		         <div class="panel-body">
+		         	<h3>Photos</h3>
+		         		{{> upload_photo resourceID=resourceID multiple="true"}}
+		         </div>
+		      </div>
+		   </div>
+		   <div class="panel panel-default">
+		      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree" class="">
+			      <div id="headingThree" role="tab" class="panel-heading panel bg-info-light">
+			         <h4 class="panel-title"> <em class="fa fa-paperclip"></em> Upload Attachments 
+			         
+				         <span data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Collapse Panel">
+			                  <em class="fa fa-plus"></em>
+			              </span>
+		              </h4>
+			      </div>
+		      </a>
+		      <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+		         <div class="panel-body">
+		         	<h3>Attachments</h3>
+		         		{{> upload_attachment resourceID=resourceID multiple="true"}}
+		         </div>
+		      </div>
+		   </div>
+		</div>
+
+    </div>
+    {{else}}
+    	{{> loading}}
+    {{/if}}
+</template>
+
+
+
+<template name="SpotlightUpload2">
+	{{#if ready}}
+	<div class="container-wrapper">
     
           <div class="splash">
              <div class="spotlight-button-container text-center">
+
 			      {{> panelButton option="video" fa="video-camera" button="info" count=(countItem "video" callback=callback)}}
 			      {{> panelButton option="photo" fa="camera" button="success" count=(countItem "photo" callback=callback)}}
 			    
@@ -16,7 +86,7 @@
 					  	{{> upload_video resourceID=resourceID multiple="true"}}
 					</div>
 					<div id="photo-panel" class="hide-panel">
-						{{> upload_photo resourceID=resourceID multiple="true"}}
+						{{> upload_photo resourceID=resourceID multiple="true" }}
 					  	<!--{{> PhotoUpload spotlightData=spotlightData}}-->
 					</div>
 					<div id="attachment-panel" class="hide-panel">

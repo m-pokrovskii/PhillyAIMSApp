@@ -1,5 +1,4 @@
 Template.uploader.onCreated(function(){
-  let callback = this.data.callback;
   this.myUploader = new MyUploader();
 
   this.onUpload = new ReactiveVar();
@@ -73,7 +72,9 @@ Template.uploader.helpers({
 Template.uploader.events({
   'change input[type="file"]' ( event, template ) {
   		event.preventDefault();
-    	template.myUploader.upload( { event: event});
+  		if(event.target.files[0]){
+    		template.myUploader.upload( { event: event});
+    	}
   },
   'click .camera-photo': function(e, template){
 	    e.preventDefault();
@@ -101,9 +102,8 @@ Template.uploader.events({
   'click .urlPicture': function(e, template){
 	    template.getURL.set(true);
   },
-  'change input:text[name=urlInput]': function(e, template){
+  'keyup input:text[name=urlInput]': function(e, template){
   	  	template.enableURL.set(e.target.value);
-
   },
   'click .urlSubmit': function(e, template){
 	    e.preventDefault();
@@ -167,6 +167,8 @@ MyUploader = function() {
 		uploader: null,
 		callback: null,
 		type: null,
+		resize: null,
+
 		_getFileFromInput: function ( event ) {
 			return event.target.files[0];
 		},
@@ -177,8 +179,9 @@ MyUploader = function() {
 		//give callback
 		init : function(template){
 			this.template = template;
-			this.callback = template.data.callback;
+			this.callback = template.data.callback;	
 			this.type = template.data.type;
+			
 
 			return this;
 		},
@@ -210,8 +213,8 @@ MyUploader = function() {
 		  		console.log(error);
 		  	}
 			else{
-					console.log(key);
-			  	  var metaContext = {key: key};
+				var metaContext = {key: key};
+				var uploadMe = function(file){
 				  self.uploader = new Slingshot.Upload( "uploadToAmazonS3", metaContext);
 
 				  self.template.filename.set(file.name);
@@ -225,8 +228,25 @@ MyUploader = function() {
 				      self._setPlaceholderText();
 				    } else {
 				      self._addUrlToDatabase( url , file, key);
+
+				     /* if(self.type=="attachment" && file.name.endsWith(".pdf")){
+				      		console.log("key "+key);
+							Meteor.call("makePdfThumbnail", key, {width:200});
+				      }*/
 				    }
 				  });
+				}
+
+				if(self.type=="photo" && self.resize){ //this.type=="photo" && this.resize
+					Resizer.resize(file, self.resize, function(err, smallFile) {
+						console.log("small thumbnail");
+						  uploadMe(smallFile);
+					 });
+				}
+				
+				else{
+					uploadMe(file);
+				}
 			 }
 		  });
 		  

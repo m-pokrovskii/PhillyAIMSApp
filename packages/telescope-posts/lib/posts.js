@@ -58,9 +58,6 @@ Posts.schema = new SimpleSchema({
     type: String,
     optional: false,
     max: 500,
-    defaultValue: function(){
-      return "Untitled"
-    },
     editableBy: ["member", "admin"],
     autoform: {
       order: 20
@@ -82,7 +79,7 @@ Posts.schema = new SimpleSchema({
     optional: true,
     editableBy: ["member", "admin"],
     autoform: {
-          label: "Q & A",
+          label: false,
           type: "summernote"
         }
   },
@@ -91,6 +88,7 @@ Posts.schema = new SimpleSchema({
     optional: true,
     editableBy: ["member", "admin"],
     autoform: {
+            label: false,
             type: "summernote"
         }
   },
@@ -198,7 +196,8 @@ Posts.schema = new SimpleSchema({
     autoform: {
       noselect: true,
       options: Posts.config.postStatuses,
-      group: 'admin'
+      group: 'admin',
+      label: "Status"
     }
   },
   /**

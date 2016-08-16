@@ -161,45 +161,34 @@ Template['metadata_files_form'].events({
 Template['video_player'].onCreated(function(){
   this.ready = new ReactiveVar(false);
   var self = this;
-
-  /*this.autorun(function () {
-    if(!self.ready.get()){
-      
-       var check = HTTP.call("HEAD", fileCheck, null, function(error, result){
-        if (error) {
-          console.log(error);
-        }
-        else if(result){
-          console.log(result);
-          self.ready.set(true);
-        }
-      })
-    }
-  });*/
   var filepath = self.data.video.filepath;
   var breakIndex = filepath.lastIndexOf(".");
   var shortKey = filepath.substring(0, breakIndex);
   var fileCheck = shortKey+".mp4"
+  console.log("data key null?");
+  console.log(fileCheck);
+  if(self.data.video.key){
+    self.check = function(){
+      try{
+        HTTP.call("HEAD", fileCheck, null, function(error, result){
 
-
-  self.check = function(){
-    try{
-      HTTP.call("HEAD", fileCheck, null, function(error, result){
-
-          //if (error) {
-          //  console.log(error);
-         // }
-          if(result){
-            clearInterval(self.interval);
-            self.ready.set(true);
-          }
-      });
+            //if (error) {
+            //  console.log(error);
+           // }
+            if(result){
+              clearInterval(self.interval);
+              self.ready.set(true);
+            }
+        });
+      }
+      catch(exception){
+      }
     }
-    catch(exception){
-    }
+    this.check();
+    this.interval = setInterval(this.check, 2000);
+  }else{
+    self.ready.set(true);
   }
-  this.check();
-  this.interval = setInterval(this.check, 2000);
 });
 
 Template['video_player'].helpers({
@@ -220,12 +209,21 @@ function endsWith(filepath, array){
 }
 
 Template['file-attachment'].helpers({
+  isPdf: function(filepath){
+    return endsWith(filepath,[".pdf"]);
+  },
+  getPdfThumbnail: function(filepath, imageId){
+    //else if(endsWith(filepath,[".pdf"])){
+      /*Thumbnails.pdf($("#th-"+imageId),filepath,{
+        width: 200,
+        page: 1
+      });
+      //return "fa-file-pdf-o text-danger";*/
+    //}
+  },
   getIcon: function (filepath) {
     if(endsWith(filepath,[".doc",".docx"])){
       return "fa-file-word-o text-primary";
-    }
-    else if(endsWith(filepath,[".pdf"])){
-      return "fa-file-pdf-o text-danger";
     }
     else if(endsWith(filepath,[".xls",".xlsx"])){
       return "fa-file-excel-o text-success";

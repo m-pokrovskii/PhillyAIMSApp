@@ -19,6 +19,9 @@ Package.onUse(function (api) {
     //"browser-policy",
     "themeteorchef:bert",
    // "meteorhacks:ssr",
+   "maxkferg:thumbnails",
+   "pascoual:pdfjs",
+   "thinksoftware:image-resize-client",
 
    "peerlibrary:aws-sdk@2.4.9_1",
    "lukemadera:video-capture",
@@ -58,13 +61,20 @@ Package.onUse(function (api) {
     'lib/client/stylesheets/application.scss'
       ], ['client']);
 
+  
+  Npm.depends({
+   "gulp-pdf-thumbnail":"0.0.7",
+   "gulp" :"3.9.1"
+  });
+
   // server
 
   api.addFiles([
     'lib/server/slingshot_file.js',
     'lib/server/slingshot_create.js',
     'lib/server/publish.js',
-    'lib/server/startup.js'
+    'lib/server/startup.js',
+    'lib/server/methods.js'
   ], ['server']);
 
   api.export('MyUploader', 'client');

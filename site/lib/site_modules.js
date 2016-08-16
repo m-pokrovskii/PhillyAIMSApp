@@ -13,3 +13,18 @@ Settings.addField([
     }
   }
 ]);
+
+
+Settings.addField([
+  {
+    fieldName: 'splashUrl',
+    fieldSchema: {
+      type: String,
+      optional: true,
+      label: "Front Page Splash Image",
+      autoform: {
+        group: "01_general"
+      }
+    }
+  }
+]);

@@ -88,25 +88,27 @@ Template.SpotlightUpload.onRendered( function() {
         self.photoCount.set(Files.find({resourceID: resourceID, type: "photo"}).count());
         self.videoCount.set(Files.find({resourceID: resourceID, type: "video"}).count());
 
-        if(self.videoCount.get() > 0){
-          self.spotlightType.set("video");
-          switchPanels("video");
-          animateButtonsSide();
-          self.once = true;
-        }
-        else if(self.photoCount.get() > 0){
-            self.spotlightType.set("photo");
-            switchPanels("photo");
+        if (!self.once) {
+          if(self.videoCount.get() > 0){
+            self.spotlightType.set("video");
+            switchPanels("video");
             animateButtonsSide();
             self.once = true;
-            
-        }
-        else if(self.attachmentCount.get() > 0){
-            self.spotlightType.set("attachment");
-            switchPanels("attachment");
-            animateButtonsSide();
-            self.once = true;
-            
+          }
+          else if(self.photoCount.get() > 0){
+              self.spotlightType.set("photo");
+              switchPanels("photo");
+              animateButtonsSide();
+              self.once = true;
+              
+          }
+          else if(self.attachmentCount.get() > 0){
+              self.spotlightType.set("attachment");
+              switchPanels("attachment");
+              animateButtonsSide();
+              self.once = true;
+              
+          }
         }
        
 

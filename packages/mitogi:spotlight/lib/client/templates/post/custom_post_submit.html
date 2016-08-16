@@ -1,8 +1,96 @@
 <template name="custom_post_submit">
-  <div class="form-page post-submit post-body">
-    <div class="grid grid-module">
-      {{> SpotlightUpload}}
-      {{> quickForm collection="Posts" id="submitPostForm" template="bootstrap3-horizontal" input-col-class="controls" type="method" meteormethod="submitPost" fields=postFields}}
-    </div>
-  </div>
+		<h1>New Resource</h1>
+	
+		   
+		   {{#autoForm collection="Posts" id="submitPostForm" type="method" meteormethod="submitPost" input-col-class="controls"}}
+		   <div class="row">
+		      <!-- Article Content-->
+		      <div class="col-lg-9">
+		         <div class="panel panel-default">
+		         	<div class="panel-heading">
+                      <div class="panel-title">Title</div>
+                   	</div>
+		            <div class="panel-body">
+		                {{> afQuickField name='title'}}
+		             </div>
+		         </div>
+		         <div class="panel panel-default">
+		         	<div class="panel-heading">
+                      <div class="panel-title">Multimedia</div>
+                   	</div>
+		            <div class="panel-body">
+		                {{> SpotlightUpload}}
+		             </div>
+		         </div>
+		         <div class="panel panel-default">
+		         	<div class="panel-heading">
+                      <div class="panel-title">Q&A</div>
+                   	</div>
+		            <div class="panel-body">
+		                {{> afQuickField name='q_a'}}
+		             </div>
+		         </div>
+		         <div class="panel panel-default">
+		         	<div class="panel-heading">
+                      <div class="panel-title">Description</div>
+                   	</div>
+		            <div class="panel-body">
+		                {{> afQuickField name='body'}}
+		             </div>
+		         </div>
+		               <div class="clearfix">
+		                  <div class="pull-right">
+		                     <button type="button" class="btn btn-default m-r-10 m-t-10">
+		                        <em class="fa fa-edit fa-fw"></em>Draft</button>
+		                     <button type="submit" class="btn btn-primary m-t-10">
+		                        <em class="fa fa-check fa-fw"></em>Submit</button>
+		                  </div>
+		               </div>
+
+		       </div>
+		      <!-- Article sidebar-->
+			   <div class="col-lg-3">
+			   		<div class="panel panel-default">
+			            <div class="panel-body">
+			            
+			                     <button type="button" class="btn btn-default m-r-10 m-t-10">
+			                        <em class="fa fa-edit fa-fw"></em>Draft</button>
+			                     <button type="submit" class="btn btn-primary m-t-10">
+			                        <em class="fa fa-check fa-fw"></em>Submit</button>
+			                
+			            </div>
+			         </div>
+			         <div class="panel panel-default">
+			         	<div class="panel-heading">Article Data</div>
+			            <div class="panel-body">
+			               {{> afQuickField name='thumbnailUrl'}}
+			               {{> afQuickField name='categories'}}
+			               {{> afQuickField name='tags'}}
+			            </div>
+			         </div>
+			      
+				      <div class="panel panel-default">
+					      	<div class="panel-heading panel-heading-collapsed">Admin Menu
+	                      
+	                           <a data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Collapse Panel">
+	                              <em class="fa fa-plus"></em>
+	                           </a>
+	                        </div>
+	                        <div class="panel-wrapper collapse" aria-expanded="false">
+					            <div class="panel-body">
+					       
+					               {{> afQuickField name='sticky'}}
+					               {{> afQuickField name='status'}}
+					               {{> afQuickField name='postedAt'}}
+					               {{> afQuickField name='userId'}}
+					            </div>
+				            </div>
+				      </div>
+		      </div>
+		   </div>
+	       {{/autoForm}}
+
+
 </template>
+
+
