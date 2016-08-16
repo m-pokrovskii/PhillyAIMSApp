@@ -1,3 +1,20 @@
+@media screen and (min-width: 600px){
+  .post-heading .post-title {
+      font-size: 24px;
+      color: #5d9cec;
+      font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .post-heading .post-title {
+      font-size: 18px;
+      color: #5d9cec;
+      font-weight: bold;
+  }
+
+}
+
 .mobile-nav{
   z-index:200!important;
 }
@@ -59,13 +76,15 @@
     top: 0px;
     margin-bottom:20px;
     height: 60vh;
+    min-height:230px;
     display: table;
     width: 100%;
-    background: url('img/splash.png') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    background-position: center top !important;
 }
 
 
@@ -120,6 +139,7 @@
   .post-btn{
       padding: 0;
       background-color: transparent !important;
+      border: 0px;
       display: block;
       font-size: 90%;
   }

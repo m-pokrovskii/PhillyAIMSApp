@@ -18,13 +18,11 @@ Template['afImageUpload'].onCreated(function (){
   this.ready = new ReactiveVar();
   this.settings = this.data.atts.settings || {};
   self.uploadFile = new ReactiveVar();
-  self.url = new ReactiveVar(this.data.value);
-  //console.log(this.data.value);
 
   self.autorun(function () {
-    var subscription = Telescope.subsManager.subscribe('filesByURL', self.url);
+    var subscription = self.subscribe('filesByURL', self.data.value);
     if (subscription.ready()) {
-      self.uploadFile.set(Files.findOne({filepath: self.url}));
+      self.uploadFile.set(Files.findOne({filepath: self.data.value}));
       self.ready.set(true);
     }
   });

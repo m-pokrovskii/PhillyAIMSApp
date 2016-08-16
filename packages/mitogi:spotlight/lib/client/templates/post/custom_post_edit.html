@@ -6,14 +6,14 @@
       {{#if $eq post.status 1}}
         <div class="alert alert-warning">
              <em class="fa fa-exclamation-circle fa-lg fa-fw"></em>
-              <span>This article is currently pending admin approval.</span>
+              <span>This article is currently pending admin approval. {{#if userIsAdmin}}<a class="approve-link">Approve</a>{{/if}}</span>
           </div>
       {{/if}}
 
       {{#if $eq post.status 2}}
         <div class="alert alert-info">
              <em class="fa fa-eye fa-lg fa-fw"></em>
-              <span>Click to <u><a target="_blank" href="/posts/{{post._id}}" class="text-white">View Post</a></u>.
+              <span>Click to <u><a target="_blank" href="/posts/{{post._id}}/{{post.slug}}" class="text-white">View Post</a></u>.
              </span>
           </div>
       {{/if}}

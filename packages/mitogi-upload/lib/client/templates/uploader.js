@@ -180,6 +180,7 @@ MyUploader = function() {
 		init : function(template){
 			this.template = template;
 			this.callback = template.data.callback;	
+			this.callback = template.data.resize;	
 			this.type = template.data.type;
 			
 

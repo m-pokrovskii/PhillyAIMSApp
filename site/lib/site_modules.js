@@ -22,7 +22,11 @@ Settings.addField([
       type: String,
       optional: true,
       label: "Front Page Splash Image",
+      defaultValue: function(){
+        return "img/splash.png"
+      },
       autoform: {
+        type: "imageUpload",
         group: "01_general"
       }
     }

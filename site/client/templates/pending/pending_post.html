@@ -1,3 +1,13 @@
 <template name="pending_post">
 	{{> posts_list_controller arguments}}
 </template>
+
+<template name="pending_post_preview">
+	<div class="">
+		<a href="/submit">Add New Post</a>
+	</div>
+	<div class="">
+		<a href="/submit">See All Your Posts</a>
+	</div>
+	{{> pending_post arguments=arguments limit=5}}
+</template>
