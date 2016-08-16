@@ -20,7 +20,7 @@ Package.onUse(function (api) {
     "themeteorchef:bert",
    // "meteorhacks:ssr",
    "maxkferg:thumbnails",
-   "pascoual:pdfjs",
+   //"pascoual:pdfjs",
    "thinksoftware:image-resize-client",
 
    "peerlibrary:aws-sdk@2.4.9_1",
@@ -56,6 +56,9 @@ Package.onUse(function (api) {
     'lib/client/templates/uploader.html',
     'lib/client/templates/uploader.js',
 
+    'lib/client/templates/test.html',
+    'lib/client/templates/test.js',
+
     'lib/client/modules/_modules.js',
     'lib/client/modules/upload-to-amazon.js',
     'lib/client/stylesheets/application.scss'
@@ -64,7 +67,8 @@ Package.onUse(function (api) {
   
   Npm.depends({
    "gulp-pdf-thumbnail":"0.0.7",
-   "gulp" :"3.9.1"
+   "gulp" :"3.9.1",
+   "pdfjs-dist": "1.5.376",
   });
 
   // server

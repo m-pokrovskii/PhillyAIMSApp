@@ -26,3 +26,10 @@ FlowRouter.route('/', {
     }
   }
 });
+
+FlowRouter.route('/test', {
+  name: 'test',
+  action: function() {
+    BlazeLayout.render("layout", {main: "test"});
+  }
+});

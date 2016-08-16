@@ -43,6 +43,10 @@ FilesSchema = new SimpleSchema({
   filepath: {
     type: String
   },
+  ready: {
+    type: Boolean,
+    optional: true
+  },
   order: {
     type: Number,
     optional: true,

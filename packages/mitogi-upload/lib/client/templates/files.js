@@ -158,36 +158,76 @@ Template['metadata_files_form'].events({
   }
 });
 
-Template['video_player'].onCreated(function(){
+/*Template['video_player'].onCreated(function(){
   this.ready = new ReactiveVar(false);
+
+});
+
+Template['video_player'].onRendered(function(){ 
   var self = this;
   var filepath = self.data.video.filepath;
   var breakIndex = filepath.lastIndexOf(".");
   var shortKey = filepath.substring(0, breakIndex);
   var fileCheck = shortKey+".mp4"
-  console.log("data key null?");
-  console.log(fileCheck);
+
   if(self.data.video.key){
+
     self.check = function(){
       try{
-        HTTP.call("HEAD", fileCheck, null, function(error, result){
+        /*HTTP.call("HEAD", fileCheck, null, function(error, result){
 
             //if (error) {
             //  console.log(error);
            // }
             if(result){
+              console.log("hit here");
               clearInterval(self.interval);
               self.ready.set(true);
             }
-        });
+            else if(error){
+              self.ready.set(false);
+            }
+        });*/
+          //function doesFileExist(urlToFile)
+          //{
+              /*var xhr = new XMLHttpRequest();
+              xhr.open('HEAD', fileCheck, true);
+              xhr.send();
+               
+              if (xhr.status == "404") {
+                  return false;
+              } else {
+                  clearInterval(self.interval);
+                  self.ready.set(true);
+              }
+
+              var xhr = new XMLHttpRequest();
+              xhr.open('HEAD', fileCheck, true);
+              xhr.onload = function (e) {
+                /*if (xhr.readyState === 4) {
+                  if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                  } else {
+                    console.error(xhr.statusText);
+                  }
+                }
+                clearInterval(self.interval);
+                  self.ready.set(true);
+              };
+              xhr.onerror = function (e) {
+                //console.error(xhr.statusText);
+              };
+              xhr.send(null);
+          //}
       }
       catch(exception){
       }
     }
-    this.check();
-    this.interval = setInterval(this.check, 2000);
+    self.check();
+    self.interval = setInterval(self.check, 2000);
   }else{
     self.ready.set(true);
+    console.log("hit there");
   }
 });
 
@@ -195,7 +235,7 @@ Template['video_player'].helpers({
   ready: function(){
     return Template.instance().ready.get();
   }
-});
+});*/
 
 function endsWith(filepath, array){
   var answer = false;

@@ -35,6 +35,9 @@ Template.SpotlightShow.helpers({
 	ready: function () {
 	  return Template.instance().ready.get();
 	},
+  hasQA: function () {
+    return Template.instance().data.q_a.trim();
+  },
 	spotlight: function(type){
     //console.log(Template.instance().mySpotlight.get("video"));
 		return Template.instance().mySpotlight.get(type);

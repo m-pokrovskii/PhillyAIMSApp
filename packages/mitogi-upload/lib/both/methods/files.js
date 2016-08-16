@@ -185,7 +185,7 @@
           var outputs = outputsArray();
 
         var params = {
-          PipelineId: Meteor.settings.AWSPipelineId,
+          PipelineId: "1470942864170-m1y5ok",
           OutputKeyPrefix: "video/",
           Input: {
            Key: srcKey,
