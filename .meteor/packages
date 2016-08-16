@@ -57,7 +57,7 @@ mitogi:upload
 #mitogi-homepage
 sergeyt:typeahead
 
-meteorhacks:npm
+#meteorhacks:npm
 random
 
 #for headers
@@ -82,4 +82,4 @@ zimme:active-route
 #t3db0t:invites
 
 
-npm-container
+#npm-container

@@ -1,6 +1,6 @@
 Meteor.methods({
     makePdfThumbnail: function(myKey, size){
-      var async = Meteor.npmRequire('async');
+     /* var async = Meteor.npmRequire('async');
       //var AWS = require('aws-sdk');
       //var gm = Meteor.npmRequire('gm').subClass({ imageMagick: true }); // Enable ImageMagick integration. 
       var gm = Meteor.npmRequire('gm');
@@ -143,7 +143,7 @@ Meteor.methods({
                       );
               }
           }
-          );
+          );*/
     }
 });
 
