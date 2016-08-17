@@ -1,0 +1,110 @@
+<template name="SpotlightShow">
+  {{#if ready}}
+	    {{#if arrayHasObject (spotlight "video")}}
+			<div class="post-body">
+			    <h2>
+			       Videos
+			    </h2>
+			    <div class="panel-body">
+			    	{{> SpotlightVideo (spotlight "video")}}
+			    </div>
+			</div>
+		{{/if}}
+
+		{{#if arrayHasObject (spotlight "attachment")}}
+
+			<div class="post-body">
+			    <h2>
+			       Attachments
+			    </h2>
+			    <div class="panel-body">
+			    	{{> Template.dynamic template="file-attachment" data=(spotlight "attachment")}}
+			    </div>
+			</div>
+			
+		{{/if}}
+
+		{{#if arrayHasObject (spotlight "photo")}}
+			<div class="post-body">
+			    <h2>
+			       Photos
+			    </h2>
+			    <div class="panel-body">
+			    	{{> Template.dynamic template="SpotlightGallery" data=(spotlight "photo")}}
+			    </div>
+			</div>
+		{{/if}}	
+
+		{{#if trim q_a}}
+			<div class="post-body">
+				<h2>
+			       Q & A
+			    </h2>
+	    		{{{q_a}}}
+			</div>
+		{{/if}}
+
+  {{else}}
+  	<div class="post-body">
+    	{{> loading}}
+	</div>
+  {{/if}}
+</template>
+
+<template name="SpotlightVideo">
+	<div class="col-lg-10 col-lg-offset-1">
+		{{#each this}}
+		    {{> video_player video=this width="100%" height="100%"}}
+	    {{/each}}
+	</div>
+</template>
+
+
+<template name="SpotlightGallery">
+	<div id="spotlight-gallery">
+		{{#each this}}
+	    <a href="{{filepath}}" title="{{ name }}" data-gallery>
+	        <img src="{{filepath}}" alt="{{ name }}" class="col-md-4" height="auto">
+	    </a>
+	    {{/each}}
+	</div>
+	{{> SpotlightGalleryModal}}
+</template>
+
+<template name="SpotlightGalleryModal">
+	<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+	<div id="blueimp-gallery" class="blueimp-gallery">
+	    <!-- The container for the modal slides -->
+	    <div class="slides"></div>
+	    <!-- Controls for the borderless lightbox -->
+	    <h3 class="title"></h3>
+	    <a class="prev">‹</a>
+	    <a class="next">›</a>
+	    <a class="close">×</a>
+	    <a class="play-pause"></a>
+	    <ol class="indicator"></ol>
+	    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+	    <div class="modal fade">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <button type="button" class="close" aria-hidden="true">&times;</button>
+	                    <h4 class="modal-title"></h4>
+	                </div>
+	                <div class="modal-body next"></div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default pull-left prev">
+	                        <i class="glyphicon glyphicon-chevron-left"></i>
+	                        Previous
+	                    </button>
+	                    <button type="button" class="btn btn-primary next">
+	                        Next
+	                        <i class="glyphicon glyphicon-chevron-right"></i>
+	                    </button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+</template>

@@ -19,7 +19,7 @@ Package.onUse(function (api) {
     //"browser-policy",
     "themeteorchef:bert",
    // "meteorhacks:ssr",
-   "maxkferg:thumbnails",
+   //"maxkferg:thumbnails",
    //"pascoual:pdfjs",
    "thinksoftware:image-resize-client",
 
@@ -56,8 +56,11 @@ Package.onUse(function (api) {
     'lib/client/templates/uploader.html',
     'lib/client/templates/uploader.js',
 
-    'lib/client/templates/test.html',
-    'lib/client/templates/test.js',
+    //'lib/client/templates/test.html',
+    //'lib/client/templates/test.js',
+
+    'lib/client/templates/partials/afImageUpload.html',
+    'lib/client/templates/partials/afImageUpload.js',
 
     'lib/client/modules/_modules.js',
     'lib/client/modules/upload-to-amazon.js',
@@ -65,11 +68,11 @@ Package.onUse(function (api) {
       ], ['client']);
 
   
-  Npm.depends({
+  /*Npm.depends({
    "gulp-pdf-thumbnail":"0.0.7",
    "gulp" :"3.9.1",
    "pdfjs-dist": "1.5.376",
-  });
+  });*/
 
   // server
 

@@ -47,7 +47,7 @@ FlowRouter.route('/sign-out', {
     AccountsTemplates.logout();
     Bert.alert(i18n.t("you_have_been_logged_out"), "success", "fixed-top");
     Meteor.connection.setUserId(null);
-    FlowRouter.go("home");
+    FlowRouter.go("signIn");
     //FlowRouter.go('signIn');
     //FlowRouter.reload();
   }]

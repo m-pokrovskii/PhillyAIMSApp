@@ -78,7 +78,7 @@
       }
       
       var result = Files.findOne({_id: fileID});
-
+      console.log(result);
       return result;
 
     } catch( exception ) {

@@ -1,4 +1,6 @@
-Meteor.methods({
+
+
+/*Meteor.methods({
     makePdfThumbnail: function(myKey, size){
      /* var async = Meteor.npmRequire('async');
       //var AWS = require('aws-sdk');
@@ -143,7 +145,7 @@ Meteor.methods({
                       );
               }
           }
-          );*/
+          );
     }
 });
 
