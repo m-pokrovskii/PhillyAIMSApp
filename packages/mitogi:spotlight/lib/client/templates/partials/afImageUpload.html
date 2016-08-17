@@ -32,18 +32,18 @@
             {{/if}}
          <!-- END panel-->
         </div>
-        
-    {{else}}
+
+    {{/if}}
+            
      <div class="col-md-12">
         <div class="panel panel-default" >
            <div class="well well-lg" style="min-height:100px">
             <div style="border: 1px solid #eeeeee;">
-               {{> upload_photo resourceID="single" callback=callback}}
+               {{> upload_photo resourceID="single" callback=callback resize=resizeTh}}
             </div>
           </div>
        </div>
      </div>
-    {{/if}}
     <input type="hidden" value="{{uploadFile.filepath}}" {{this.atts}}>
   {{else}}
     {{> loading}}

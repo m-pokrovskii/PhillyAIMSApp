@@ -66,10 +66,15 @@
         key: data.key,
         resourceID: data.id,
         type: data.type,
+        noShow: true,
       });
 
       if(data.type==="video" && data.key!==null){
-        Meteor.call('videoEncoder', data.key);
+        var callback = {finished:function(){
+            Files.update({key:data.key},{$set:{noShow:false}})
+          }
+        };
+        Meteor.call('videoEncoder', data.key, callback);
       }
       
       var result = Files.findOne({_id: fileID});
@@ -139,7 +144,7 @@
   getBucket: function(){
     return Meteor.settings.AWSBucket;
   },
-  videoEncoder: function( key ) {
+  videoEncoder: function( key, callback ) {
     check( key, String );
 
     try {
@@ -205,6 +210,7 @@
                  console.log(error);
               } else {
                  console.log("Job well done");
+                 
 
                 console.log(data);
                  var waitParam = {
@@ -215,6 +221,7 @@
                     if (err) console.log(err, err.stack); // an error occurred
                     else{console.log("Job completed");
                       _deleteFilesWithKey(key); 
+                      callback.finished();
                       }        // successful response
                 })); 
                  

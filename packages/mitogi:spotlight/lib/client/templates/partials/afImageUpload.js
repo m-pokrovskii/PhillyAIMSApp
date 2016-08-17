@@ -14,12 +14,16 @@ function deleteSingle(fileId){
 
 //template level subscription
 Template['afImageUpload'].onCreated(function (){
-  var self = this;
+  
   this.ready = new ReactiveVar();
   this.settings = this.data.atts.settings || {};
-  self.uploadFile = new ReactiveVar();
+  this.uploadFile = new ReactiveVar();
+});
 
+Template['afImageUpload'].onRendered(function (){
+  var self = this;
   self.autorun(function () {
+    console.log(self.data.value);
     var subscription = self.subscribe('filesByURL', self.data.value);
     if (subscription.ready()) {
       self.uploadFile.set(Files.findOne({filepath: self.data.value}));
@@ -39,8 +43,8 @@ Template.afImageUpload.helpers({
   callback: function() {
     var template = Template.instance();
     return {finished: function(data){
-        //console.log("data!!");
-        //console.log(data);
+        console.log("data!!");
+        console.log(data);
         if(template.uploadFile.get()){
           deleteSingle(template.uploadFile.get()._id);
         }
