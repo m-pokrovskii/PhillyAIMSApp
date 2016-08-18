@@ -4,6 +4,9 @@
       color: #5d9cec;
       font-weight: bold;
   }
+  #editPostForm{
+    padding: 20px 50px;
+  }
 }
 
 @media screen and (max-width: 600px){
@@ -225,9 +228,6 @@
     padding: 20px 40px;
 }
 
-#editPostForm{
-    padding: 20px 50px;
-}
 
 .splash-search{
     max-width: 1000px;

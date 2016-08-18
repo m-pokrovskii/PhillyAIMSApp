@@ -11,47 +11,10 @@
 
 
 <template name="post_form">
-			   <div class="row">
-		   	<!-- Article sidebar-->
-			   <div class="col-lg-3">
-			   		<div class="panel panel-default">
-			            <div class="panel-body">
-			                     <button type="submit" class="col-md-12 btn btn-primary m-t-10">
-			                        <em class="fa fa-check fa-fw"></em>Submit</button>
-			                
-			            </div>
-			         </div>
-			         <div class="panel panel-default">
-			         	<div class="panel-heading">Featured Image</div>
-			            <div class="panel-body">
-			               {{> afQuickField name='thumbnailUrl'}}
-			               
-			            </div>
-			         </div>
-
-
-			      
-				      <div class="panel panel-default">
-					      	<div class="panel-heading panel-heading-collapsed">Admin Menu
-	                      
-	                           <a data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Collapse Panel">
-	                              <em class="fa fa-plus"></em>
-	                           </a>
-	                        </div>
-	                        <div class="panel-wrapper collapse" aria-expanded="false">
-					            <div class="panel-body">
-					       
-					               {{> afQuickField name='sticky'}}
-					               {{> afQuickField name='status'}}
-					               {{> afQuickField name='postedAt'}}
-					               {{> afQuickField name='userId'}}
-					            </div>
-				            </div>
-				      </div>
-		      </div>
+<div class="row">
 		      <!-- Article Content-->
 
-		      <div class="col-lg-9">
+		      <div class="col-md-8">
 		         <div class="panel panel-default">
 		         	<div class="panel-heading">
                       <div class="panel-title">Title</div>
@@ -105,6 +68,36 @@
 		               </div>
 
 		       </div>
-		      
-		   </div>
+		       <!-- Article sidebar-->
+			   <div class="col-md-4">
+			   
+			         <div class="panel panel-default">
+			         	<div class="panel-heading">Featured Image</div>
+			            <div class="panel-body">
+			               {{> afQuickField name='thumbnailUrl'}}
+			               
+			            </div>
+			         </div>
+
+
+			      
+				      <div class="panel panel-default">
+					      	<div class="panel-heading panel-heading-collapsed">Admin Menu
+	                      
+	                           <a data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Collapse Panel">
+	                              <em class="fa fa-plus"></em>
+	                           </a>
+	                        </div>
+	                        <div class="panel-wrapper collapse" aria-expanded="false">
+					            <div class="panel-body">
+					       
+					               {{> afQuickField name='sticky'}}
+					               {{> afQuickField name='status'}}
+					               {{> afQuickField name='postedAt'}}
+					               {{> afQuickField name='userId'}}
+					            </div>
+				            </div>
+				      </div>
+		      </div>
+	</div>
 </template>
