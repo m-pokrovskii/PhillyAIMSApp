@@ -1,10 +1,2 @@
 {
-  "gulp-pdf-thumbnail":"0.0.7",
-   "gulp" :"3.9.1",
-   "mktemp" : "0.4.0",
-   "async" :"2.0.1",
-   "gm" : "1.23.0",
-   "aws-sdk":"2.5.0",
-   "file-system" : "2.2.1",
-   "util" : "0.10.3"
 }

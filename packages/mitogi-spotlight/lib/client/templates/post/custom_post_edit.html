@@ -1,0 +1,35 @@
+<template name="custom_post_edit">
+
+    <h1>Edit Resource</h1>
+      {{#if ready}}
+
+      {{#if $eq post.status 1}}
+        <div class="alert alert-warning">
+             <em class="fa fa-exclamation-circle fa-lg fa-fw"></em>
+              <span>This article is currently pending admin approval. {{#if userIsAdmin}}Click here to <a class="approve-link">Approve</a>.{{/if}}</span>
+          </div>
+      {{/if}}
+
+      {{#if $eq post.status 2}}
+        <div class="alert alert-info">
+             <em class="fa fa-eye fa-lg fa-fw"></em>
+              <span>Click to <u><a target="_blank" href="/posts/{{post._id}}/{{post.slug}}" class="text-white">View Post</a></u>.
+             </span>
+          </div>
+      {{/if}}
+
+
+       {{#checker check="edit" doc=post message="sorry_you_cannot_edit_this_post"}}
+       {{#autoForm collection="Posts" doc=post id="editPostForm" type="method-update" meteormethod="editPost" input-col-class="controls" }}
+            {{> post_form}}
+       {{/autoForm}}
+    {{/checker}}
+
+  {{else}}
+    {{> loading}}
+  {{/if}}
+
+
+</template>
+
+

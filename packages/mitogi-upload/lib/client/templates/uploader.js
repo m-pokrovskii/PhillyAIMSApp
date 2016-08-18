@@ -172,15 +172,15 @@ MyUploader = function() {
 		_getFileFromInput: function ( event ) {
 			return event.target.files[0];
 		},
-		_setPlaceholderText: function( string = "Click or Drag a File Here to Upload" ) {
+		_setPlaceholderText: function(string) {//string = "Click or Drag a File Here to Upload" 
 		  this.template.find( "span.placeholder" ).innerText = string;
 		},
 		//give either event or file and template
 		//give callback
 		init : function(template){
 			this.template = template;
-			this.callback = template.data.callback;	
-			this.callback = template.data.resize;	
+			this.callback = template.data.callback;
+			this.resize = template.data.resize;	
 			this.type = template.data.type;
 			
 
@@ -240,7 +240,6 @@ MyUploader = function() {
 
 				if(self.type=="photo" && self.resize){ //this.type=="photo" && this.resize
 					Resizer.resize(file, self.resize, function(err, smallFile) {
-						console.log("small thumbnail");
 						  uploadMe(smallFile);
 					 });
 				}
@@ -269,10 +268,11 @@ MyUploader = function() {
 		      self._setPlaceholderText();
 		    } else {
 		      Bert.alert( "File uploaded to Amazon S3!", "success" );
-		      self.template.find(".upload-input").value="";
-		      self.template.onUpload.set(0);
-		      self._setPlaceholderText();
-		      if(self.callback && self.callback.finished) self.callback.finished(result);
+		     	self.template.find(".upload-input").value="";
+		      	self.template.onUpload.set(0);
+		      	self._setPlaceholderText();
+		      if(self.callback && self.callback.finished){
+		      	self.callback.finished(result)};
 		    }
 		  });
 		},

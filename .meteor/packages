@@ -51,13 +51,12 @@ mitogi:theme-base
 mitogi:theme-hubble
 #mitogi:post-description
 mitogi:invites
+#mitogi:pending
 
 mitogi:upload
 
-#mitogi-homepage
-sergeyt:typeahead
+#sergeyt:typeahead
 
-#meteorhacks:npm
 random
 
 #for headers
@@ -74,12 +73,4 @@ mizzao:jquery-ui
 mobile-experience
 mpowaga:autoform-summernote
 zimme:active-route
-
-#t3db0t:accounts-invite
-#mitogi:accounts-invite
-#accounts-ui
-#accounts-password
-#t3db0t:invites
-
-#npm-container
-meteor
+mitogi:homescreen

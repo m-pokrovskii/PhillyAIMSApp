@@ -133,7 +133,6 @@ Template['metadata_files_form'].events({
     //var name = template.find("input[name='filename' data-id="+targetId+"]");
     //var order = template.find("input[name='order' data-id="+targetId+"]");
     var name = event.target.value;
-    console.log(name);
     Meteor.call("setFileName" ,targetId, name);
     //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
 
@@ -145,7 +144,6 @@ Template['metadata_files_form'].events({
     //var name = template.find("input[name='filename' data-id="+targetId+"]");
     //var order = template.find("input[name='order' data-id="+targetId+"]");
     var order = event.target.value;
-    console.log(order);
     Meteor.call("setFileOrder" ,targetId, order);
     //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
 

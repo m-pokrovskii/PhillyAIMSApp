@@ -1,0 +1,48 @@
+<template name="custom_post_page">
+  <div class="row">
+  {{#if ready}}
+    {{#if post}}
+      {{#with post}}
+        {{#if canView}}
+          {{#if isPending}}
+          {{/if}}
+          <div class="single-post grid">
+            
+            <div class="posts posts-list">
+              {{> post_item post=this}}
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                  {{> modules zone="postBody" moduleData=this}}
+                  
+                  {{#if $neq q_a "<p><br></p>"}}
+                    <div class="post-body">
+                      <h2>
+                           Q & A
+                        </h2>
+                        {{{q_a}}}
+                    </div>
+                  {{/if}}
+                  {{#if $neq body "<p><br></p>"}}
+                    {{> post_body}}
+                  {{/if}}
+                  {{> comment_submit}}
+                  {{> comment_list}}
+                </div>
+                <div class="col-md-4">
+                  {{> modules zone="postSidebar" moduleClass="post-body" moduleData=this}}
+                </div>
+              </div>
+          </div>
+        {{else}}
+          {{> no_rights}}
+        {{/if}}
+      {{/with}}
+    {{else}}
+      {{> not_found}}
+    {{/if}}
+  {{else}}
+    <div class="posts-loading">{{> loading}}</div>
+  {{/if}}
+  </div>
+</template>

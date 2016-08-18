@@ -1,10 +1,12 @@
 <template name="user_account">
-  <div class="grid-small grid-module dialog user-edit">
+  <div class="row dialog user-edit">
 
-  {{> quickForm collection="Meteor.users" doc=user id="editUserForm" template="bootstrap3-horizontal" input-col-class="controls" type="update" fields=userFields}}
+  	<div class="col-md-8 col-md-offset-2">
+	  {{> quickForm collection="Meteor.users" doc=user id="editUserForm" template="bootstrap3-horizontal" input-col-class="controls" type="update" fields=userFields}}
 
-  {{#if isUsingPassword}}
-    <a href="{{pathFor "atChangePwd"}}">{{_ "change_password"}}</a>
-  {{/if}}
+	  {{#if isUsingPassword}}
+	    <a href="{{pathFor "atChangePwd"}}">{{_ "change_password"}}</a>
+	  {{/if}}
+	</div>
   </div>
 </template>

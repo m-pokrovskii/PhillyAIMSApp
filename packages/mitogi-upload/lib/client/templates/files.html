@@ -18,7 +18,7 @@
                             </div>
                             <div class="panel-body">
                                <a href="{{filepath}}" title="{{name}}" data-gallery><img src="{{this.filepath}}" height="auto" width="100%"></a><br/>
-                                 <div>
+                                 <div class="row well">
                                   {{numberWithCommas size }} KB
                                 </div>
                                 
@@ -46,6 +46,8 @@
                 
             </div>
       </div>
+      {{else}}
+
       {{/each}}
      
     </div>
@@ -114,7 +116,7 @@
                                     <br>
                                     {{name}}
                                 </a>
-                                <div>
+                                <div class="row well">
                                   {{numberWithCommas size }} KB
                                 </div>
                             </div>

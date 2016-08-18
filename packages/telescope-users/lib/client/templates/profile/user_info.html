@@ -2,12 +2,6 @@
   <div class="user-profile grid grid-module">
     <div class="user-profile-avatar">{{> avatar user=this size="large" shape="circle"}}</div>
     <table class="user-info">
-      {{#if isAdmin}}
-        <tr>
-          <td>{{_ "id"}}: </td>
-          <td>{{_id}}</td>
-        </tr>
-      {{/if}}
       {{#each publicProfileFields}}
         <tr>
           <td>{{label}}</td>
