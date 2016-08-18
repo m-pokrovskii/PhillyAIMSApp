@@ -4,14 +4,16 @@ Template.post_edit.onCreated(function(){
 
 Template.post_edit.helpers({
 	userIsAdmin: function(){
-	    return Users.is.admin(this);
+		console.log("admin check");
+	    return Users.is.admin(Meteor.user());
 	  },
 });
 
 Template.post_edit.events({
 'click .approve-link': function(e){
-    Meteor.call('approvePost', this._id);
+    Meteor.call('approvePost', FlowRouter.getParam("_id"));
     Bert.alert( 'The Post has been approved', 'success', 'growl-top-right' );
     e.preventDefault();
+    FlowRouter.reload();
   }
 });

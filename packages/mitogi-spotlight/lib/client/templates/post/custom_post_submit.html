@@ -3,12 +3,20 @@
 	
 		   
 		   {{#autoForm collection="Posts" id="submitPostForm" type="method" meteormethod="submitPost" input-col-class="controls"}}
-		   <div class="row">
+		   	{{> post_form}}
+	       {{/autoForm}}
+
+
+</template>
+
+
+<template name="post_form">
+			   <div class="row">
 		   	<!-- Article sidebar-->
 			   <div class="col-lg-3">
 			   		<div class="panel panel-default">
 			            <div class="panel-body">
-			                     <button type="submit" class="btn btn-primary m-t-10">
+			                     <button type="submit" class="col-md-12 btn btn-primary m-t-10">
 			                        <em class="fa fa-check fa-fw"></em>Submit</button>
 			                
 			            </div>
@@ -99,9 +107,4 @@
 		       </div>
 		      
 		   </div>
-	       {{/autoForm}}
-
-
 </template>
-
-

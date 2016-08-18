@@ -27,8 +27,12 @@ Posts.addField(
       optional: true,
       editableBy: ["member", "admin"],
       autoform: {
-        type: 'imageUpload',
-        order: 20
+        afFieldInput: {
+          type: 'imageUpload',
+          settings: "thumbnail" 
+        },
+        order: 20,
+        label: false,
       }
     }
   }

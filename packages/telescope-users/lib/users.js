@@ -93,7 +93,12 @@ Telescope.schemas.userData = new SimpleSchema({
     optional: true,
     editableBy: ["member", "admin"],
     autoform:{
-      type: "imageUpload",
+      afFieldInput: {
+        type: 'imageUpload',
+        label: "Avatar",
+        settings: "avatar"
+        
+      }
     }
   },
   htmlBio: {

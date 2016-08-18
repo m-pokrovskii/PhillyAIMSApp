@@ -7,7 +7,7 @@
 		<a href="/submit">Add New Post</a>
 	</div>
 	<div class="">
-		<a href="{{allPost}}">View All Your Posts</a>
+		<a href="{{pathFor 'userProfile' _idOrSlug=this.telescope.slug}}">View All Your Posts</a>
 	</div>
 	{{> pending_post arguments=arguments limit=5}}
 </template>

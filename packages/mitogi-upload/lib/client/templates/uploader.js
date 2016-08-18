@@ -179,8 +179,8 @@ MyUploader = function() {
 		//give callback
 		init : function(template){
 			this.template = template;
-			this.callback = template.data.callback;	
-			this.callback = template.data.resize;	
+			this.callback = template.data.callback;
+			this.resize = template.data.resize;	
 			this.type = template.data.type;
 			
 
@@ -240,7 +240,6 @@ MyUploader = function() {
 
 				if(self.type=="photo" && self.resize){ //this.type=="photo" && this.resize
 					Resizer.resize(file, self.resize, function(err, smallFile) {
-						console.log("small thumbnail");
 						  uploadMe(smallFile);
 					 });
 				}
@@ -273,7 +272,6 @@ MyUploader = function() {
 		      	self.template.onUpload.set(0);
 		      	self._setPlaceholderText();
 		      if(self.callback && self.callback.finished){
-		      	console.log("I'm so sad!!");
 		      	self.callback.finished(result)};
 		    }
 		  });

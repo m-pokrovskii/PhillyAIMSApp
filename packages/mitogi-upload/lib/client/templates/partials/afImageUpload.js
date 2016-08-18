@@ -8,7 +8,6 @@ AutoForm.addInputType("imageUpload", {
 });
 
 function deleteSingle(fileId){
-    console.log(fileId);
     Meteor.call("deleteS3File", fileId);
 }
 
@@ -17,16 +16,17 @@ Template['afImageUpload'].onCreated(function (){
   
   this.ready = new ReactiveVar();
   this.uploadFile = new ReactiveVar();
-  //this.url = new ReactiveVar(self.data.value);
-  this.settings = {};
+  this.settings = this.data.atts.settings; //|| {};
+  //console.log(this.settings);
 
   var self = this;
 
   self.autorun(function () {
-    console.log(self.data.value);
     var subscription = Telescope.subsManager.subscribe('filesByURL', self.data.value);
     if (subscription.ready()) {
-      self.uploadFile.set(Files.findOne({filepath: self.data.value}));
+      var myFile = Files.findOne({filepath: self.data.value});
+      if(myFile)
+        self.uploadFile.set(myFile);
       self.ready.set(true);
     }
   });
@@ -38,28 +38,32 @@ Template.afImageUpload.helpers({
     return Template.instance().ready.get();
   },
   resizeTh : function(){
-    return {width:200, height:175, cropSquare: true};
+    let s = Template.instance().settings;
+    if(s=="thumbnail"){
+      return {width:300, height: 150, cropSquare:true};//var resize = {width: s.width, height: s.height, cropSquare: s.cropSquare};
+    }
+    else if(s=="avatar"){
+      return {width:75, height: 75, cropSquare:true};//var resize = {width: s.width, height: s.height, cropSquare: s.cropSquare};
+    }
+    //return Template.instance().settings.resize;
+    //return {width:200, height:175, cropSquare: true};
   },
-  callback: function() {
+  myCallback: function() {
     var template = Template.instance();
     return {finished: function(data){
-        console.log("data!!");
-        console.log(data);
         if(template.uploadFile.get()){
           deleteSingle(template.uploadFile.get()._id);
         }
         template.uploadFile.set(data);
         template.url.set(template.uploadFile.get().filepath);
-        //Telescope.subsManager.subscribe('filesByURL', template.url.get());
       }
     }
   },
   avatar: function(){
-    //if(Template.instance().settings)
-    return false;//Template.instance().settings.avatar;
+    if(Template.instance().settings=="avatar")
+    return Template.instance().settings=="avatar";//Template.instance().settings.avatar;
   },
   uploadFile: function(){
-    console.log(Template.instance().uploadFile.get());
     return Template.instance().uploadFile.get();
   }
 })
@@ -67,7 +71,6 @@ Template.afImageUpload.helpers({
 Template['afImageUpload'].events({
   'click .delete-file':function(event, template) {
     event.preventDefault();
-    console.log(template.uploadFile.get());
     if (confirm('Are you sure?')) {
       var targetId = template.uploadFile.get()._id;
       deleteSingle(targetId);

@@ -33,9 +33,6 @@ Posts.schema = new SimpleSchema({
     type: Date,
     optional: true,
     editableBy: ["admin"],
-    defaultValue: function(){
-      return new Date();
-    },
     autoform: {
       group: 'admin',
       type: "bootstrap-datetimepicker"

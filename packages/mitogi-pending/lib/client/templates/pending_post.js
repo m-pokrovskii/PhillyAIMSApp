@@ -13,9 +13,10 @@ Template.pending_post.helpers({
     };
     return args;
   },
-  allPost: function () {
+  userSlug: function () {
       var user = Meteor.user();
-      return FlowRouter.path('userProfile', {_idOrSlug: user && user.telescope && user.telescope.slug});
+      //console.log(FlowRouter.path('userProfile', {_idOrSlug: user && user.telescope && user.telescope.slug}));
+      return user.telescope.slug;
   }
 
 });
