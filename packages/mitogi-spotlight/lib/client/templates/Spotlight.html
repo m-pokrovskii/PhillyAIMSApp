@@ -60,8 +60,13 @@
 <template name="SpotlightGallery">
 	<div id="spotlight-gallery" class="row">
 		{{#each this}}
+<<<<<<< HEAD
 	    <a href="{{filepath}}" title="{{ name }}" class="col-sm-4"  data-gallery>
 	        <img src="{{filepath}}" alt="{{ name }}" width="100%">
+=======
+	    <a href="{{filepath}}" title="{{ name }}" data-gallery>
+	        <img src="{{filepath}}" alt="{{ name }}" class="col-xs-4" style="max-width:200px" height="auto">
+>>>>>>> origin/master
 	    </a>
 	    {{/each}}
 	</div>

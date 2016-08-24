@@ -4,6 +4,9 @@
       color: #5d9cec;
       font-weight: bold;
   }
+  #editPostForm{
+    padding: 20px 50px;
+  }
 }
 
 @media screen and (max-width: 725px){
@@ -254,6 +257,10 @@
     padding: 20px 40px;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 .splash-search{
     max-width: 1000px;
     background: rgba(255, 255, 255, .9);
