@@ -64,8 +64,11 @@ AutoForm.hooks({
 
     onError: function(formType, error) {
       console.log(error);
-      Messages.flash(error.reason.split('|')[0], "error"); // workaround because error.details returns undefined
-      Messages.clearSeen();
+     // Messages.flash(error.reason.split('|')[0], "error"); // workaround because error.details returns undefined
+     // Messages.clearSeen();
+
+      Bert.alert( error.reason.split('|')[0], 'danger', 'fixed-top' );
+      $("html, body").animate({ scrollTop: 0 }, 600);
     }
 
   }

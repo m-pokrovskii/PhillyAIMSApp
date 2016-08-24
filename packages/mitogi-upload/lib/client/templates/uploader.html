@@ -1,25 +1,25 @@
 <template name="uploader">
 	<form>
 		{{#if $not multiple}}
-		  
+
 		  <div class="row">
-	         <div class="upload-container">
-				<div class="input-group col-md-12"><label for="files" style="float:none" class="btn btn-info notUrl notVideoCapture col-md-10 col-md-offset-1"><span class="fa fa-upload"></span> <span class="buttonText">UPLOAD</span></label>
-				</div>
-	         	<input type="file"
+	         
+				<div class="col-xs-6">
+					<label for="files" style="width:100%" class="btn btn-info notUrl notVideoCapture"><span class="fa fa-fw fa-upload"></span> <span class="buttonText">UPLOAD</span></label>
+					
+	         		<input type="file"
 				            class="upload-input"
 				            multiple="{{ multiple }}"
 				            data-form-data='{{ submitData }}'
 				            accept="{{ fileTypes }}">
+	        	
 	         </div>
-	      </div>
+	     
 	     
 	      <!--<div class="row">
 	      	<div class="input-group col-md-12"><span class="" tabindex="0"><label style="float:none" for="camera" class="camera-{{type}} col-md-10 col-md-offset-1 btn notUrl btn-warning"><span class="icon-span-filestyle fa fa-camera"></span> <span class="buttonText">CAMERA</span></label></span></div>
 	      </div>-->
-	 
-	      <div class="row">
-	      	<div class="input-group col-md-12"><label style="float:none" for="link" class="col-md-10 col-md-offset-1 btn urlPicture notVideoCapture btn-success bg-green"><span class="fa fa-link"></span> <span class="buttonText">LINK</span></label></div>
+	      	<div class="col-xs-6"><label for="link" style="width:100%"  class="col-lg-12 btn urlPicture notVideoCapture btn-success"><span class="fa fa-fw fa-link"></span> <span class="buttonText">LINK</span></label></div>
 	      </div>
 			
 		{{else}}

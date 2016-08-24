@@ -181,6 +181,7 @@ MyUploader = function() {
 			this.template = template;
 			this.callback = template.data.callback;
 			this.resize = template.data.resize;	
+
 			this.type = template.data.type;
 			
 
@@ -239,6 +240,7 @@ MyUploader = function() {
 				}
 
 				if(self.type=="photo" && self.resize){ //this.type=="photo" && this.resize
+					console.log("resize!");
 					Resizer.resize(file, self.resize, function(err, smallFile) {
 						  uploadMe(smallFile);
 					 });

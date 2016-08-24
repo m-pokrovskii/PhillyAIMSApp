@@ -15,7 +15,7 @@
                 <div class="col-md-8">
                   {{> modules zone="postBody" moduleData=this}}
                   
-                  {{#if $neq q_a "<p><br></p>"}}
+                  {{#if $and q_a ($neq q_a "<p><br></p>")}}
                     <div class="post-body">
                       <h2>
                            Q & A
@@ -23,7 +23,7 @@
                         {{{q_a}}}
                     </div>
                   {{/if}}
-                  {{#if $neq body "<p><br></p>"}}
+                  {{#if $and body ($neq body "<p><br></p>")}}
                     {{> post_body}}
                   {{/if}}
                   {{> comment_submit}}

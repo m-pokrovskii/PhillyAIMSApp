@@ -1,4 +1,4 @@
-@media screen and (min-width: 600px){
+@media screen and (min-width: 725px){
   .post-heading .post-title {
       font-size: 24px;
       color: #5d9cec;
@@ -6,13 +6,35 @@
   }
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 725px){
   .post-heading .post-title {
       font-size: 18px;
       color: #5d9cec;
       font-weight: bold;
   }
 
+}
+
+.notifications-menu .menu-items{
+  left:-100px !important;
+}
+/*
+@media only screen and (min-width:600px) and (max-width: 730px)  {
+  .logo-image{
+    width:60%;
+    height:auto;
+  }
+}*/
+
+.notifications-menu .menu-label-wrapper:after{
+  display:none !important;
+}
+
+.side-logo {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    height: 30px;
 }
 
 .mobile-nav{
@@ -51,13 +73,16 @@
 }
 
 /* home splash */
-@media screen and (min-width: 600px){
+@media screen and (min-width: 725px){
   .home-header{
     background-color: transparent !important;
+  }
+}
+
+.home-header{
     position: absolute !important;
     width: 100% !important;
   }
-}
 
 #search-main{
   font-size: 1.2em;
@@ -76,7 +101,7 @@
     color: white;
     top: 0px;
     margin-bottom:20px;
-    height: 60vh;
+    height: 40vh;
     min-height:230px;
     display: table;
     width: 100%;
@@ -124,7 +149,11 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#528ed8', endColorstr='#6dcdfc', GradientType=0 );
 }
 
-@media screen and (max-width: 600px){
+.top-nav .header{
+  margin-bottom:0px !important;
+}
+
+@media screen and (max-width: 725px){
   .top-nav .header {
       height: 44px;
   } 
@@ -223,10 +252,6 @@
 
 .module {
     padding: 20px 40px;
-}
-
-#editPostForm{
-    padding: 20px 50px;
 }
 
 .splash-search{

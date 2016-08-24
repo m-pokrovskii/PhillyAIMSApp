@@ -17,6 +17,21 @@ Pages.schema = new SimpleSchema({
       type:"summernote"
     }
   },
+  icon: {
+    type: String,
+    optional: true,
+    autoform: {
+      label: "Optional Icon"
+    }
+  },
+  show: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+    autoform: {
+      leftLabel: "Show in Navigation"
+    }
+  },
   order: {
     type: Number,
     optional: true
@@ -41,7 +56,7 @@ Telescope.modules.add("primaryNav", {
 });
 
 Telescope.modules.add("mobileNav", {
-  template: 'pages_menu',
+  template: 'pages_menu2',
   order: 5
 });
 

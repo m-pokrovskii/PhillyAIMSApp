@@ -3,7 +3,29 @@
     <div class="pages-menu {{moduleClass}}">
       {{#each pages}}
         <div class="pages-menu-item">
-          <a href="{{pathFor 'page' slug=this.slug}}">{{title}}</a>
+          <a href="{{pathFor 'page' slug=this.slug}}">
+          	{{#if $and this.icon (notMobile moduleClass)}}
+          	  <i class="fa fa-{{this.icon}} fa-lg"></i>
+          	{{else}}
+          		{{title}}
+          	{{/if}}
+          	</a>
+          	{{menuType}}
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</template>
+
+<template name="pages_menu2">
+  {{#if hasPages}}
+    <div class="pages-menu {{moduleClass}}">
+      {{#each pages}}
+        <div class="pages-menu-item">
+          <a href="{{pathFor 'page' slug=this.slug}}">
+          		{{title}} 	
+          	</a>
+          	{{menuType}}
         </div>
       {{/each}}
     </div>

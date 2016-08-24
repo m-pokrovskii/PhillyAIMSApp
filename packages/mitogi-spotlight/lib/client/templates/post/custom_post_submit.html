@@ -12,9 +12,73 @@
 
 <template name="post_form">
 			   <div class="row">
-		   	<!-- Article sidebar-->
-			   <div class="col-lg-3">
-			   		<div class="panel panel-default">
+		   	
+		      <!-- Article Content-->
+
+		      <div class="col-lg-8">
+		         <div class="panel panel-default">
+		         	<div class="panel-heading">
+                      <div class="panel-title"><h4>Name Your Resource</h4></div>
+                   	</div>
+		            <div class="panel-body">
+		                {{> afQuickField name='title'}}
+		             </div>
+		         </div>
+		         <div class="panel panel-default">
+		         	<div class="panel-heading">
+                      <div class="panel-title"><h4>Add Multimedia</h4></div>
+                   	</div>
+		            <div class="panel-body">
+		                {{> SpotlightUpload}}
+		             </div>
+		         </div>
+		         <div class="panel panel-default">
+		         	<div class="panel-heading">
+                      <div class="panel-title"><h4>Describe Your Resource</h4></div>
+                   	</div>
+		            <div class="panel-body">
+		            	<div class="col-md-6">
+		                	{{> afQuickField name='categories'}}
+		            	</div>
+		            	<div class="col-md-6">
+			           	 	{{> afQuickField name='tags'}}
+			            </div>
+		             </div>
+		         </div>
+		         <div class="panel panel-default">
+		         	<div class="panel-heading">
+                      <div class="panel-title"><h4>Come Up With Q & A</h4>
+                      	<span class="help-block m-b-none">Answer common questions people might have using this resource.</span>
+                      	
+                  		</div>
+                   	</div>
+		            <div class="panel-body">
+		            	
+		                {{> afQuickField name='q_a'}}
+		             </div>
+		         </div>
+		         <div class="panel panel-default">
+		         	<div class="panel-heading">
+                      <div class="panel-title"><h4>Add A Description</h4>
+                      	<span class="help-block m-b-none">Include details for this resource.</span>
+                      </div>
+                   	</div>
+		            <div class="panel-body">
+		            	
+		                {{> afQuickField name='body'}}
+		             </div>
+		         </div>
+		               <div class="clearfix">
+		                  <div class="pull-right">
+		                     <button type="submit" class="btn btn-primary m-t-10">
+		                        <em class="fa fa-check fa-fw"></em>Submit</button>
+		                  </div>
+		               </div>
+
+		       </div>
+		       <!-- Article sidebar-->
+			   <div class="col-lg-4"> 
+			   		<div class="panel panel-default desktop-only">
 			            <div class="panel-body">
 			                     <button type="submit" class="col-md-12 btn btn-primary m-t-10">
 			                        <em class="fa fa-check fa-fw"></em>Submit</button>
@@ -22,7 +86,7 @@
 			            </div>
 			         </div>
 			         <div class="panel panel-default">
-			         	<div class="panel-heading">Featured Image</div>
+			         	<div class="panel-heading"><h4>Featured Image</h4></div>
 			            <div class="panel-body">
 			               {{> afQuickField name='thumbnailUrl'}}
 			               
@@ -49,62 +113,6 @@
 				            </div>
 				      </div>
 		      </div>
-		      <!-- Article Content-->
-
-		      <div class="col-lg-9">
-		         <div class="panel panel-default">
-		         	<div class="panel-heading">
-                      <div class="panel-title">Title</div>
-                   	</div>
-		            <div class="panel-body">
-		                {{> afQuickField name='title'}}
-		             </div>
-		         </div>
-		         <div class="panel panel-default">
-		         	<div class="panel-heading">
-                      <div class="panel-title">Multimedia</div>
-                   	</div>
-		            <div class="panel-body">
-		                {{> SpotlightUpload}}
-		             </div>
-		         </div>
-		         <div class="panel panel-default">
-		         	<div class="panel-heading">
-                      <div class="panel-title">Metadata</div>
-                   	</div>
-		            <div class="panel-body">
-		            	<div class="col-md-6">
-		                	{{> afQuickField name='categories'}}
-		            	</div>
-		            	<div class="col-md-6">
-			           	 	{{> afQuickField name='tags'}}
-			            </div>
-		             </div>
-		         </div>
-		         <div class="panel panel-default">
-		         	<div class="panel-heading">
-                      <div class="panel-title">Q&A</div>
-                   	</div>
-		            <div class="panel-body">
-		                {{> afQuickField name='q_a'}}
-		             </div>
-		         </div>
-		         <div class="panel panel-default">
-		         	<div class="panel-heading">
-                      <div class="panel-title">Description</div>
-                   	</div>
-		            <div class="panel-body">
-		                {{> afQuickField name='body'}}
-		             </div>
-		         </div>
-		               <div class="clearfix">
-		                  <div class="pull-right">
-		                     <button type="submit" class="btn btn-primary m-t-10">
-		                        <em class="fa fa-check fa-fw"></em>Submit</button>
-		                  </div>
-		               </div>
-
-		       </div>
 		      
 		   </div>
 </template>

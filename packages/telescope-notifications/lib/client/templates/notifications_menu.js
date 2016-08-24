@@ -11,13 +11,28 @@ Template.notifications_menu.helpers({
     var notificationsCount;
     var notifications = getNotifications();
 
-    if(notifications.length === 0){
-      notificationsCount = i18n.t('no_notifications');
-    }else if(notifications.length === 1){
-      notificationsCount = i18n.t('1_notification');
-    }else{
-      notificationsCount = notifications.length+' '+ i18n.t('notifications');
+    if (this.zone === "mobileNav") {
+
+      if(notifications.length === 0){
+        notificationsCount = i18n.t('no_notifications');
+
+      }else{
+        notificationsCount = notifications.length+' '+ i18n.t('notifications');
+
+      }
+
+
     }
+    else{
+      if(notifications.length === 0){
+        notificationsCount = "<div class='dropdown'><i class='fa fa-bell-o fa-lg fa-fw'></i></div>";
+      }else{
+        notificationsCount = "<div class='dropdown'><i class='fa fa-bell-o fa-lg fa-fw'></i><div class='label label-danger'>"+notifications.length+"</div></div>";
+      }
+
+    }
+
+    
 
     return notificationsCount;
   },

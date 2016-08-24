@@ -1,13 +1,25 @@
 <template name="home_hero">
-  <main class="masthead" id="content" tabindex="-1" style="background: linear-gradient(
+  <main class="masthead" id="content" tabindex="-1" style="position:relative; background: linear-gradient(
       rgba(0, 169, 255, 0.45),
       rgba(0, 123, 185, 0.45)
     ),
     url('{{splashUrl}}');"> 
-    <div class="container">
-     <h1 class="intro">What can we help you with?</h1> 
-     <div class="col-md-6 col-md-offset-3"> {{> search_main}} 
-     </div> 
+    <div class="container" style="width:100%">
+       <h1 class="intro">What can we help you with?</h1> 
+       <div class="col-md-6 col-md-offset-3"> {{> search_main}} 
+      </div> 
     </div>
+    <img src="/img/logo.png" class="side-logo">
   </main>
+
+  {{#if $and announcement ($neq announcement "<p><br></p>")}}
+    <div class="row announcement">
+        <div class="col-md-8 col-md-offset-2">
+         <div role="alert" class="alert alert-info">
+              {{{announcement}}}
+        </div>
+      </div>
+     </div>
+    {{/if}}
+
 </template>

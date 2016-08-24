@@ -25,7 +25,7 @@
                         </div>
                         <div class="panel-body">
 
-                           <a href="{{uploadFile.filepath}}" title="{{uploadFile.name}}" target="_blank" width="100%"><img src="{{uploadFile.filepath}}" height="auto" width="100%"></a><br/>
+                           <a href="{{uploadFile.filepath}}" style="float:none;" title="{{uploadFile.name}}" target="_blank" width="100%"><img src="{{uploadFile.filepath}}" height="auto" width="100%"></a><br/>
                         </div>
                      </div>
               </div>
@@ -34,11 +34,9 @@
         
     {{/if}}
       <div class="{{#if avatar}}col-md-6{{else}}col-lg-12{{/if}}">
-         <div class="panel panel-default">
-          <div class="panel-body">
+       
            {{> upload_photo resourceID="single" callback=myCallback resize=resizeTh}}
-          </div>
-        </div>
+          
       </div>
     <input type="hidden" value="{{uploadFile.filepath}}" {{this.atts}}>
   {{else}}

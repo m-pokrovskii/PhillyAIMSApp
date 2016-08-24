@@ -50,8 +50,12 @@ AutoForm.hooks({
       this.template.$('button[type=submit]').removeClass('loading');
       this.template.$('.disabled').removeClass("disabled").prop("disabled", false);
 
-      Messages.flash(error.message.split('|')[0], 'error'); // workaround because error.details returns undefined
-      Messages.clearSeen();
+      //Messages.flash(error.message.split('|')[0], 'error'); // workaround because error.details returns undefined
+      //Messages.clearSeen();
+      //Bert.alert();
+
+      Bert.alert( error.message.split('|')[0], 'danger', 'fixed-top' );
+      $("html, body").animate({ scrollTop: 0 }, 600);
       // $(e.target).removeClass('disabled');
       if (error.error === "603") {
         var dupePostId = error.reason.split('|')[1];

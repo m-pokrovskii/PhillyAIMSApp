@@ -18,7 +18,8 @@ var userMenuItems = [
       var user = Meteor.user();
       return FlowRouter.path('userProfile', {_idOrSlug: user && user.telescope && user.telescope.slug});
     },
-    label: 'profile'
+    label: 'profile',
+    order:10,
     // description: 'view_your_profile'
   },
   {
@@ -26,18 +27,21 @@ var userMenuItems = [
       var user = Meteor.user();
       return FlowRouter.path('userEdit', {_idOrSlug: user && user.telescope && user.telescope.slug});
     },
-    label: 'edit_account'
+    label: 'edit_account',
+    order:20,
     // description: 'edit_your_profile'
   },
   {
     route: 'adminSettings',
     label: 'settings',
     // description: 'settings',
-    adminOnly: true
+    adminOnly: true,
+    order:30,
   },
   {
     route: 'signOut',
-    label: 'sign_out'
+    label: 'sign_out',
+    order:40,
     // description: 'sign_out'
   }
 ];

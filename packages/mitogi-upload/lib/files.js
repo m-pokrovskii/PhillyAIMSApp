@@ -51,7 +51,11 @@ FilesSchema = new SimpleSchema({
     type: Number,
     optional: true,
     defaultValue: 0,
-  }
+  },
+  desc: {
+    type: String,
+    optional: true
+  },
 });
 
 Files.attachSchema(FilesSchema);
@@ -69,6 +73,10 @@ Meteor.methods({
     },
     setFileName : function(id, name){
     	Files.update({_id:id}, {$set:{name:name}});
+    }
+    ,
+    setFileDesc : function(id, desc){
+      Files.update({_id:id}, {$set:{desc:desc}});
     }
     ,
     setFileOrder : function(id, order){

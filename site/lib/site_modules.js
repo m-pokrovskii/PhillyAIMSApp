@@ -4,11 +4,29 @@ Settings.addField([
     fieldSchema: {
       type: String,
       optional: true,
-      label: "Terms",
+      label: "Terms of Use",
       autoform: {
+        type: "summernote",
         group: "01_general",
         rows: 5,
         instructions: 'Specify Terms of Use.'
+      }
+    }
+  }
+]);
+
+Settings.addField([
+  {
+    fieldName: 'announcement',
+    fieldSchema: {
+      type: String,
+      optional: true,
+      label: "FrontPage Announcement",
+      autoform: {
+        type: "summernote",
+        group: "01_general",
+        rows: 5,
+        instructions: 'Announcement for homepage.'
       }
     }
   }

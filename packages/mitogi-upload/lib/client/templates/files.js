@@ -138,6 +138,17 @@ Template['metadata_files_form'].events({
 
   },
 
+  'blur textarea[name="desc"]': function (event, template) {
+    event.preventDefault();
+    var targetId = event.target.getAttribute("data-id");
+    //var name = template.find("input[name='filename' data-id="+targetId+"]");
+    //var order = template.find("input[name='order' data-id="+targetId+"]");
+    var desc = event.target.value;
+    Meteor.call("setFileDesc" ,targetId, desc);
+    //template.uploadAttach.list()[targetIndex].name = event.target.text.value;
+
+  },
+
   'blur input[name="order"]': function (event, template) {
     event.preventDefault();
     var targetId = event.target.getAttribute("data-id");

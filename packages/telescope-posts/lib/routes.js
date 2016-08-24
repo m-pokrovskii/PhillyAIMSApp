@@ -35,10 +35,9 @@ PostsController.route('/posts/:_id/:slug?', {
   }
 });
 
-PostsController.route('/posts/:_id/?', {
+PostsController.route('/posts/:_id/', {
   name: "postPage2",
   action: function(params, queryParams) {
-    
     BlazeLayout.render("layout", {main: "post_page"});
   }
 });

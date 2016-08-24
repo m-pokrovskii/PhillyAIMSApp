@@ -40,7 +40,7 @@ Template.afImageUpload.helpers({
   resizeTh : function(){
     let s = Template.instance().settings;
     if(s=="thumbnail"){
-      return {width:300, height: 150, cropSquare:true};//var resize = {width: s.width, height: s.height, cropSquare: s.cropSquare};
+      return {width:600, height: 300, cropSquare:false};//var resize = {width: s.width, height: s.height, cropSquare: s.cropSquare};
     }
     else if(s=="avatar"){
       return {width:75, height: 75, cropSquare:true};//var resize = {width: s.width, height: s.height, cropSquare: s.cropSquare};
