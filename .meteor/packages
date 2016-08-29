@@ -14,7 +14,7 @@ telescope:core
 telescope:migrations
 telescope:api
 telescope:daily # singleday
-telescope:datetimepicker
+#telescope:datetimepicker
 telescope:debug
 
 telescope:email
@@ -51,12 +51,7 @@ mitogi:theme-base
 mitogi:theme-hubble
 #mitogi:post-description
 mitogi:invites
-#mitogi:pending
-
 mitogi:upload
-
-#sergeyt:typeahead
-
 random
 
 #for headers

@@ -9,28 +9,32 @@ Package.onUse(function (api) {
   // ---------------------------------- 1. Core dependency -----------------------------------
 
   api.use(["telescope:core",
-    "standard-app-packages",
+    //"standard-app-packages",
     "underscore",
     "jquery",
     "check",
     //"audit-argument-checks",
     "themeteorchef:jquery-validation",
-    "twbs:bootstrap",
+    //"twbs:bootstrap",
     //"browser-policy",
     "themeteorchef:bert",
    // "meteorhacks:ssr",
    //"maxkferg:thumbnails",
    //"pascoual:pdfjs",
    "thinksoftware:image-resize-client",
-
+   "tsega:bootstrap3-datetimepicker@=3.1.3_3",
+   "aldeed:autoform-bs-datetimepicker",
+   
+   "jrudio:videojs",
    "peerlibrary:aws-sdk@2.4.9_1",
-   "lukemadera:video-capture",
+   //"lukemadera:video-capture",
     "froatsnook:request",
     "fourseven:scss",
     "standard-minifiers",
     "edgee:slingshot",
     "ecmascript",
-    "mdg:camera"]);
+    //"mdg:camera"
+    ]);
 
   // ---------------------------------- 2. Files to include ----------------------------------
 
@@ -84,7 +88,7 @@ Package.onUse(function (api) {
     'lib/server/methods.js'
   ], ['server']);
 
-  api.export('MyUploader', 'client');
+  //api.export('MyUploader', 'client');
   api.export('Files');
 
 });

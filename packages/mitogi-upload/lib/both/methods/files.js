@@ -56,6 +56,10 @@
     //check( data.size, Number );
     //Modules.both.checkUrlValidity( data.filepath );
 
+    if(data.type==="video" && data.key!==null){
+        data.key = data.key.split(".")[0].split("/")[1];
+    }
+
     try {
       var fileID = Files.insert({
         filepath: data.filepath,
@@ -75,10 +79,12 @@
           }
         };
         Meteor.call('videoEncoder', data.key, callback);
-      }
+    }
+
+
       
       var result = Files.findOne({_id: fileID});
-      console.log(result);
+      
       return result;
 
     } catch( exception ) {
@@ -107,9 +113,6 @@
     check( id, String );
 
     try {
-        console.log(id);
-        console.log(Files.find({_id: id}));
-        console.log(Files.find({_id: id}).fetch()[0]);
 
         var key = Files.findOne({_id: id}).key;
         var type = Files.findOne({_id: id}).type;
@@ -120,9 +123,10 @@
 
           var objKey = [];
           if(type==="video"){
-            var shortKey = key.substring(0, key.lastIndexOf("."));
+            var shortKey = key; //key.substring(0, key.lastIndexOf("."));
             objKey.push(shortKey+".webm");
             objKey.push(shortKey+".mp4");
+            objKey.push("/thumbnails"+shortKey+"-00001.png");
           }
           else{
             objKey.push(key);
@@ -153,7 +157,7 @@
      var bucket = Meteor.settings.AWSBucket;
     
      var srcKey = decodeURIComponent(key.replace(/\+/g, " ")); //the object may have spaces  
-     var newKey = srcKey.split(".")[0].split("/")[1];
+     var newKey = key;
 
         
         AWS.config.update({
@@ -174,6 +178,8 @@
               array.push({Key: newKey + ".webm",
                //ThumbnailPattern: "thumbs-" + newKey,
                PresetId: '1351620000001-100240', //Webm 720p
+               ThumbnailPattern: '../thumbnails/video/'+newKey+'-{count}', 
+               Rotate: 'auto'
               });
              }
 
@@ -209,7 +215,7 @@
               if(error) {
                  console.log(error);
               } else {
-                 console.log("Job well done");
+                 //console.log("Job well done");
                  
 
                 console.log(data);
@@ -219,7 +225,8 @@
 
                 elastictranscoder.waitFor('jobComplete', waitParam, Meteor.bindEnvironment(function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
-                    else{console.log("Job completed");
+                    else{
+                      //console.log("Job completed");
                       _deleteFilesWithKey(key); 
                       callback.finished();
                       }        // successful response

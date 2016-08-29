@@ -259,7 +259,7 @@ function endsWith(filepath, array){
 
 Template['file-attachment'].helpers({
   isPdf: function(filepath){
-    return endsWith(filepath,[".pdf"]);
+    return false;//endsWith(filepath,[".pdf"]);
   },
   getPdfThumbnail: function(filepath, imageId){
     //else if(endsWith(filepath,[".pdf"])){
@@ -273,6 +273,9 @@ Template['file-attachment'].helpers({
   getIcon: function (filepath) {
     if(endsWith(filepath,[".doc",".docx"])){
       return "fa-file-word-o text-primary";
+    }
+    else if(endsWith(filepath,[".pdf"])){
+      return "fa-file-pdf-o text-danger";
     }
     else if(endsWith(filepath,[".xls",".xlsx"])){
       return "fa-file-excel-o text-success";

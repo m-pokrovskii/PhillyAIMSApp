@@ -6,7 +6,6 @@ Template.pages_menu.helpers({
     return Pages.find({show:true});
   },
   notMobile: function(moduleClass){
-  	console.log(this);
   	return !moduleClass.includes("mobile");
   },
   menuType: function () {
@@ -23,7 +22,6 @@ Template.pages_menu2.helpers({
     return Pages.find({show:true});
   },
   notMobile: function(moduleClass){
-  	console.log(this);
   	return !moduleClass.includes("mobile");
   },
   menuType: function () {

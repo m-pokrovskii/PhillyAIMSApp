@@ -240,7 +240,7 @@ MyUploader = function() {
 				}
 
 				if(self.type=="photo" && self.resize){ //this.type=="photo" && this.resize
-					console.log("resize!");
+				
 					Resizer.resize(file, self.resize, function(err, smallFile) {
 						  uploadMe(smallFile);
 					 });

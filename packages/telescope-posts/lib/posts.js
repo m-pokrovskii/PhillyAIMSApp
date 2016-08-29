@@ -222,7 +222,7 @@ Posts.schema = new SimpleSchema({
   },
   /**
     Save info for later spam checking on a post. We will use this for the akismet package
-  */
+  
   userIP: {
     type: String,
     optional: true
@@ -231,6 +231,7 @@ Posts.schema = new SimpleSchema({
     type: String,
     optional: true
   },
+  */
   referrer: {
     type: String,
     optional: true

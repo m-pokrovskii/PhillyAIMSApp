@@ -13,6 +13,10 @@
             </div>
             <div class="row">
                 <div class="col-md-8">
+                  {{#if $and body ($neq body "<p><br></p>")}}
+                    {{> post_body}}
+                  {{/if}}
+                  
                   {{> modules zone="postBody" moduleData=this}}
                   
                   {{#if $and q_a ($neq q_a "<p><br></p>")}}
@@ -23,9 +27,7 @@
                         {{{q_a}}}
                     </div>
                   {{/if}}
-                  {{#if $and body ($neq body "<p><br></p>")}}
-                    {{> post_body}}
-                  {{/if}}
+                  
                   {{> comment_submit}}
                   {{> comment_list}}
                 </div>
