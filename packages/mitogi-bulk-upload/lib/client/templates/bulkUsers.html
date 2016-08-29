@@ -1,0 +1,30 @@
+<template name="bulkUsers">
+  <div class="grid-small grid-block dialog admin">
+    <h3>Add Multiple Users</h3>
+
+    <p>Download this <u><a href="/template/make_users.csv" download>CSV File</a></u> and fill in the form. Reupload below to add many users at once. Users will be notified of their account by email.</p>
+
+    {{#unless uploading}}
+      <input type="file" name="uploadCSV">
+    {{else}}
+      <p><i class="fa fa-spin fa-refresh"></i> Uploading files...</p>
+    {{/unless}}
+
+    {{#if results.error}}
+    <div class="alert alert-danger" role="alert">
+    	{{#each results.error}}
+        <p>{{this}}</p>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if results.success}}
+    <div class="alert alert-success" role="alert">
+      {{#each results.success}}
+        <p>{{this}}</p>
+      {{/each}}
+    </div>
+    {{/if}}
+  </div>
+  
+</template>

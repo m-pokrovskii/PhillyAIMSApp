@@ -55,7 +55,7 @@ Template.afImageUpload.helpers({
           deleteSingle(template.uploadFile.get()._id);
         }
         template.uploadFile.set(data);
-        template.url.set(template.uploadFile.get().filepath);
+        //template.url.set(template.uploadFile.get().filepath);
       }
     }
   },

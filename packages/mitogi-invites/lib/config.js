@@ -1,10 +1,15 @@
 
 Telescope.menuItems.add("userMenu", {
-  route: 'makeInvites',
-  label: 'Invites',
+  route: 'addUsers',
+  label: 'Add Users',
   adminOnly: true,
   order:35,
  });
+
+Telescope.modules.add("makeUser", {
+  template: "user_invites",
+  order: 10
+});
 
 /*
 AccountsTemplates.configureRoute('signUp', {

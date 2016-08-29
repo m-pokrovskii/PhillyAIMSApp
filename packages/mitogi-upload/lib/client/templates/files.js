@@ -44,6 +44,9 @@ Template['video_player'].helpers({
   newExtension: function(filepath, ext) {
     return filepath.slice(0,-(filepath.split(".").slice(-1)[0].length))+ext;
   },
+  thumbnailUrl: function(filepath) {
+    return (filepath.slice(0,-(filepath.split(".").slice(-1)[0].length+1))+"-00001.png").replace("/video/","/video/thumbnails/").replace(/ /g,"+");
+  },
   getPlayer: function(url){
 
     if(url.indexOf("vimeo.com") > -1){

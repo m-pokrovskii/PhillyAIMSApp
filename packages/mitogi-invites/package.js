@@ -58,6 +58,7 @@ Package.onUse(function (api) {
     'lib/client/templates/register.html',
     'lib/client/templates/register.js',
     'lib/client/templates/user_invites.html',
+    'lib/client/templates/make_user.html',
     'lib/client/templates/user_invites.js',
     'lib/client/templates/invalidInvite.html',
     'lib/client/templates/invalidInvite.js'

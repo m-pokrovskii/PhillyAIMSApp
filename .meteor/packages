@@ -53,6 +53,7 @@ mitogi:theme-hubble
 mitogi:invites
 mitogi:upload
 random
+mitogi:bulk-upload
 
 #for headers
 raix:handlebar-helpers

@@ -19,10 +19,10 @@ FlowRouter.route( '/invite/:email/:token', {
   }
 });
 
-FlowRouter.route( '/user/invite', {
-  name: 'makeInvites',
+FlowRouter.route( '/user/add', {
+  name: 'addUsers',
   action(params) {
-      BlazeLayout.render( "layout" , {main: 'user_invites' } );
+      BlazeLayout.render( "layout" , {main: 'make_user' } );
   }
 });
 
