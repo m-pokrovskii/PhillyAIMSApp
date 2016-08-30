@@ -42,11 +42,11 @@ Package.onUse(function (api) {
   ], ['client', 'server']);
 
   // both
-
+/*
   api.addFiles([
     'lib/invites.js'
   ], ['client', 'server']);
-
+*/
   // client
 
   api.addFiles([

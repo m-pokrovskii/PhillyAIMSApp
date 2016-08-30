@@ -9,15 +9,13 @@ Package.onUse(function (api) {
   // ---------------------------------- 1. Core dependency -----------------------------------
 
   api.use(["telescope:core",
+    "telescope:email",
     "harrison:papa-parse"]);
 
   // ---------------------------------- 2. Files to include ----------------------------------
 
   // client & server
 
-  api.addFiles([
-    'lib/server/methods.js'
-  ], ['server']);
 
   // client
 
@@ -30,11 +28,17 @@ Package.onUse(function (api) {
 api.addFiles([
     'lib/config.js',
     'lib/routes.js',
-    'lib/email_templates.js',
+    
   ], ['server', 'client']);
 
  api.addAssets([
-    'lib/server/templates/emailAdd.handlebars'
+    'lib/server/templates/emailAdd.handlebars',
+  ], ['server']);
+
+
+  api.addFiles([
+    'lib/server/methods.js',
+    'lib/server/templates.js'
   ], ['server']);
 
 

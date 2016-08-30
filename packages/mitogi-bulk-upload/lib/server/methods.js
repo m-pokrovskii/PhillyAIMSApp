@@ -19,7 +19,7 @@
               emailProperties = {
                 username : username,
                 password : password,
-                em : password,
+                //email : email,
                 changePwdUrl : FlowRouter.path("changePwd"),
                 siteUrl: Settings.get("siteUrl"),
               };
