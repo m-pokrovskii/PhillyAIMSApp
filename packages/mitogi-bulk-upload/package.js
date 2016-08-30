@@ -27,8 +27,6 @@ Package.onUse(function (api) {
 
 api.addFiles([
     'lib/config.js',
-    'lib/routes.js',
-    
   ], ['server', 'client']);
 
  api.addAssets([
