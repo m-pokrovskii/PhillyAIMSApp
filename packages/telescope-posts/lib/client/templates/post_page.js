@@ -67,7 +67,7 @@ Template.post_page.onCreated(function () {
     if (subscriptionsReady) {
       template.ready.set(true);
       var post = Posts.findOne(FlowRouter.getParam("_id"));
-      if (post) {
+      /*if (post) {
         doSEOStuff(post);
       } else {
         DocHead.addMeta({
@@ -80,7 +80,7 @@ Template.post_page.onCreated(function () {
           property: "robots",
           content: "noindex, nofollow"
         });
-      }
+      }*/
     }
   });
 

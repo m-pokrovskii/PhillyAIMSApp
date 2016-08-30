@@ -36,7 +36,7 @@
             }
         }
         a{
-          color: {{accentColor}};
+          color: #528fd8;
           font-weight: bold;
           text-decoration: none;
         }
@@ -103,7 +103,7 @@
           <td class="heading-container">
             <a href="{{siteUrl}}">
               {{#if logoUrl}}
-                <img class="logo" src="{{logoUrl}}" height="{{logoHeight}}" width="{{logoWidth}}" alt="{{siteName}}"/>
+                <img class="logo" src="{{siteUrl}}/{{logoUrl}}" height="{{logoHeight}}" width="{{logoWidth}}" alt="{{siteName}}"/>
               {{else}}
                 {{siteName}}
               {{/if}}
@@ -120,8 +120,10 @@
         </tr>
         <tr>
           <td class="footer-container">
-            <a href="{{accountLink}}">Change your notifications settings</a><br/><br/>
-            {{{footer}}}
+            
+              <a href="{{siteUrl}}/{{accountLink}}">Change your notifications settings</a><br/><br/>
+              {{{footer}}}
+         
           </td>
         </tr>
       </table>

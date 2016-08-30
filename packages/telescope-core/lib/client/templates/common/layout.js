@@ -1,5 +1,5 @@
 var init = _.once(function () {
-  var title = Settings.get("title", "Telescope");
+  var title = "Philly AIMS Portal";
   if (!!Settings.get("tagline")) {
     title += ": "+Settings.get("tagline");
   }
