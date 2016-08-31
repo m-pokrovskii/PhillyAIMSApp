@@ -56,7 +56,7 @@ Template.post_page.onCreated(function () {
     Meteor.call('increasePostViews', id, sessionId);
   }
 
-  trackRouteEntry(postId);
+  //trackRouteEntry(postId);
   
   // Autorun 3: when subscription is ready, update the data helper's terms
   template.autorun(function () {
