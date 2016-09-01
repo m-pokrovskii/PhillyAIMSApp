@@ -36,7 +36,7 @@ Template.register.events({
 	  var username = t.find('#account-username').value
 	    , password = t.find('#account-password').value
 	    , password1 = t.find('#account-password1').value
-	    , email = t.find('#account-email').value ? t.find('#account-email').value : t.email.get()
+	    , email = t.find('#account-email') ? t.find('#account-email').value : t.email.get()
 	    , terms = $('#terms-box').is(":checked");//terms = $('input').is(":checked").val(); 
 
 	    // Trim and validate the input
