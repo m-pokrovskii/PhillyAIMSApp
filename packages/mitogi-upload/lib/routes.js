@@ -1,7 +1,7 @@
 /*
 * Routes: Authenticated
 * Routes that are only visible to authenticated users.
-*/
+
 
 
 FlowRouter.route('/uploadTest', {
@@ -9,3 +9,4 @@ FlowRouter.route('/uploadTest', {
     	BlazeLayout.render('uploadNew');
  	 }
 });
+*/

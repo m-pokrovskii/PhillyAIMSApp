@@ -25,6 +25,7 @@ Slingshot.createDirective( "uploadToAmazonS3", Slingshot.S3Storage, {
       pathname = "uploads/"
     }*/
    // var user = Meteor.users.findOne( this.userId );
-    return metaContext.key;
+   
+    return metaContext.key;//.replace(/ /g, '+');
   }
 });

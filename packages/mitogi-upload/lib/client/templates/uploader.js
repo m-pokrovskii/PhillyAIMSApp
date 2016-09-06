@@ -173,7 +173,8 @@ MyUploader = function() {
 			return event.target.files[0];
 		},
 		_setPlaceholderText: function(string) {//string = "Click or Drag a File Here to Upload" 
-		  this.template.find( "span.placeholder" ).innerText = string;
+		  if(this.template.find( "span.placeholder" )) 
+		  	this.template.find( "span.placeholder" ).innerText = string;
 		},
 		//give either event or file and template
 		//give callback
