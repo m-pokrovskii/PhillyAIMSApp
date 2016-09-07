@@ -30,7 +30,7 @@
             },
             function(e){
                 //bind failure
-                console.log("bind failure");
+                console.log(e);
             }
         ));
         //);
@@ -41,7 +41,7 @@
       //deleteObject(params);
     } catch( exception ) {
       console.log(exception);
-      return exception;
+      //return exception;
     }
 
   }
@@ -173,6 +173,8 @@
          region: "us-east-1"
         });
 
+        var deleteKey = true;
+
         function outputsArray(){
              var array = [];
              if (!key.endsWith("webm")){
@@ -183,6 +185,9 @@
                Rotate: 'auto'
               });
              }
+             else{
+              deleteKey = false;
+             }
 
             if (!key.endsWith("mp4")){
               array.push({Key: newKey + ".mp4",
@@ -190,6 +195,9 @@
                PresetId: '1351620000001-000010', //Webm 720p
               });
             }
+            else{
+              deleteKey = false;
+             }
 
             return array;
           }
@@ -227,8 +235,12 @@
                 elastictranscoder.waitFor('jobComplete', waitParam, Meteor.bindEnvironment(function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
                     else{
-                      //console.log("Job completed");
-                      _deleteFilesWithKey(key); 
+                      console.log("delete key: "+ key);
+                      
+                      if(deleteKey){
+                        _deleteFilesWithKey(key); 
+                       }
+
                       callback.finished();
                       }        // successful response
                 })); 

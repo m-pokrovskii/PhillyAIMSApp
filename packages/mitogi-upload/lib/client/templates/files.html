@@ -35,6 +35,7 @@
 <template name="file-video">
 
     <div class="row">
+      <div>
       {{#each this}}
       <div class="panel panel-default col-sm-6">
             <div class="panel-heading">
@@ -49,7 +50,7 @@
       {{else}}
 
       {{/each}}
-     
+      </div>
     </div>
 </template>
 
@@ -81,8 +82,10 @@
 
 
 <template name="video_player">
+  <div>
   {{#if $not video.noShow}}
     {{name}}
+    {{desc}}
     {{#if $not video.key}}
       <iframe width="100%" height="350px" src="{{getPlayer video.filepath}}" frameborder="0" allowfullscreen preload='metadata'></iframe>
     {{else}}
@@ -90,17 +93,15 @@
       <!--need to encode videos-->
         <source src="{{newExtension video.filepath 'mp4'}}" type="video/mp4">
         <source src="{{newExtension video.filepath 'webm'}}" type="video/webm">
-        
-
        <p class="vjs-no-js">Your browser does not support the video tag.</p>
     </video>
-    {{desc}}
+    
     {{/if}}
   {{else}}
     {{> loading}}
    <p class="text-center"> Video is processing and should be up shortly.</p>
   {{/if}}
-
+  </div>
 </template>
 
 
