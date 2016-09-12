@@ -61,6 +61,8 @@
         data.key = 
     }*/
 
+    var noShow = data.key===null ? false : true;
+
     try {
       var fileID = Files.insert({
         filepath: data.filepath,
@@ -71,7 +73,7 @@
         key: data.key,
         resourceID: data.id,
         type: data.type,
-        noShow: true,
+        noShow: noShow,
       });
 
       if(data.type==="video" && data.key!==null){
