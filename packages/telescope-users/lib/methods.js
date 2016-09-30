@@ -58,17 +58,23 @@ Meteor.methods({
 
   removeUser: function (userId, removePosts) {
 
-    if (Users.is.adminById(this.userId)) {
+    var user = Meteor.users.findOne({ _id : userId });
+    var userEmail = Users.getEmail(user);
+
+    if (Users.is.adminById(this.userId) && userEmail.toLowerCase()!=="philadelphia.aims@gmail.com") {
 
       removePosts = (typeof removePosts === "undefined") ? false : removePosts;
-
+      
       Meteor.users.remove(userId);
 
       //Meteor.users(userId)
       if (removePosts) {
         var deletedPosts = Posts.remove({userId: userId});
         var deletedComments = Comments.remove({userId: userId});
-        //var deletedInvite = Invites.remove({invitedUserEmail: userId});
+        //Invites.remove({invitedUserEmail: userEmail});
+
+        Comments.remove({userId: userId});
+        var deletedInvite = Invites.remove({invitedUserEmail: userEmail});
         return "Deleted "+deletedPosts+" posts and "+deletedComments+" comments";
       } else {
         // not sure if anything should be done in that scenario yet

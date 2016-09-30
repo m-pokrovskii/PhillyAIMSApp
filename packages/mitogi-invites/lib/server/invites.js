@@ -59,8 +59,19 @@ Meteor.methods({
       // don't allow duplicate multiple invite for the same person
       var existingInvite = Invites.findOne({ invitedUserEmail : userEmail });
 
+      /*if( Invites.findOne({ invitedUserEmail : userEmail }) 
+        && Invites.findOne({ invitedUserEmail : userEmail }).accepted 
+        && !Meteor.users.findOne({ email : userEmail })){
+        Invites.remove({ invitedUserEmail : userEmail });
+        existingInvite = false;
+      } //if its accepted and yet no account.
+      */
+
       if (existingInvite) {
-        throw new Meteor.Error(403, "Somebody has already invited this person.");
+         Meteor.call("resend", userEmail);       //throw new Meteor.Error(403, "Somebody has already invited this person.");
+         return {
+          newUser : typeof user === 'undefined'
+        };
       }
 
       var newToken = Random.hexString(16);

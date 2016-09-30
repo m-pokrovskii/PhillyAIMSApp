@@ -1,6 +1,12 @@
 Template.user_posts.helpers({
+  isUser: function(){
+    var user = this;
+    return user._id === Meteor.userId();
+  },
   argumentsPending: function () {
     var user = this;
+    console.log("user");
+    console.log(user);
     var args = {
       template: "posts_list_compact",
       options: {

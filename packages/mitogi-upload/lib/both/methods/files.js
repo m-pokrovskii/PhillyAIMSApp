@@ -181,7 +181,6 @@
              var array = [];
              if (!key.endsWith("webm")){
               array.push({Key: newKey + ".webm",
-               //ThumbnailPattern: "thumbs-" + newKey,
                PresetId: '1351620000001-100240', //Webm 720p
                //ThumbnailPattern: 'thumbnails/'+newKey+'-{count}', 
                Rotate: 'auto'

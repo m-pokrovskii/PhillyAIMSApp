@@ -94,7 +94,7 @@ AutoForm.hooks({
       }
       //scrollUp();
 
-      console.log(result);
+      //console.log(result);
     },
 
     onError: function(operation, error) {
@@ -103,7 +103,7 @@ AutoForm.hooks({
       if(error && error.reason){
         Bert.alert( 'Error '+error.reason, 'danger', 'growl-top-right' );
       }
-      console.log(error);
+      //console.log(error);
     }
   }
 });
