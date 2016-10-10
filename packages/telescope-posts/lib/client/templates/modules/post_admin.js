@@ -30,7 +30,7 @@ Template.post_admin.events({
       FlowRouter.go('postsDefault');
       Meteor.call("deletePostById", post._id, function(error) {
         if (error) {
-          console.log(error);
+          //console.log(error);
           Bert.alert( error.reason, 'danger', 'fixed-top' );
         } else {
           Bert.alert( i18n.t('your_post_has_been_deleted'), 'success', 'fixed-top' );

@@ -29,7 +29,7 @@ function splitTerms(termsString){
     for(var i = 0; i< quotes.length; i++){
       termsString = termsString.replace(quotes[i], "");
       quotes[i] = quotes[i].replace(/"/g,"");
-          console.log(quotes[i]);
+      //console.log(quotes[i]);
     }
 
   }

@@ -12,9 +12,9 @@ Telescope.colorElements.colorTable = {
 };
 
 Telescope.colorElements.defaultColors = {
-  accentColor: "#6dcdfc", // red
+  accentColor: "#6dcdfc", // light blue
   accentContrastColor: "#ffffff", // white
-  secondaryColor: "#528fd8", // slate
+  secondaryColor: "#528fd8", // dark blue
   secondaryContrastColor: "#ffffff" // white
 };
 

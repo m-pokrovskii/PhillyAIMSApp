@@ -5,8 +5,6 @@ Template.user_posts.helpers({
   },
   argumentsPending: function () {
     var user = this;
-    console.log("user");
-    console.log(user);
     var args = {
       template: "posts_list_compact",
       options: {

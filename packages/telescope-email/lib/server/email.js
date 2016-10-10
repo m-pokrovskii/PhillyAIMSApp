@@ -34,6 +34,9 @@ Telescope.email.getTemplate = function (templateName) {
 
 Telescope.email.buildTemplate = function (htmlContent) {
 
+  
+  var logoUrl = Telescope.utils.getSiteUrl().slice(0, -1)+Settings.get('logoUrl');
+
   var emailProperties = {
     secondaryColor: Settings.get('secondaryColor', '#444444'),
     accentColor: Settings.get('accentColor', '#DD3416'),
@@ -44,7 +47,7 @@ Telescope.email.buildTemplate = function (htmlContent) {
     unsubscribe: '',
     accountLink: Telescope.utils.getSiteUrl()+'account',
     footer: Settings.get('emailFooter'),
-    logoUrl: Settings.get('logoUrl'),
+    logoUrl: logoUrl,
     logoHeight: Settings.get('logoHeight'),
     logoWidth: Settings.get('logoWidth')
   };

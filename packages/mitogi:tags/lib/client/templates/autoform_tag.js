@@ -64,11 +64,11 @@ AutoForm.hooks({
     after: {
     // Replace `formType` with the form `type` attribute to which this hook applies
     insert: function(error, result) {
-      console.log(this.currentDoc);
+     // console.log(this.currentDoc);
       insertTags(this.currentDoc.tags);
     },
     update: function(error, result) {
-      console.log(this.currentDoc);
+     // console.log(this.currentDoc);
       insertTags(this.currentDoc.tags);
     },
   },

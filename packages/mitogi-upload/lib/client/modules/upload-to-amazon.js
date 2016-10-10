@@ -34,7 +34,6 @@ let _uploadFileToAmazon = ( file ) => {
 let upload = ( options ) => {
   template = options.template;
   let file = _getFileFromInput( options.event );
-      console.log("detect");
   _setPlaceholderText( `Uploading ${file.name}...` );
   _uploadFileToAmazon( file );
 };

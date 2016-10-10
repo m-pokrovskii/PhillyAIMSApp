@@ -17,7 +17,6 @@ AutoForm.addInputType("bootstrap-url", {
 
 Template.afBootstrapUrl_bootstrap3.helpers({
   atts: function addFormControlAtts() {
-    console.log(this);
     var atts = _.clone(this.atts);
     // Add bootstrap class
     atts = AutoForm.Utility.addClass(atts, "form-control");
